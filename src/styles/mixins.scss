@@ -1,0 +1,9 @@
+@mixin regular-font {
+    font-family: $font-family;
+    font-weight: $font-regular;
+}
+
+@mixin bold-font {
+    font-family: $font-family;
+    font-weight: $font-bold;
+}
