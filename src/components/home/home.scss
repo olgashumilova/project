@@ -1,0 +1,57 @@
+@import '../../styles/main.scss';
+
+.home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(./images/background/background.jpg) no-repeat;
+    @include regular-font;
+}
+
+.home__input {
+    width: 900px;
+    height: 30px;
+    margin: 5%;
+    border-radius: 13px;
+    border: 1px solid rgba(255, 255, 255, 0.98);
+    background-color: rgb(0, 0, 0, 0.800);
+}
+
+.home__title {
+    width: 900px;
+    padding-bottom: 9px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.98);
+    color: rgba(255, 255, 255, 0.98);
+}
+
+.home__categories-logos {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.home__text{
+    color: rgba(255, 255, 255, 0.98);
+}
+
+.home__logos-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 9%;
+    border: 3px rgba(0, 0, 0, 0.800) solid;
+    border-bottom: 8px solid rgba(0, 0, 0, 0.800);
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.800);
+    color: gba(255, 255, 255, 0.98);
+}
+
+.home__logos-container:hover {
+    border: 3px rgb(199, 0, 218) solid;
+    border-bottom: 8px solid rgb(199, 0, 218);
+    transition-property: border;
+    transition-timing-function: ease;
+    transition-duration: 1s;
+}
