@@ -1,19 +1,30 @@
 .footer {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     background-color:rgba(0, 0, 0, 0.800);
-    color: rgb(255, 255, 255)
+    color: rgb(255, 255, 255);
+    // @include regular-font;
 }
 
 .footer__title {
     display: flex;
     justify-content: center;
-    padding: 2%;
+    padding: 1%;
 }
 
 .footer__icons {
     display: flex;
-    justify-content: space-between;
-    width: 200px;
-    padding: 2% 0 5% 0;
+    justify-content: center;
+    height: 45px;
+    padding: 0 0 15px 0;
+}
+
+.footer__link {
+    padding: 0 2.3% 0 2.3%;
+}
+
+.footer__link:hover{
+    margin: 5px
+    
 }
