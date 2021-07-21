@@ -1,10 +1,12 @@
+@import '../../styles/main.scss';
+
 .header {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     height: 90px;
     background-color:rgba(0, 0, 0, 0.800);
-    // @include regular-font;
+    @include regular-font;
 }
 
 .header__title {
