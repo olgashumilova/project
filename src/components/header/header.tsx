@@ -9,11 +9,13 @@ import {
 import {ROUTES} from '../routes'
 
 // import Main from '../main/main'
+import HomeComponent from '../home/home'
 import FooterComponent from '../footer/footer'
 
 // Scss
 import './header.scss'
 import '../footer/footer.scss'
+import '../home/home.scss'
 
 const App: React.FunctionComponent = () => {
     return (
@@ -72,7 +74,7 @@ const App: React.FunctionComponent = () => {
 }
   
 function Home() {
-  return <h2>Home Page</h2>;
+  return <HomeComponent />;
 }
 
 function Products() {
