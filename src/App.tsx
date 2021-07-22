@@ -1,8 +1,9 @@
 import React, { Component, ErrorInfo, ReactNode } from "react";
 import  { Redirect } from "react-router-dom"
 import {ROUTES} from './components/routes'
-import './App.css';
 import Header from './components/header/header'
+
+import './App.css';
 
 interface Props {
   children: ReactNode;
