@@ -6,21 +6,16 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(./images/background/background.jpg) no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(./images/background/background.jpg);
     @include regular-font;
 }
 
-.home__input {
-    width: 900px;
-    height: 30px;
-    margin: 5%;
-    border-radius: 13px;
-    border: 1px solid rgba(255, 255, 255, 0.98);
-    background-color: rgb(0, 0, 0, 0.800);
+.home__main {
+    width: 70%;
 }
 
 .home__title {
-    width: 900px;
+    width: 100%;
     padding-bottom: 9px;
     border-bottom: 2px solid rgba(255, 255, 255, 0.98);
     color: rgba(255, 255, 255, 0.98);
@@ -29,18 +24,27 @@
 .home__categories-logos {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
+}
+
+.home__device-logo {
+    width: 60%;
+    @media (min-width: 300px) and (max-width: 700px){      
+        flex-wrap: wrap;
+    }
 }
 
 .home__text{
-    color: rgba(255, 255, 255, 0.98);
+    text-align: center;
+    color: $white-color;
 }
 
 .home__logos-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 9%;
+    width: 100%;
+    margin: 2%;
     border: 3px rgba(0, 0, 0, 0.800) solid;
     border-bottom: 8px solid rgba(0, 0, 0, 0.800);
     border-radius: 20px;
@@ -48,9 +52,18 @@
     color: gba(255, 255, 255, 0.98);
 }
 
+.home__link-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 2%;
+}
+
 .home__logos-container:hover {
-    border: 3px rgb(199, 0, 218) solid;
-    border-bottom: 8px solid rgb(199, 0, 218);
+    border: 3px solid;
+    border-bottom: 8px solid;
+    border-color: $purple-color;
     transition-property: border;
     transition-timing-function: ease;
     transition-duration: 1s;
