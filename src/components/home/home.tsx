@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from "react-router-dom"
 import {ROUTES} from '../routes'
 
-// Logo images
+// Logo Images
 import pcLogo from './images/logo/pcLogo.png'
 import playstationLogo from './images/logo/playstationLogo.png'
 import xboxLogo from './images/logo/xboxLogo.png'
@@ -11,15 +11,17 @@ import xboxLogo from './images/logo/xboxLogo.png'
 import SearchBar from '../searchBar/searchBar'
 import '../searchBar/searchBar.scss'
 
-//Products Component
+// Products Component
 import Products from '../products/products'
 import '../products/products.scss'
 
-//Game Card
+// Game Card
 import GameCard from '../gameCard/gameCard'
 import '../gameCard/gameCard.scss'
 
-import overwatch from '../gameCard/gamesImages/overwatch.jpg'
+//Game Card Images
+import overwatch from '../../assets/gamesImages/overwatch.jpg'
+// const overwatch = '../../assets/gamesImages/overwatch.jpg'
 
 const HomeComponent: React.FunctionComponent = () => {
     return (
@@ -48,17 +50,17 @@ const HomeComponent: React.FunctionComponent = () => {
                                 <img className = 'home__device-logo' src = {xboxLogo} alt = "Xbox logo"/>
                                 <p className = 'home__text'>XBox One</p>
                             </div> 
-                       </Link>
-                        
+                       </Link>   
                    </div>
                </div>
                <div>
                    <p className = 'home__title'>New games</p>
                    <div>
+                       
                        <GameCard backgroundImage = {overwatch}/>
                        <GameCard backgroundImage = {overwatch}/>
                        <GameCard backgroundImage = {overwatch}/>
-                   </div>
+                    </div>
                </div>
             </div>
             <div></div>

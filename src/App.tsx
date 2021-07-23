@@ -18,7 +18,7 @@ class App extends Component <Props, State> {
     hasError: false
   };
   
-  public static getDerivedStateFromError(error: Error): State {
+  public static getDerivedStateFromError(): State {
     return { hasError: true };
   }
 

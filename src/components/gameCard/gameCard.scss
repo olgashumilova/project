@@ -1,30 +1,33 @@
-.flipcard {
+@import '../../styles/main.scss';
+
+.gamecard {
     position: relative;
     width: 220px;
     height: 160px;
     perspective: 500px;
 }
 
-.flipcard.h:hover .front, .flipcard.h.flip .front {
+.gamecard.h:hover .front, .gamecard.h.flip .front {
     transform: rotateY(180deg);
 }
 
-.flipcard.h:hover .back, .flipcard.h.flip .back {
+.gamecard.h:hover .back, .gamecard.h.flip .back {
     transform: rotateY(0deg);
 }
 
-.flipcard.h .back {
+.gamecard.h .back {
     transform: rotateY(-180deg);
 }
 
-.flipcard .front, .flipcard .back {
+.gamecard .front, .gamecard .back {
     position:absolute;
     width: 100%;
     height: 100%;
     box-sizing: border-box;
+    border: 1px solid;
+    border-color: $purple-color;
     transition: all 0.5s ease-in;
     color: white;
-    background-color: #000;
     padding: 10px;
     backface-visibility: hidden;
 }

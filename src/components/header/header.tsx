@@ -42,7 +42,8 @@ const App: React.FunctionComponent = () => {
               <li className = 'header__link'>Home</li>
             </Link>
             
-            <li className = 'header__list-element' onClick = {() => setIsVisible(!isVisible)} onBlur = {changeVisibility}>    
+            <li className = 'header__list-element' 
+                onPointerEnter = {() => setIsVisible(!isVisible)} onBlur = {changeVisibility}>    
                 Products 
                 <div className = 'triangle'></div>
                 <div className = {isVisible ? 'dropdownMenu' : ''}>

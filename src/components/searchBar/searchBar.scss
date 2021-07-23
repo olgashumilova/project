@@ -19,3 +19,37 @@
     outline: none;
     @include regular-font
 }
+
+.loader {
+    display: flex;
+    align-items: center;
+    height: 25px;
+    margin-left: 45%;
+  }
+
+.loader:after {
+    content: " ";
+    display: flex;
+    width: 60px;
+    height: 60px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid;
+    border-color: $white-color;
+    border-color: $white-color transparent $white-color transparent;
+    animation: loader 1.2s linear infinite;
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.searchbar__result {
+    color: $white-color;
+}
+  
