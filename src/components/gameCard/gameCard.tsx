@@ -1,11 +1,19 @@
 import React from 'react'
 
-const GameCard: React.FunctionComponent <{backgroundImage: string}> = (background) => {
+interface IProp {
+    backgroundImage: string;
+    description: string;
+    ageLimit: string;
+}
+
+const GameCard: React.FunctionComponent <{backgroundImage: string, description: string, ageLimit: string}> = ({backgroundImage, description, ageLimit}: IProp) => {
     return (
         <div className = 'gamecard h'>
-            {/* <img src = {background}></img> */}
-            <div className = 'front' style = {{backgroundImage: `url(${background})`}}>This is front side</div>
-            <div className = 'back' style = {{backgroundImage: `url(${background})`}}>Back side</div>
+            <div className = 'front' style = {{backgroundImage: `url(${backgroundImage})`}}></div>
+            <div className = 'back'>
+                <p className = 'back__description'>{description}</p>
+                <p>{ageLimit}</p>
+                <button className = 'back__cart-button'>Add to cart</button></div>
         </div>
     )
 }
