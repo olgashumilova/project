@@ -21,7 +21,8 @@ import '../gameCard/gameCard.scss'
 
 //Game Card Images
 import overwatch from '../../assets/gamesImages/overwatch.jpg'
-// const overwatch = '../../assets/gamesImages/overwatch.jpg'
+import minecraft from '../../assets/gamesImages/minecraft.webp'
+import terraria from '../../assets/gamesImages/terraria.jpg'
 
 const HomeComponent: React.FunctionComponent = () => {
     return (
@@ -55,11 +56,22 @@ const HomeComponent: React.FunctionComponent = () => {
                </div>
                <div>
                    <p className = 'home__title'>New games</p>
-                   <div>
-                       
-                       <GameCard backgroundImage = {overwatch}/>
-                       <GameCard backgroundImage = {overwatch}/>
-                       <GameCard backgroundImage = {overwatch}/>
+                   <div className = 'home__game-cards'>
+                        <GameCard 
+                            backgroundImage = {overwatch} 
+                            description = 'Overwatch is a colorful team-based action game starring a diverse cast of powerful heroes. Travel the world, build a team, and contest objectives in exhilarating 6v6 combat.'
+                            ageLimit = '12 +'
+                        />
+                        <GameCard 
+                            backgroundImage = {minecraft} 
+                            description = 'Minecraft is a sandbox game. There is a virtual land where users can create their own worlds and experiences, using building blocks, resources discovered on the site and their own creativity.'
+                            ageLimit = '3 +'
+                        />
+                        <GameCard 
+                            backgroundImage = {terraria} 
+                            description = 'Terraria is a 2D sandbox game with gameplay that revolves around exploration, building, crafting, combat, survival, and mining, playable in both single-player and multiplayer modes.'
+                            ageLimit = '6 +'
+                        />
                     </div>
                </div>
             </div>
