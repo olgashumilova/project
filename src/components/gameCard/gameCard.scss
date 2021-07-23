@@ -3,7 +3,7 @@
 .gamecard {
     position: relative;
     width: 220px;
-    height: 160px;
+    height: 280px;
     perspective: 500px;
 }
 
@@ -30,4 +30,17 @@
     color: white;
     padding: 10px;
     backface-visibility: hidden;
+}
+
+.front {
+    background-size: 100%;
+}
+
+.back {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.712);
+}
+
+.back__description {
+    margin-top: 1%;
 }
