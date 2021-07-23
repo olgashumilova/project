@@ -24,18 +24,7 @@ const SearchBar: React.FunctionComponent = () => {
           setIsLoading(false)
         }
       }, 300)
-
-    // useEffect(() => {
-    //   async function fetchData() {
-    //       await axios.get('http://localhost:3000/about').then((response) => {
-    //         setText(response.data)
-    //       }).catch ((error) => {
-    //           console.log(error);
-    //       })
-    //   }
-    //   fetchData();
-    // }, []);
-
+      
     return (
 
       <div className = 'searchbar'>
@@ -47,10 +36,7 @@ const SearchBar: React.FunctionComponent = () => {
             placeholder = 'Search'
         />
 
-        <p className = 'searchbar__result'>{result}</p>
-
         <div className = {isLoading ? 'loader' : ''}>{isLoading}</div>
-        {/* onChange = {onLoading} className = {isLoading ? 'loader' : ''} */}
       </div>
     );
 }
