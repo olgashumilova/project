@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom"
 import {ROUTES} from '../routes'
+import axios from 'axios'
 
 // Logo Images
-import pcLogo from './images/logo/pcLogo.png'
-import playstationLogo from './images/logo/playstationLogo.png'
-import xboxLogo from './images/logo/xboxLogo.png'
+import pcLogo from '../../assets/gamePlatformsLogos/pcLogo.png'
+import playstationLogo from '../../assets/gamePlatformsLogos/playstationLogo.png'
+import xboxLogo from '../../assets/gamePlatformsLogos/xboxLogo.png'
 
 // Search Bar Component
 import SearchBar from '../searchBar/searchBar'
@@ -21,14 +22,37 @@ import '../gameCard/gameCard.scss'
 
 //Game Card Images
 import overwatch from '../../assets/gamesImages/overwatch.jpg'
-import minecraft from '../../assets/gamesImages/minecraft.webp'
+import minecraft from '../../assets/gamesImages/minecraft.jpg'
 import terraria from '../../assets/gamesImages/terraria.jpg'
 
 const HomeComponent: React.FunctionComponent = () => {
+
+    interface IGamesArrray {
+        id: number,
+        name: string,
+        ageLimit: string,
+        rating: number,
+        image: string,
+        description: string,
+    }
+
+    const [topGames, setTopGames] = useState([])
+
+    useEffect(() => {
+        async function fetchData() {
+            await axios.get('http://localhost:3001/getTopGames').then((response) => {
+                setTopGames(response.data)
+            }).catch ((error) => {
+                console.log(error);
+            })
+        }
+        fetchData();
+    }, []);
+
     return (
         <main className = 'home'>
 
-            <SearchBar />
+            <SearchBar />          
 
             <div className = 'home__main'>
                <div className = 'home__categories'>
@@ -72,6 +96,24 @@ const HomeComponent: React.FunctionComponent = () => {
                             description = 'Terraria is a 2D sandbox game with gameplay that revolves around exploration, building, crafting, combat, survival, and mining, playable in both single-player and multiplayer modes.'
                             ageLimit = '6 +'
                         />
+                    </div>
+                    <div>
+                        <p className = 'home__title'>Top rated games</p>
+
+                        <div className = 'home__game-cards'>
+                            {topGames.map((item: IGamesArrray) => {
+                            return (
+                                <div key = {item.name}>
+                                    <GameCard 
+                                        backgroundImage = {item.image} 
+                                        description = {item.description}
+                                        ageLimit = {item.ageLimit}
+                                    />
+                                </div>
+                            )})}
+                        </div>
+                        
+                        
                     </div>
                </div>
             </div>
