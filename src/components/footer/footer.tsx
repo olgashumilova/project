@@ -1,7 +1,7 @@
 // Logo
-import ubisoftLogo from './logo/ubisoftLogo.png'
-import rockstarGamesLogo from './logo/rockstarGamesLogo.png'
-import epicGamesLogo from './logo/epicGamesLogo.png'
+import ubisoftLogo from '../../assets/gameCompaniesLogos/ubisoftLogo.png'
+import rockstarGamesLogo from '../../assets/gameCompaniesLogos/rockstarGamesLogo.png'
+import epicGamesLogo from '../../assets/gameCompaniesLogos/epicGamesLogo.png'
 
 const FooterComponent: React.FunctionComponent = () => {
     return (
