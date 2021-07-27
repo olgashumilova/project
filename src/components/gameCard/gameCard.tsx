@@ -13,7 +13,7 @@ const GameCard: React.FunctionComponent <{backgroundImage: string, description: 
             <div className = 'back'>
                 <p className = 'back__description'>{description}</p>
                 <p>{ageLimit}</p>
-                <button className = 'back__cart-button'>Add to cart</button></div>
+                <button className = 'back__cart-button' onClick = {() => alert('Got Product')}>Add to cart</button></div>
         </div>
     )
 }
