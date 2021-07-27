@@ -72,6 +72,8 @@
 
 .home__game-cards {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: space-around;
     margin-bottom: 40px;
+    margin-top: 35px;
 }
