@@ -52,4 +52,14 @@
 .searchbar__result {
     color: $white-color;
 }
-  
+
+.game-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 35px;
+}
+
+.a {
+  color: $white-color;
+}
