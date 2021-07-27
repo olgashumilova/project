@@ -21,12 +21,18 @@ const SearchBar: React.FunctionComponent = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [arrOfMatches, setArrOfMatches] = useState([])
 
+  useEffect(() => {
+   
+    fetchData();
+
+  }, [text])
+
   async function fetchData() {
     await axios.get(`http://localhost:3001/search/${result}`).then((response) => {
       if (text.length != 0) {
         console.log(text);
         setArrOfMatches(response.data)
-      } else if (text.length === 0){
+      } else if (text.length === 0) {
         setArrOfMatches([])
       }         
     }).catch ((error) => {
@@ -57,14 +63,8 @@ const SearchBar: React.FunctionComponent = () => {
       <input 
           className = 'searchbar__input'
           onChange = {(event) => {
-            setText(event.target.value)  
-              const response = axios.get(`http://localhost:3001/search/${result}`)
-              // console.log(response)           
-              fetchData()
-          }
-            // async (event) => {
-              
-            // }
+            setText(event.target.value)
+            }
           }
           type = 'text'  
           placeholder = 'Search'
@@ -74,9 +74,8 @@ const SearchBar: React.FunctionComponent = () => {
 
       <div className = 'game-cards'>
 
-        {arrOfMatches.map((item: IGamesArrray) => {
-          
-          return (
+        {arrOfMatches.map((item: IGamesArrray) => {         
+            return (
               <div key = {item.name}>
                   <GameCard
                       backgroundImage = {item.image}
@@ -84,7 +83,8 @@ const SearchBar: React.FunctionComponent = () => {
                       ageLimit = {item.ageLimit}
                   />
               </div>
-          )})}
+            )
+          })}
       </div>
 
     </div>
