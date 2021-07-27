@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import {ROUTES} from '../routes'
 import axios from 'axios'
 
-// Logo Images
+// Platform Logos Images
 import pcLogo from '../../assets/gamePlatformsLogos/pcLogo.png'
 import playstationLogo from '../../assets/gamePlatformsLogos/playstationLogo.png'
 import xboxLogo from '../../assets/gamePlatformsLogos/xboxLogo.png'
@@ -12,9 +12,9 @@ import xboxLogo from '../../assets/gamePlatformsLogos/xboxLogo.png'
 import SearchBar from '../searchBar/searchBar'
 import '../searchBar/searchBar.scss'
 
-// Products Component
-import Products from '../products/products'
-import '../products/products.scss'
+// // Products Component
+// import Products from '../products/products'
+// import '../products/products.scss'
 
 // Game Card
 import GameCard from '../gameCard/gameCard'
@@ -104,16 +104,14 @@ const HomeComponent: React.FunctionComponent = () => {
                             {topGames.map((item: IGamesArrray) => {
                             return (
                                 <div key = {item.name}>
-                                    <GameCard 
-                                        backgroundImage = {item.image} 
+                                    <GameCard
+                                        backgroundImage = {item.image}
                                         description = {item.description}
                                         ageLimit = {item.ageLimit}
                                     />
                                 </div>
                             )})}
-                        </div>
-                        
-                        
+                        </div>                                      
                     </div>
                </div>
             </div>
