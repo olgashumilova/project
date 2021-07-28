@@ -1,0 +1,54 @@
+@import '@MainScss/main.scss';
+
+.modalwindow {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    height: 400px;
+    border: 1px solid black;
+    color: $white-color;
+    background-color: rgba(0, 0, 0, 0.800);
+    @include regular-font;
+}
+
+.modalwindow__header {
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+}
+
+.modalwindow__close-button {
+    width: 20px;
+    height: 20px;
+    border: none;
+}
+
+.modalwindow__form {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin-top: 50px;
+}
+
+.modalwindow__input {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80%;
+    margin: 2% 2% 2% 13%;
+}
+
+.modalwindow__button {
+    height: 30px;
+    border: none;
+    border-radius: 6px;
+    color: $white-color;
+    background-color: $purple-color;
+    margin-top: 50px;
+}
+
+.modalwindow__input-field {
+    width: 60%;
+}
