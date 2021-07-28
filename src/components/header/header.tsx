@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -6,20 +6,27 @@ import {
   Link
 } from "react-router-dom";
 
-import {ROUTES} from '../routes'
+import ROUTES from '@Routes/routes.ts'
 
-// import Main from '../main/main'
-import HomeComponent from '../home/home'
-import FooterComponent from '../footer/footer'
+// Semantic UI (for modal window)
+import 'semantic-ui-css/semantic.min.css'
+import { Dropdown } from 'semantic-ui-react'
+
+// Components
+import HomeComponent from '@HomeComponent/home.tsx'
+import FooterComponent from '@FooterComponent/footer.tsx'
+
+// Modals
+import SignUpModal from '@Modal/signUpModal.tsx'
+import SignInModal from '@Modal/signInModal.tsx'
 
 // Scss
-import './header.scss'
-import '../footer/footer.scss'
-import '../home/home.scss'
+import '@HeaderComponent/header.scss'
+import '@FooterComponent/footer.scss'
+import '@HomeComponent/home.scss'
+import '@Modal/modals.scss'
 
 const App: React.FunctionComponent = () => {
-
-  const [isVisible, setIsVisible] = useState(false)
 
   return (
     <Router>
@@ -34,17 +41,14 @@ const App: React.FunctionComponent = () => {
               <li className = 'header__link'>Home</li>
             </Link>
             
-            <li className = 'header__list-element' 
-                onClick = {() => setIsVisible(!isVisible)}>    
-                Products 
-                <div className = 'triangle'></div>
-                <div className = {isVisible ? 'dropdownMenu' : ''}>
-                  <ul className = 'header__dropdown-list'>
-                    <li className = 'header__dropdown-item' onClick = {() => alert('PC Page')}>PC</li>
-                    <li className = 'header__dropdown-item' onClick = {() => alert('Playstation 5 Page')}>Playstation 5</li>
-                    <li className = 'header__dropdown-item' onClick = {() => alert('XBox One Page')}>XBox One</li>
-                  </ul>
-                </div>
+            <li className = 'header__list-element'>
+                <Dropdown text = 'Products'>
+                  <Dropdown.Menu>
+                    <Dropdown.Item text = 'PC' onClick = {() => alert('PC Page')}/>
+                    <Dropdown.Item text = 'Playstation 5' onClick = {() => alert('Playstation 5 Page')}/>
+                    <Dropdown.Item text = 'XBox One' onClick = {() => alert('XBox One Page')}/>
+                  </Dropdown.Menu>
+                </Dropdown>
             </li>
             
             <Link className = 'header__list-element' to = {ROUTES.ABOUT}>
@@ -70,10 +74,10 @@ const App: React.FunctionComponent = () => {
       </header>
       <Switch>
         <Route path={ROUTES.SIGNUP}>
-          <SignUp />
+          <SignUpModal />
         </Route>
         <Route path={ROUTES.SIGNIN}>
-          <SignIn />
+          <SignInModal />
         </Route>
         <Route path={ROUTES.ABOUT}>
           <About />
