@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom"
 import {ROUTES} from '../routes'
 import axios from 'axios'
@@ -35,14 +35,16 @@ const HomeComponent: React.FunctionComponent = () => {
 
     const [topGames, setTopGames] = useState([])
 
-    async function fetchData() {
-        await axios.get('http://localhost:3001/getTopGames').then((response) => {
-            setTopGames(response.data)
-        }).catch (() => {
-            alert('Server is not responding');
-        })
-    }
-    fetchData()
+    useEffect(() => {
+        function fetchData() {
+            axios.get('http://localhost:3001/getTopGames').then((response) => {
+                setTopGames(response.data)
+            }).catch ((error) => {
+                console.log(error);
+            })
+        }
+        fetchData();
+    }, []);
 
     return (
         <main className = 'home'>
