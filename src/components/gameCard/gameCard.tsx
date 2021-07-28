@@ -8,7 +8,7 @@ interface IProp {
 
 const GameCard: React.FunctionComponent <{backgroundImage: string, description: string, ageLimit: string}> = ({backgroundImage, description, ageLimit}: IProp) => {
     return (
-        <div className = 'gamecard h'>
+        <div className = 'gamecard gamecard-wrap'>
             <div className = 'front' style = {{backgroundImage: `url(${backgroundImage})`}}></div>
             <div className = 'back'>
                 <p className = 'back__description'>{description}</p>

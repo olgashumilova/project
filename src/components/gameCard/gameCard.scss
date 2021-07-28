@@ -8,15 +8,15 @@
     margin: 30px;
 }
 
-.gamecard.h:hover .front, .gamecard.h.flip .front {
+.gamecard.gamecard-wrap:hover .front, .gamecard.gamecard-wrap.flip .front {
     transform: rotateY(180deg);
 }
 
-.gamecard.h:hover .back, .gamecard.h.flip .back {
+.gamecard.gamecard-wrap:hover .back, .gamecard.gamecard-wrap.flip .back {
     transform: rotateY(0deg);
 }
 
-.gamecard.h .back {
+.gamecard.gamecard-wrap .back {
     transform: rotateY(-180deg);
 }
 
