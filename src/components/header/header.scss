@@ -1,4 +1,4 @@
-@import '../../styles/main.scss';
+@import '@MainScss/main.scss';
 
 .header {
     display: flex;
@@ -10,6 +10,8 @@
 }
 
 .header__title {
+    display: flex;
+    align-items: center;
     width: 40%;
     @include bold-font;
     color: $white-color;
@@ -30,11 +32,10 @@
 }
 
 .header__list-element {
-    position: relative;
     display: flex;
+    justify-content: center;
     width: 150px;
     padding-top: 40px;
-    padding-left: 6%;
     color: $white-color;
     list-style-type: none;
     text-decoration: none;
@@ -51,45 +52,6 @@
     display: flex;
     justify-content: center;
     height: 28px;
-    padding-left: 10%;
     text-align: center;
     color: $white-color;
-}
-
-.triangle {
-    width: 0;
-    height: 0;
-    margin-left: 8px;
-    margin-top: 8.5px;
-    border-style: solid;
-    border-width: 7px 5.5px 0 5.5px;
-    border-color: $white-color transparent transparent transparent;
-}
-
-.dropdownMenu {
-    position: absolute;
-    top: 50px;
-    display: none;
-    margin-top: 55px;
-    color: $white-color;
-}
-
-.header__dropdown-list {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    top: 100%;
-    left: 0px;
-    right: 0;
-    width: 80%;
-    padding: 20px;
-    color: $white-color;
-    list-style-type: none;
-    background-color: rgba(0, 0, 0, 0.800);
-}
-
-.header__dropdown-item {
-    padding-bottom: 15%;
-    cursor: pointer;
 }

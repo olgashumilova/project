@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom"
-import {ROUTES} from '../routes'
 import axios from 'axios'
+import ROUTES from '@Routes/routes.ts'
 
 // Platform Logos Images
 import pcLogo from '@GamePlatformsLogos/pcLogo.png'
@@ -9,12 +9,12 @@ import playstationLogo from '@GamePlatformsLogos/playstationLogo.png'
 import xboxLogo from '@GamePlatformsLogos/xboxLogo.png'
 
 // Search Bar Component
-import SearchBar from '../searchBar/searchBar'
-import '../searchBar/searchBar.scss'
+import SearchBar from '@SearchBar/searchBar.tsx'
+import '@SearchBar/searchBar.scss'
 
 // Game Card
-import GameCard from '../gameCard/gameCard'
-import '../gameCard/gameCard.scss'
+import GameCard from '@GameCard/gameCard.tsx'
+import '@GameCard/gameCard.scss'
 
 //Game Card Images
 import overwatch from '@GamesImages/overwatch.jpg'
@@ -24,7 +24,6 @@ import terraria from '@GamesImages/terraria.jpg'
 const HomeComponent: React.FunctionComponent = () => {
 
     interface IGamesArrray {
-        index: number,
         id: number,
         name: string,
         ageLimit: string,
@@ -35,14 +34,19 @@ const HomeComponent: React.FunctionComponent = () => {
 
     const [topGames, setTopGames] = useState([])
 
-    async function fetchData() {
-        await axios.get('http://localhost:3001/getTopGames').then((response) => {
+    useEffect(() => {
+   
+        fetchData();
+
+    }, [])
+
+    function fetchData() {
+        axios.get('http://localhost:3001/getTopGames').then((response) => {
             setTopGames(response.data)
-        }).catch (() => {
-            alert('Server is not responding');
+        }).catch ((error) => {
+            console.log(error);
         })
     }
-    fetchData()
 
     return (
         <main className = 'home'>
@@ -96,9 +100,9 @@ const HomeComponent: React.FunctionComponent = () => {
                         <p className = 'home__title'>Top rated games</p>
 
                         <div className = 'home__game-cards'>
-                            {topGames.map((item: IGamesArrray) => {
+                            {topGames.map((item: IGamesArrray, index) => {
                             return (
-                                <div key = {item.index}>
+                                <div key = {index}>
                                     <GameCard
                                         backgroundImage = {item.image}
                                         description = {item.description}
