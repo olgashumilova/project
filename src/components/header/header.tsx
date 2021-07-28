@@ -19,15 +19,7 @@ import '../home/home.scss'
 
 const App: React.FunctionComponent = () => {
 
-  const [isVisible, setIsVisible] = useState(false)  
-
-  const changeVisibility = () => {
-    if (isVisible === false) {
-      setIsVisible(true)
-    } else {
-      setIsVisible(false)
-    }
-  }
+  const [isVisible, setIsVisible] = useState(false)
 
   return (
     <Router>
@@ -43,7 +35,7 @@ const App: React.FunctionComponent = () => {
             </Link>
             
             <li className = 'header__list-element' 
-                onPointerEnter = {() => setIsVisible(!isVisible)} onBlur = {changeVisibility}>    
+                onClick = {() => setIsVisible(!isVisible)}>    
                 Products 
                 <div className = 'triangle'></div>
                 <div className = {isVisible ? 'dropdownMenu' : ''}>
