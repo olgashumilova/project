@@ -1,0 +1,54 @@
+@import '../../styles/main.scss';
+
+.gamecard {
+    position: relative;
+    width: 220px;
+    height: 280px;
+    perspective: 500px;
+    margin: 30px;
+}
+
+.gamecard.gamecard-wrap:hover .front, .gamecard.gamecard-wrap.flip .front {
+    transform: rotateY(180deg);
+}
+
+.gamecard.gamecard-wrap:hover .back, .gamecard.gamecard-wrap.flip .back {
+    transform: rotateY(0deg);
+}
+
+.gamecard.gamecard-wrap .back {
+    transform: rotateY(-180deg);
+}
+
+.gamecard .front, .gamecard .back {
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    transition: all 0.5s ease-in;
+    color: white;
+    padding: 10px;
+    backface-visibility: hidden;
+}
+
+.front {
+    background-size: 100%;
+    @include purple-shadow;
+}
+
+.back {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.712);
+    @include purple-shadow;
+}
+
+.back__description {
+    margin-top: 1%;
+}
+
+.back__cart-button {
+    height: 30px;
+    border: none;
+    border-radius: 6px;
+    color: $white-color;
+    background-color: $purple-color;
+}

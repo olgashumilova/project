@@ -1,8 +1,9 @@
 import React, { Component, ErrorInfo, ReactNode } from "react";
 import  { Redirect } from "react-router-dom"
 import {ROUTES} from './components/routes'
-import './App.css';
 import Header from './components/header/header'
+
+import './App.css';
 
 interface Props {
   children: ReactNode;
@@ -17,15 +18,15 @@ class App extends Component <Props, State> {
     hasError: false
   };
   
-  public static getDerivedStateFromError(error: Error): State {
+  public static getDerivedStateFromError(): State {
     return { hasError: true };
   }
 
-  public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+  public componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
     console.error("Uncaught error:", error, errorInfo);
   }
 
-  public render() {
+  public render(): JSX.Element {
     if (this.state.hasError) {
         <Redirect to = {ROUTES.HOME} />
       return (

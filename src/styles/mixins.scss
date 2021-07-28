@@ -1,3 +1,5 @@
+// Fonts
+
 @mixin regular-font {
     font-family: $font-family;
     font-weight: $font-regular;
@@ -6,4 +8,10 @@
 @mixin bold-font {
     font-family: $font-family;
     font-weight: $font-bold;
+}
+
+// Shadow
+
+@mixin purple-shadow {
+    box-shadow: 0px 1px 10px 7px rgba(199, 0, 218, 0.5);
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -18,59 +18,76 @@ import '../footer/footer.scss'
 import '../home/home.scss'
 
 const App: React.FunctionComponent = () => {
-    return (
-      <Router>
-        <header className = 'header'>
-          <div className = 'header__title'>
-            <h1>Game Store</h1>
-          </div>
 
-          <div className = 'header__nav'>
-            <ul className = 'header__list'>
-              <li className = 'header__list-element'>
-                <Link className = 'header__link' to = {ROUTES.HOME}>Home</Link>
-              </li>
-              <li className = 'header__list-element'>
-                <Link className = 'header__link' to = {ROUTES.PRODUCTS}>
-                  Products 
-                  <div className = 'triangle'></div>
-                </Link>
-                
-              </li>
-              <li className = 'header__list-element'>
-                <Link className = 'header__link' to = {ROUTES.ABOUT}>About</Link>
-              </li>
-              <li className = 'header__list-element'>
-                <Link className = 'header__link' to = {ROUTES.SIGNIN}>Sign In</Link>
-              </li>
-              <li className = 'header__list-element'>
-                <Link className = 'header__link'  to = {ROUTES.SIGNUP}>Sign Up</Link>
-              </li>
-            </ul>
-          </div>
-        </header>
+  const [isVisible, setIsVisible] = useState(false)
 
-        <Switch>
-          <Route path={ROUTES.SIGNUP}>
-            <SignUp />
-          </Route>
-          <Route path={ROUTES.SIGNIN}>
-            <SignIn />
-          </Route>
-          <Route path={ROUTES.ABOUT}>
-            <About />
-          </Route>
-          <Route path={ROUTES.PRODUCTS}>
-            <Products />
-          </Route>
-          <Route path={ROUTES.HOME}>
-            <Home />
-          </Route>
-        </Switch>
+  return (
+    <Router>
+      <header className = 'header'>
+        <div className = 'header__title'>
+          <h1>Game Store</h1>
+        </div>
+        <div className = 'header__nav'>
+          <ul className = 'header__list'>
+            
+            <Link className = ' header__list-element' to = {ROUTES.HOME}>
+              <li className = 'header__link'>Home</li>
+            </Link>
+            
+            <li className = 'header__list-element' 
+                onClick = {() => setIsVisible(!isVisible)}>    
+                Products 
+                <div className = 'triangle'></div>
+                <div className = {isVisible ? 'dropdownMenu' : ''}>
+                  <ul className = 'header__dropdown-list'>
+                    <li className = 'header__dropdown-item' onClick = {() => alert('PC Page')}>PC</li>
+                    <li className = 'header__dropdown-item' onClick = {() => alert('Playstation 5 Page')}>Playstation 5</li>
+                    <li className = 'header__dropdown-item' onClick = {() => alert('XBox One Page')}>XBox One</li>
+                  </ul>
+                </div>
+            </li>
+            
+            <Link className = 'header__list-element' to = {ROUTES.ABOUT}>
+              <li className = 'header__link'>
+                About
+              </li>
+            </Link>
+            
+            <Link className = 'header__list-element' to = {ROUTES.SIGNIN}>
+              <li className = 'header__link'>
+                Sign In
+              </li>
+            </Link>
 
-        <FooterComponent />
-      </Router>
-    );
+            <Link className = 'header__list-element'  to = {ROUTES.SIGNUP}>
+              <li className = 'header__link'>
+                Sign Up
+              </li>
+            </Link>
+            
+          </ul>
+        </div>
+      </header>
+      <Switch>
+        <Route path={ROUTES.SIGNUP}>
+          <SignUp />
+        </Route>
+        <Route path={ROUTES.SIGNIN}>
+          <SignIn />
+        </Route>
+        <Route path={ROUTES.ABOUT}>
+          <About />
+        </Route>
+        <Route path={ROUTES.PRODUCTS}>
+          <Products />
+        </Route>
+        <Route path={ROUTES.HOME}>
+          <Home />
+        </Route>
+      </Switch>
+      <FooterComponent />
+    </Router>
+  );
 }
   
 function Home() {
