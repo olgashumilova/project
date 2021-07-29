@@ -1,4 +1,4 @@
-@import '@MainScss/main.scss';
+@import '@Styles/main.scss';
 
 .footer {
     display: flex;
@@ -12,14 +12,14 @@
 .footer__title {
     display: flex;
     justify-content: center;
-    padding: 1%;
+    padding: 3% 0 0 0;
 }
 
 .footer__icons {
     display: flex;
     justify-content: center;
     height: 45px;
-    padding: 0 0 15px 0;
+    margin: 3%;
 }
 
 .footer__link {

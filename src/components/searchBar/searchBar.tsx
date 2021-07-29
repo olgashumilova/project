@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 
 // Game Card
-import GameCard from '../gameCard/gameCard'
-import '../gameCard/gameCard.scss'
+import GameCard from '@Components/gameCard/gameCard.tsx'
+import '@Components/gameCard/gameCard.scss'
 
 const SearchBar: React.FunctionComponent = () => {
 

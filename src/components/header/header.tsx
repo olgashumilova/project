@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -6,27 +6,29 @@ import {
   Link
 } from "react-router-dom";
 
-import ROUTES from '@Routes/routes.ts'
+import ROUTES from '@Components/routes.ts'
 
 // Semantic UI (for modal window)
 import 'semantic-ui-css/semantic.min.css'
 import { Dropdown } from 'semantic-ui-react'
 
 // Components
-import HomeComponent from '@HomeComponent/home.tsx'
-import FooterComponent from '@FooterComponent/footer.tsx'
+import HomeComponent from '@Components/home/home.tsx'
+import FooterComponent from '@Components/footer/footer.tsx'
 
 // Modals
-import SignUpModal from '@Modal/signUpModal.tsx'
-import SignInModal from '@Modal/signInModal.tsx'
+import SignUpModal from '@Components/modals/signUpModal.tsx'
+import SignInModal from '@Components/modals//signInModal.tsx'
 
 // Scss
-import '@HeaderComponent/header.scss'
-import '@FooterComponent/footer.scss'
-import '@HomeComponent/home.scss'
-import '@Modal/modals.scss'
+import '@Components/header/header.scss'
+import '@Components/footer/footer.scss'
+import '@Components/home/home.scss'
+import '@Components/modals/modals.scss'
 
 const App: React.FunctionComponent = () => {
+
+  // const [isActive, setIsActive] = useState(false)
 
   return (
     <Router>
@@ -63,11 +65,11 @@ const App: React.FunctionComponent = () => {
               </li>
             </Link>
 
-            <Link className = 'header__list-element'  to = {ROUTES.SIGNUP}>
+            <Link className = 'header__list-element' to = {ROUTES.SIGNUP}>
               <li className = 'header__link'>
                 Sign Up
               </li>
-            </Link>
+              </Link>
             
           </ul>
         </div>
@@ -106,12 +108,8 @@ function About() {
   return <h2>About</h2>;
 }
 
-function SignIn() {
-  return <h2>Sign In</h2>;
-}
-
-function SignUp() {
-  return <h2>Sign Up</h2>;
-}
+// function SignUp() {
+//   return <SignUpModal />;
+// }
 
 export default App;

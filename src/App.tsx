@@ -1,7 +1,7 @@
 import React, { Component, ErrorInfo, ReactNode } from "react";
 import  { Redirect } from "react-router-dom"
-import ROUTES from '@Routes/routes.ts'
-import Header from '@HeaderComponent/header.tsx'
+import ROUTES from '@Components/routes.ts'
+import Header from '@Components/header/header.tsx'
 
 interface Props {
   children: ReactNode;

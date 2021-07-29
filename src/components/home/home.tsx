@@ -1,25 +1,25 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom"
 import axios from 'axios'
-import ROUTES from '@Routes/routes.ts'
+import ROUTES from '@Components/routes.ts'
 
 // Platform Logos Images
-import pcLogo from '@GamePlatformsLogos/pcLogo.png'
-import playstationLogo from '@GamePlatformsLogos/playstationLogo.png'
-import xboxLogo from '@GamePlatformsLogos/xboxLogo.png'
+import pcLogo from '@Assets/gamePlatformsLogos/pcLogo.png'
+import playstationLogo from '@Assets/gamePlatformsLogos/playstationLogo.png'
+import xboxLogo from '@Assets/gamePlatformsLogos/xboxLogo.png'
 
 // Search Bar Component
-import SearchBar from '@SearchBar/searchBar.tsx'
-import '@SearchBar/searchBar.scss'
+import SearchBar from '@Components/searchBar/searchBar.tsx'
+import '@Components/searchBar/searchBar.scss'
 
 // Game Card
-import GameCard from '@GameCard/gameCard.tsx'
-import '@GameCard/gameCard.scss'
+import GameCard from '@Components/gameCard/gameCard.tsx'
+import '@Components/gameCard/gameCard.scss'
 
 //Game Card Images
-import overwatch from '@GamesImages/overwatch.jpg'
-import minecraft from '@GamesImages/minecraft.jpg'
-import terraria from '@GamesImages/terraria.jpg'
+import overwatch from '@Assets/gamesImages/overwatch.jpg'
+import minecraft from '@Assets/gamesImages/minecraft.jpg'
+import terraria from '@Assets/gamesImages/terraria.jpg'
 
 const HomeComponent: React.FunctionComponent = () => {
 
