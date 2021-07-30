@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom"
-import axios from 'axios'
 import ROUTES from '@Components/routes.ts'
 
 // Platform Logos Images
@@ -21,9 +20,11 @@ import overwatch from '@Assets/gamesImages/overwatch.jpg'
 import minecraft from '@Assets/gamesImages/minecraft.jpg'
 import terraria from '@Assets/gamesImages/terraria.jpg'
 
+import { getTopGames } from '../../api/api.js'
+
 const HomeComponent: React.FunctionComponent = () => {
 
-    interface IGamesArrray {
+    interface IGamesArray {
         id: number,
         name: string,
         ageLimit: string,
@@ -36,12 +37,12 @@ const HomeComponent: React.FunctionComponent = () => {
 
     useEffect(() => {
    
-        fetchData();
+        fetchData()
 
     }, [])
 
-    function fetchData() {
-        axios.get('http://localhost:3001/getTopGames').then((response) => {
+    async function fetchData () {
+        await getTopGames.then((response) => {
             setTopGames(response.data)
         }).catch ((error) => {
             console.log(error);
@@ -100,7 +101,7 @@ const HomeComponent: React.FunctionComponent = () => {
                         <p className = 'home__title'>Top rated games</p>
 
                         <div className = 'home__game-cards'>
-                            {topGames.map((item: IGamesArrray, index) => {
+                            {topGames.map((item: IGamesArray, index) => {
                             return (
                                 <div key = {index}>
                                     <GameCard
