@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 import { Link } from 'react-router-dom'
 import ROUTES from '@Components/routes.ts'
 
@@ -8,6 +9,12 @@ const SignUpModal: React.FunctionComponent = () => {
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
     const [repeatPassword, setRepeatPassword] = useState('')
+
+    async function signUp() {
+        const response = await axios.post('http://localhost:3001/signup', 
+        {login, password})
+        Swal.fire(response.data)
+    }
 
     return (
 
@@ -32,7 +39,7 @@ const SignUpModal: React.FunctionComponent = () => {
                 <div className = 'modalwindow__input'>
                     <p>Password</p>
                     <input 
-                        type="text" 
+                        type = 'password'
                         className = 'modalwindow__input-field'
                         onChange = {(event) => setPassword(event.target.value)}
                     />
@@ -41,7 +48,7 @@ const SignUpModal: React.FunctionComponent = () => {
                 <div className = 'modalwindow__input'>
                     <p>Repeat password</p>
                     <input 
-                        type="text" 
+                        type = 'password'
                         className = 'modalwindow__input-field'
                         onChange = {(event) => setRepeatPassword(event.target.value)}
                     />
@@ -51,12 +58,12 @@ const SignUpModal: React.FunctionComponent = () => {
             <button 
                 className = 'modalwindow__button'
                 type = 'submit'
-                onClick = {async() => {
-                    await axios.post('http://localhost:3001/signup', {
-                        login,
-                        password: password,
-                    })
-                }}>Submit</button>
+                onClick = {() => {
+                    if (password === repeatPassword) {
+                        signUp()
+                    } else {
+                        alert('Passwords don\'t match')
+                }}}>Submit</button>
         </div>
     )
 }
