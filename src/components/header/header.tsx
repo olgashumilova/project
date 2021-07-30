@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -15,10 +15,12 @@ import { Dropdown } from 'semantic-ui-react'
 // Components
 import HomeComponent from '@Components/home/home.tsx'
 import FooterComponent from '@Components/footer/footer.tsx'
+import UserPage from '@Components/userPage/userPage.tsx'
+import SignedInButons from './signedInButons';
 
 // Modals
 import SignUpModal from '@Components/modals/signUpModal.tsx'
-import SignInModal from '@Components/modals//signInModal.tsx'
+import SignInModal from '@Components/modals/signInModal.tsx'
 
 // Scss
 import '@Components/header/header.scss'
@@ -28,7 +30,11 @@ import '@Components/modals/modals.scss'
 
 const App: React.FunctionComponent = () => {
 
-  // const [isActive, setIsActive] = useState(false)
+  const [signedIn, setSignedIn] = useState(false)
+
+  // if () {
+  //   setSignedIn(true)
+  // }
 
   return (
     <Router>
@@ -58,23 +64,33 @@ const App: React.FunctionComponent = () => {
                 About
               </li>
             </Link>
-            
-            <Link className = 'header__list-element' to = {ROUTES.SIGNIN}>
-              <li className = 'header__link'>
-                Sign In
-              </li>
-            </Link>
 
-            <Link className = 'header__list-element' to = {ROUTES.SIGNUP}>
-              <li className = 'header__link'>
-                Sign Up
-              </li>
-              </Link>
-            
+            {signedIn ? (
+              <SignedInButons />
+            ) : ( 
+              <div className = 'header__nav'>
+                <div className = 'header__list'>
+                  <Link className = 'header__list-element' to = {ROUTES.SIGNIN}>
+                    <li className = 'header__link'>
+                      Sign In
+                    </li>
+                  </Link>
+
+                  <Link className = 'header__list-element' to = {ROUTES.SIGNUP}>
+                    <li className = 'header__link'>
+                      Sign Up
+                    </li>
+                  </Link>
+                </div>
+              </div>
+            )}
           </ul>
         </div>
       </header>
       <Switch>
+        <Route path={ROUTES.USER}>
+          <User />
+        </Route>
         <Route path={ROUTES.SIGNUP}>
           <SignUpModal />
         </Route>
@@ -108,8 +124,8 @@ function About() {
   return <h2>About</h2>;
 }
 
-// function SignUp() {
-//   return <SignUpModal />;
-// }
+function User() {
+  return <UserPage />;
+}
 
 export default App;
