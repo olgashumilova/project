@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import Swal from 'sweetalert2'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import ROUTES from '@Components/routes.ts'
 
 const SignUpModal: React.FunctionComponent = () => {
@@ -9,16 +9,23 @@ const SignUpModal: React.FunctionComponent = () => {
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
     const [repeatPassword, setRepeatPassword] = useState('')
+    const [isSignedUp, setIsSignedUp] = useState(false)
 
     async function signUp() {
         const response = await axios.post('http://localhost:3001/signup', 
         {login, password})
         Swal.fire(response.data)
+        setIsSignedUp(true)
     }
 
     return (
-
+        
         <div className = 'modalwindow'>
+            {isSignedUp ? (
+                <Redirect to = {ROUTES.SIGNIN}></Redirect>
+            ) : (
+                ''
+            )}
             <div className = 'modalwindow__header'>
                 <p>Registration</p>
                 <Link to = {ROUTES.HOME}>
@@ -60,7 +67,7 @@ const SignUpModal: React.FunctionComponent = () => {
                 type = 'submit'
                 onClick = {() => {
                     if (password === repeatPassword) {
-                        signUp()
+                        signUp()                        
                     } else {
                         alert('Passwords don\'t match')
                 }}}>Submit</button>

@@ -4,28 +4,29 @@ import Swal from 'sweetalert2'
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom'
 import ROUTES from '@Components/routes.ts'
+import getUsers from '@Components/header/header.tsx'
 
 const SignInModal: React.FunctionComponent = () => {
 
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
-    const [usersArray, setUsersArray] = useState(null)
-    const [redirect, setRedirect] = useState(false)
+    const [isSignedIn, setIsSignedIn] = useState(false)
 
     async function signIn() {
         const response = await axios.post('http://localhost:3001/signin', 
         {login, password})
         Swal.fire(response.data)
-        setRedirect(true)
-        
-        // const usersArray = await axios.get('http://localhost:3001/getUsersArray')
-        // setUsersArray(usersArray)
-        // console.log(usersArray);
-        
+        getUsers
+        setIsSignedIn(true)
     }
 
     return (
         <div className = 'modalwindow'>
+            {isSignedIn ? (
+                <Redirect to = {ROUTES.USER}></Redirect>
+            ) : (
+                console.log('Nothing happend')
+            )}
             <div className = 'modalwindow__header'>
                 <p>Authorization</p>
                 <Link to = {ROUTES.HOME}>
