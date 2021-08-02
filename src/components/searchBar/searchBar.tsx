@@ -30,7 +30,6 @@ const SearchBar: React.FunctionComponent = () => {
   async function fetchData() {
     await axios.get(`http://localhost:3001/search/${result}`).then((response) => {
       if (text.length != 0) {
-        console.log(text);
         setArrOfMatches(response.data)
       } else if (text.length === 0) {
         setArrOfMatches([])
