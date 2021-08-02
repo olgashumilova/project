@@ -3,10 +3,13 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  Redirect
 } from "react-router-dom";
-
 import ROUTES from '@Components/routes.ts'
+
+// Api
+import { getArrayOfUsers } from "@/api/api.js";
 
 // Semantic UI (for modal window)
 import 'semantic-ui-css/semantic.min.css'
@@ -16,7 +19,6 @@ import { Dropdown } from 'semantic-ui-react'
 import HomeComponent from '@Components/home/home.tsx'
 import FooterComponent from '@Components/footer/footer.tsx'
 import UserPage from '@Components/userPage/userPage.tsx'
-import SignedInButons from './signedInButons';
 
 // Modals
 import SignUpModal from '@Components/modals/signUpModal.tsx'
@@ -30,11 +32,22 @@ import '@Components/modals/modals.scss'
 
 const App: React.FunctionComponent = () => {
 
-  const [signedIn, setSignedIn] = useState(false)
+  const [isSignedIn, setIsSignedIn] = useState(false)
+  const [usersArray, setUsersArray] = useState([])
 
-  // if () {
-  //   setSignedIn(true)
-  // }
+  async function getUsers() {
+    await getArrayOfUsers
+    setUsersArray((await getArrayOfUsers).data)
+    console.log(usersArray);
+    
+    if (usersArray.length !== 0) {
+      setIsSignedIn(true)
+      console.log(usersArray);      
+    } else {
+      console.log(usersArray);    
+    }
+  }
+getUsers()
 
   return (
     <Router>
@@ -65,8 +78,23 @@ const App: React.FunctionComponent = () => {
               </li>
             </Link>
 
-            {signedIn ? (
-              <SignedInButons />
+            {isSignedIn ? (
+              <div className = 'header__nav'>
+                <div className = 'header__list'>
+                  <Link className = 'header__list-element' to = {ROUTES.USER}>
+                    <div className = 'header__user-icon'></div>
+                    <p className = 'header__user-name'>Hello, {usersArray.map(user => user.login)}</p>
+                  </Link>
+            
+                  <Link className = 'header__list-element' to = {ROUTES.CART}>
+                      <div className = 'header__cart-icon'></div>
+                  </Link>
+            
+                  <Link className = 'header__list-element' to = {ROUTES.HOME}>
+                      <div className = 'header__logout-icon'></div>
+                  </Link>
+                </div>
+            </div>
             ) : ( 
               <div className = 'header__nav'>
                 <div className = 'header__list'>
