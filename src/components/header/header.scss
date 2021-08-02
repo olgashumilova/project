@@ -64,18 +64,16 @@
     background: url(../../assets/headerIcons/userIcon.png) no-repeat;
 }
 
-// .header__user-name {
-//     margin-right: 15px;
-// }
-
 .header__cart-icon {
     width: 55px;
     height: 30px;
+    border: none;
     background: url(../../assets/headerIcons/cartIcon.png) no-repeat center;
 }
 
 .header__logout-icon {
     width: 55px;
     height: 30px;
+    border: none;
     background: url(../../assets/headerIcons/logOut.png) no-repeat center;
 }

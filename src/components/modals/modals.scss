@@ -49,6 +49,14 @@
     margin-top: 50px;
 }
 
+.modalwindow__button:hover {
+    background-color: rgba(200, 0, 218, 0.644);
+}
+
+.modalwindow__button:active {
+    padding-bottom: 0.5px;
+}
+
 .modalwindow__input-field {
     width: 60%;
 }
