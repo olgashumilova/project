@@ -38,16 +38,19 @@ const App: React.FunctionComponent = () => {
   async function getUsers() {
     await getArrayOfUsers
     setUsersArray((await getArrayOfUsers).data)
-    console.log(usersArray);
     
     if (usersArray.length !== 0) {
       setIsSignedIn(true)
-      console.log(usersArray);      
-    } else {
-      console.log(usersArray);    
     }
   }
-getUsers()
+  getUsers()
+
+  const logOut = () => {
+    usersArray.pop()
+    setIsSignedIn(false)
+    console.log(isSignedIn)
+    console.log(usersArray)  
+  }
 
   return (
     <Router>
@@ -62,17 +65,17 @@ getUsers()
               <li className = 'header__link'>Home</li>
             </Link>
             
-            <li className = 'header__list-element'>
-                <Dropdown text = 'Products'>
-                  <Dropdown.Menu>
-                    <Dropdown.Item text = 'PC' onClick = {() => alert('PC Page')}/>
-                    <Dropdown.Item text = 'Playstation 5' onClick = {() => alert('Playstation 5 Page')}/>
-                    <Dropdown.Item text = 'XBox One' onClick = {() => alert('XBox One Page')}/>
-                  </Dropdown.Menu>
-                </Dropdown>
-            </li>
-            
-            <Link className = 'header__list-element' to = {ROUTES.ABOUT}>
+              <li className = 'header__list-element'>
+                  <Dropdown text = 'Products'>
+                      <Dropdown.Menu>
+                        <Dropdown.Item text = 'PC' onClick = {() => alert('PC Page')}/>
+                        <Dropdown.Item text = 'Playstation 5' onClick = {() => alert('Playstation 5 Page')}/>
+                        <Dropdown.Item text = 'XBox One' onClick = {() => alert('XBox One Page')}/>
+                      </Dropdown.Menu>
+                  </Dropdown>
+              </li>
+
+            <Link className = 'header__list-element' to = {isSignedIn ? ROUTES.ABOUT : ROUTES.SIGNIN}>
               <li className = 'header__link'>
                 About
               </li>
@@ -87,11 +90,11 @@ getUsers()
                   </Link>
             
                   <Link className = 'header__list-element' to = {ROUTES.CART}>
-                      <div className = 'header__cart-icon'></div>
+                      <button className = 'header__cart-icon'></button>
                   </Link>
             
                   <Link className = 'header__list-element' to = {ROUTES.HOME}>
-                      <div className = 'header__logout-icon'></div>
+                      <button className = 'header__logout-icon' onClick = {() => logOut() }></button>
                   </Link>
                 </div>
             </div>
