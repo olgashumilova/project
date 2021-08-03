@@ -69,6 +69,7 @@
     height: 30px;
     border: none;
     background: url(../../assets/headerIcons/cartIcon.png) no-repeat center;
+    cursor: pointer;
 }
 
 .header__logout-icon {
@@ -76,4 +77,5 @@
     height: 30px;
     border: none;
     background: url(../../assets/headerIcons/logOut.png) no-repeat center;
+    cursor: pointer;
 }
