@@ -1,0 +1,5 @@
+export const ACTION_TYPES = {
+    GET_USERS: 'GET_USERS',
+    SET_USER: 'SET_USER',
+    DELETE_USER: 'DELETE_USER',
+}
