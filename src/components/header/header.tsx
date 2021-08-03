@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux'
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link,
-  Redirect
 } from "react-router-dom";
 import ROUTES from '@Components/routes.ts'
-
-// Api
-import { getArrayOfUsers } from "@/api/api.js";
 
 // Semantic UI (for modal window)
 import 'semantic-ui-css/semantic.min.css'
@@ -30,34 +27,26 @@ import '@Components/footer/footer.scss'
 import '@Components/home/home.scss'
 import '@Components/modals/modals.scss'
 
-import signIn from '../modals/signInModal'
+import deleteUser from '../../redux/reducers/redusers'
 
-const App: React.FunctionComponent = (props) => {
+const App: React.FunctionComponent = () => {
 
-  const MyContext = React.createContext(undefined);
- 
-  const [isSignedIn, setIsSignedIn] = useState(false)
-  const [usersArray, setUsersArray] = useState([])
+  const dispatch = useDispatch()
 
-  async function getUsers() {
-    await getArrayOfUsers.then((response) => {
-      setUsersArray(response.data)
-    })
-    if (usersArray.length !== 0) {
-      setIsSignedIn(true)
-    }
-    for (let i = 0; i < usersArray.length; i++) {
-      localStorage.setItem(usersArray[i].login, 'username')
-    }
+  interface RootState {
+    isSignedIn: boolean
   }
 
-  getUsers()
+  const logIn = false
 
-  const logOut = () => {
-    for (let i = 0; i < usersArray.length; i++) {
-      return localStorage.removeItem(usersArray[i].login)
+  const [showButtons, setShowButtons] = useState(false)
+
+  async function changeHeader() {
+    if (logIn === true) {
+      setShowButtons(true)
     }
   }
+  changeHeader()
 
   return (
     <Router>
@@ -82,51 +71,45 @@ const App: React.FunctionComponent = (props) => {
                   </Dropdown>
               </li>
 
-            <Link className = 'header__list-element' to = {isSignedIn ? ROUTES.ABOUT : ROUTES.SIGNIN}>
+            <Link className = 'header__list-element' to = {logIn ? ROUTES.ABOUT : ROUTES.SIGNIN}>
               <li className = 'header__link'>
                 About
               </li>
             </Link>
 
-            <MyContext.Consumer> 
-              {value => (
-                isSignedIn ? (
-                  <div className = 'header__nav'>
-                    <div className = 'header__list'>
-                      <Link className = 'header__list-element' to = {ROUTES.USER}>
-                        <div className = 'header__user-icon'></div>
-                        <p className = 'header__user-name'>Hello, {usersArray.map(user => user.login)}</p>
-                      </Link>
-                  
-                      <Link className = 'header__list-element' to = {ROUTES.CART}>
-                          <button className = 'header__cart-icon'></button>
-                      </Link>
-                  
-                      <Link className = 'header__list-element' to = {ROUTES.HOME}>
-                          <button className = 'header__logout-icon' onClick = {() => logOut() }></button>
-                      </Link>
-                    </div>
-                  </div>
-                ) : (
-                  <div className = 'header__nav'>
-                    <div className = 'header__list'>
-                      <Link className = 'header__list-element' to = {ROUTES.SIGNIN}>
-                        <li className = 'header__link'>
-                          Sign In
-                        </li>
-                      </Link>
-
-                      <Link className = 'header__list-element' to = {ROUTES.SIGNUP}>
-                        <li className = 'header__link'>
-                          Sign Up
-                        </li>
-                      </Link>
-                    </div>
-                  </div>
-                )
+              {showButtons ? (
+                <div className = 'header__nav'>
+                  <div className = 'header__list'>
+                    <Link className = 'header__list-element' to = {ROUTES.USER}>
+                      <div className = 'header__user-icon'></div>
+                      <p className = 'header__user-name'>Hello, {usersArray.map(user => user.login)}</p>
+                    </Link>
                 
+                    <Link className = 'header__list-element' to = {ROUTES.CART}>
+                        <button className = 'header__cart-icon'></button>
+                    </Link>
+                
+                    <Link className = 'header__list-element' to = {ROUTES.HOME}>
+                        <button className = 'header__logout-icon' onClick = {() => dispatch(deleteUser) }></button>
+                    </Link>
+                  </div>
+                </div>
+              ) : (
+                <div className = 'header__nav'>
+                  <div className = 'header__list'>
+                    <Link className = 'header__list-element' to = {ROUTES.SIGNIN}>
+                      <li className = 'header__link'>
+                        Sign In
+                      </li>
+                    </Link>
+                    <Link className = 'header__list-element' to = {ROUTES.SIGNUP}>
+                      <li className = 'header__link'>
+                        Sign Up
+                      </li>
+                    </Link>
+                  </div>
+                </div>
               )}
-            </MyContext.Consumer>
             
           </ul>
         </div>

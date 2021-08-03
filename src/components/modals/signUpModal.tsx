@@ -1,31 +1,39 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
+import { useDispatch ,useSelector } from 'react-redux'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import { Link, Redirect } from 'react-router-dom'
 import ROUTES from '@Components/routes.ts'
+import { setUser } from '../../redux/actions/actions';
 
 const SignUpModal: React.FunctionComponent = () => {
+
+    const dispatch = useDispatch()
 
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
     const [repeatPassword, setRepeatPassword] = useState('')
-    const [isSignedUp, setIsSignedUp] = useState(false)
 
     async function signUp() {
-        const response = await axios.post('http://localhost:3001/signup', 
-        {login, password})
-        Swal.fire(response.data)
-        setIsSignedUp(true)
+        try {
+            await axios.post('http://localhost:3001/signup', {login, password}).then((response) => {
+                console.log(response.data)   
+                dispatch(() => setUser(response.data))   
+            })
+        } catch (error) {
+            console.log(error); 
+        }   
     }
+
+    const emptyFields = useCallback (() => {
+        setLogin('')
+        setPassword('')
+        setRepeatPassword('')
+    },[])
 
     return (
         
         <div className = 'modalwindow'>
-            {isSignedUp ? (
-                <Redirect to = {ROUTES.SIGNIN}></Redirect>
-            ) : (
-                ''
-            )}
             <div className = 'modalwindow__header'>
                 <p>Registration</p>
                 <Link to = {ROUTES.HOME}>
@@ -39,7 +47,8 @@ const SignUpModal: React.FunctionComponent = () => {
                     <input 
                         type="text" 
                         className = 'modalwindow__input-field'
-                        onChange = {(event) => setLogin(event.target.value)} 
+                        onChange = {(event) => setLogin(event.target.value)}
+                        value = {login}
                     />
                 </div>
         
@@ -49,6 +58,7 @@ const SignUpModal: React.FunctionComponent = () => {
                         type = 'password'
                         className = 'modalwindow__input-field'
                         onChange = {(event) => setPassword(event.target.value)}
+                        value = {password}
                     />
                 </div>
         
@@ -58,6 +68,7 @@ const SignUpModal: React.FunctionComponent = () => {
                         type = 'password'
                         className = 'modalwindow__input-field'
                         onChange = {(event) => setRepeatPassword(event.target.value)}
+                        value = {repeatPassword}
                     />
                 </div>
             </div>
@@ -67,9 +78,10 @@ const SignUpModal: React.FunctionComponent = () => {
                 type = 'submit'
                 onClick = {() => {
                     if (password === repeatPassword) {
-                        signUp()                        
+                        signUp()
+                        emptyFields()     
                     } else {
-                        alert('Passwords don\'t match')
+                        Swal.fire('Passwords don\'t match')
                 }}}>Submit</button>
         </div>
     )
