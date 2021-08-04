@@ -4,7 +4,9 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import { Link, Redirect } from 'react-router-dom'
 import ROUTES from '@Components/routes.ts'
+
 import { setUser } from '../../redux/actions/actions';
+import { useEffect } from 'react'
 
 const SignUpModal: React.FunctionComponent = () => {
 
@@ -13,23 +15,33 @@ const SignUpModal: React.FunctionComponent = () => {
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
     const [repeatPassword, setRepeatPassword] = useState('')
-
-    async function signUp() {
-        try {
-            await axios.post('http://localhost:3001/signup', {login, password}).then((response) => {
-                console.log(response.data)   
-                dispatch(() => setUser(response.data))   
-            })
-        } catch (error) {
-            console.log(error); 
-        }   
-    }
+    const [redirect, setRedirect] = useState(false)
 
     const emptyFields = useCallback (() => {
         setLogin('')
         setPassword('')
         setRepeatPassword('')
     },[])
+    
+    async function signUp() {
+        try {
+            await axios.post('http://localhost:3001/signup', {login, password}).then((response) => {
+                const userData = response.data
+                
+                for (let i = 0; i < userData.length; i++) {
+                    if (userData[i].login) {
+                        Swal.fire('You\'ve been signed up!')
+                        dispatch(() => setUser(userData[i])) 
+                        setRedirect(true)
+                    } else {
+                        Swal.fire(response.data)
+                    }
+                }
+            })
+        } catch (error) {
+            console.log(error); 
+        }   
+    }
 
     return (
         
@@ -83,6 +95,7 @@ const SignUpModal: React.FunctionComponent = () => {
                     } else {
                         Swal.fire('Passwords don\'t match')
                 }}}>Submit</button>
+            {redirect ? <Redirect to = {ROUTES.SIGNIN}></Redirect> : null}
         </div>
     )
 }

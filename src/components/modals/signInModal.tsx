@@ -1,42 +1,41 @@
-import React, { useState, useCallback } from "react";
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState, useCallback } from "react"
 import axios from 'axios'
 import Swal from 'sweetalert2'
-import { Redirect } from 'react-router';
+import { Redirect } from 'react-router'
 import { Link } from 'react-router-dom'
 import ROUTES from '@Components/routes.ts'
 
-import { setUser } from '../../redux/actions/actions'
+import getUser from '../header/header'
 
 const SignInModal: React.FunctionComponent = () => {
 
-    const dispatch = useDispatch()
-
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
+    const [redirect, setRedirect] = useState(false)
+
     const emptyFields = useCallback (() => {
         setLogin('')
         setPassword('')
     },[])
 
-    interface IRootState {
-        authUser: null
-    }
-
-    const user = useSelector((state: IRootState) => state.authUser)
-    console.log(user);
-
     async function signIn() {
         try {
             await axios.post('http://localhost:3001/signin', {login, password}).then((response) => {
-                console.log(response.data)
-                localStorage.setItem(response.data.id, response.data.login)
-                dispatch(() => setUser(response.data))
+                const userData = response.data
+
+                if (userData.login) {
+                    Swal.fire(`Welcome, ${userData.login}`)
+                    localStorage.setItem(userData.id, userData.login)
+                    setRedirect(true)
+                } else {
+                    Swal.fire(response.data)
+                }
             })        
         } catch (error) {
             console.log(error);         
         }   
     }
+    
 
     return (
         <div>
@@ -75,7 +74,7 @@ const SignInModal: React.FunctionComponent = () => {
                     }}>
                         Submit
                 </button>
-                {user ? <Redirect to = {ROUTES.USER}></Redirect> : null}
+                {redirect ? <Redirect to = {ROUTES.USER}></Redirect> : null}
             </div>
 
         </div>
@@ -83,15 +82,3 @@ const SignInModal: React.FunctionComponent = () => {
 }
 
 export default SignInModal
-
-// const SignInModal = ({ message, isOpen, onClose, children }) => {
-//     if (!isOpen) return null
-//     return ReactDOM.createPortal(    
-//       <div className="modal">
-//         <span className="message">{message}</span>
-//         <button onClick={onClose}>Close</button>
-//       </div>,
-//       domNode)
-// }
-
-// export default SignInModal

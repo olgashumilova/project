@@ -5,7 +5,8 @@ import {
   Switch,
   Route,
   Link,
-} from "react-router-dom";
+} from "react-router-dom"
+import axios from "axios"
 import ROUTES from '@Components/routes.ts'
 
 // Semantic UI (for modal window)
@@ -30,23 +31,21 @@ import '@Components/modals/modals.scss'
 import deleteUser from '../../redux/reducers/redusers'
 
 const App: React.FunctionComponent = () => {
-
-  const dispatch = useDispatch()
-
-  interface RootState {
-    isSignedIn: boolean
-  }
-
-  const logIn = false
-
+  
+  const user = useSelector(state => state.authUser)
+  
   const [showButtons, setShowButtons] = useState(false)
 
-  async function changeHeader() {
-    if (logIn === true) {
-      setShowButtons(true)
-    }
+  if (user) {
+    setShowButtons(true)
+  } else {
+    console.log('User is null')
   }
-  changeHeader()
+
+  const logOut = () => {
+    localStorage.clear()
+    setShowButtons(false)
+  }
 
   return (
     <Router>
@@ -71,7 +70,7 @@ const App: React.FunctionComponent = () => {
                   </Dropdown>
               </li>
 
-            <Link className = 'header__list-element' to = {logIn ? ROUTES.ABOUT : ROUTES.SIGNIN}>
+            <Link className = 'header__list-element' to = {showButtons ? ROUTES.ABOUT : ROUTES.SIGNIN}>
               <li className = 'header__link'>
                 About
               </li>
@@ -82,7 +81,7 @@ const App: React.FunctionComponent = () => {
                   <div className = 'header__list'>
                     <Link className = 'header__list-element' to = {ROUTES.USER}>
                       <div className = 'header__user-icon'></div>
-                      <p className = 'header__user-name'>Hello, {usersArray.map(user => user.login)}</p>
+                      <p className = 'header__user-name'>Hello, {}</p>
                     </Link>
                 
                     <Link className = 'header__list-element' to = {ROUTES.CART}>
@@ -90,7 +89,7 @@ const App: React.FunctionComponent = () => {
                     </Link>
                 
                     <Link className = 'header__list-element' to = {ROUTES.HOME}>
-                        <button className = 'header__logout-icon' onClick = {() => dispatch(deleteUser) }></button>
+                        <button className = 'header__logout-icon' onClick = {() => logOut() }></button>
                     </Link>
                   </div>
                 </div>
