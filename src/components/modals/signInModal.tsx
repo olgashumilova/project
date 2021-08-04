@@ -14,17 +14,17 @@ const SignInModal: React.FunctionComponent = () => {
 
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
-
-    // interface IRootState {
-    //     authUser: null
-    // }
-
-    const user = useSelector(state => state.authUser)
-
     const emptyFields = useCallback (() => {
         setLogin('')
         setPassword('')
     },[])
+
+    interface IRootState {
+        authUser: null
+    }
+
+    const user = useSelector((state: IRootState) => state.authUser)
+    console.log(user);
 
     async function signIn() {
         try {

@@ -1,9 +1,9 @@
 import { ACTION_TYPES } from '../const/actionTypes';
 
 export const initialState = {
-    users: [],
-    isSignedIn: false,
-    authUser: null,
+  users: [],
+  isSignedIn: false,
+  authUser: null,
 }
 
 const reducer = (state = initialState, action: any) => {
@@ -16,11 +16,11 @@ const reducer = (state = initialState, action: any) => {
           }
         }
         case ACTION_TYPES.SET_USER: {
-            return {
-              ...state,
-              authUser: action.payload,
-              isSignedIn: true,
-            }
+          return {
+            ...state,
+            authUser: action.payload,
+            isSignedIn: true,
+          }
         }
         case ACTION_TYPES.DELETE_USER: {
             return {
