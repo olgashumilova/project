@@ -1,0 +1,80 @@
+@import '@Styles/main.scss';
+
+.userpage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: $white-color;
+    @include regular-font;
+}
+
+.userpage__title {
+    @include title;
+    width: 80%;
+    padding-top: 3%;
+}
+
+.userpage__main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 70%;
+    margin: 5% 0 10% 0;
+}
+
+.userpage__userpic-container {
+    display: flex;
+    flex-direction: column;
+
+    .userpage__image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 250px;
+        height: 300px;
+        border-radius: 5%;
+        background-color: rgb(148, 148, 148);
+
+        .userpage__image-inner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100px;
+            height: 100px;
+            text-transform: uppercase;
+            border: 1px solid white;
+        }
+    }
+}
+
+.userpage__button {
+    margin: 20% 0 0 0;
+    @include button;
+}
+
+.userpage__buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.userpage__input {
+    width: 100%;
+    height: 40px;
+    margin: 15px 0 15px 0;
+    color: $white-color;
+    border-color: $white-color;
+    background-color: rgba(0, 0, 0, 0.329);
+}
+
+.userpage__input-description {
+    height: 200px;
+    resize: none;
+}
+
+// .modalportal {
+//     position: absolute;
+//     top: 20%;
+//     left: 30%;
+//     z-index: 999;
+// }
