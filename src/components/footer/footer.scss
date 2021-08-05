@@ -4,7 +4,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color:rgba(0, 0, 0, 0.800);
+    height: 20%;
+    background-color: rgba(0, 0, 0, 0.800);
     color: $white-color;
     @include regular-font;
 }
@@ -12,14 +13,14 @@
 .footer__title {
     display: flex;
     justify-content: center;
-    padding: 3% 0 0 0;
+    padding: 2% 0 0 0;
 }
 
 .footer__icons {
     display: flex;
     justify-content: center;
     height: 45px;
-    margin: 3%;
+    margin: 2%;
 }
 
 .footer__link {
@@ -28,5 +29,4 @@
 
 .footer__link:hover{
     margin: 5px
-    
 }

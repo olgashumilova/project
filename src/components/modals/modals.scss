@@ -1,5 +1,9 @@
 @import '@Styles/main.scss';
 
+body {
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7)), url(../../assets/background/background.jpg);
+}
+
 .modalwindow {
     display: flex;
     flex-direction: column;
