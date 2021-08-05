@@ -3,6 +3,8 @@ import  { Redirect } from "react-router-dom"
 import ROUTES from '@Components/routes.ts'
 import Header from '@Components/header/header.tsx'
 
+import '@/App.css'
+
 interface Props {
   children: ReactNode;
 }
