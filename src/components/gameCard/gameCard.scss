@@ -46,9 +46,5 @@
 }
 
 .back__cart-button {
-    height: 30px;
-    border: none;
-    border-radius: 6px;
-    color: $white-color;
-    background-color: $purple-color;
+    @include button;
 }
