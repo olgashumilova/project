@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ACTION_TYPES } from '../const/actionTypes';
+import { ACTION_TYPES } from '@/redux/const/actionTypes.ts';
 
 // Users
 export const getUsersArray = (users) => ({
@@ -9,11 +9,16 @@ export const getUsersArray = (users) => ({
 
 export const setUser = (payload) => ({
     type: ACTION_TYPES.SET_USER,
-    payload: payload,
+    payload: {...payload},
 })
 
 export const deleteUser = (payload) => ({
     type: ACTION_TYPES.DELETE_USER,
+    payload: payload,
+})
+
+export const isSignedIn = (payload) => ({
+    type: ACTION_TYPES.IS_SIGNED_IN,
     payload: payload,
 })
 
