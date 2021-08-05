@@ -30,21 +30,31 @@ import '@Components/header/header.scss'
 import '@Components/footer/footer.scss'
 import '@Components/home/home.scss'
 import '@Components/modals/modals.scss'
+import '@Components/userPage/userPage.scss'
 
 const App: React.FunctionComponent = () => {
-  
-  const user = useSelector(state => state.authUser)
-  const isSignedIn = useSelector(state => state.isSignedIn)
-  
+
   const [showButtons, setShowButtons] = useState(false)
+
+  const isSignedIn = useSelector(state => state.isSignedIn)
+
+  const userName = localStorage.getItem('username')
 
   useEffect(() => {
     if (isSignedIn) {
       setShowButtons(true)
     } else {
-      console.log('User is null')
+      setShowButtons(false)
     }
   }, [isSignedIn])
+
+  useEffect(() => {
+    if (userName) {
+      setShowButtons(true)
+    } else {
+      setShowButtons(false)
+    }
+  }, [userName])
 
   const logOut = () => {
     localStorage.clear()
@@ -86,7 +96,7 @@ const App: React.FunctionComponent = () => {
                   <div className = 'header__list'>
                     <Link className = 'header__list-element' to = {ROUTES.USER}>
                       <div className = 'header__user-icon'></div>
-                      <p className = 'header__user-name'>Hello, {user.login}</p>
+                      <p className = 'header__user-name'>Hello, {userName}</p>
                     </Link>
                 
                     <Link className = 'header__list-element' to = {ROUTES.CART}>
