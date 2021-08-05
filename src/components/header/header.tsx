@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link,
 } from "react-router-dom"
-import axios from "axios"
+
 import ROUTES from '@Components/routes.ts'
 
 // Semantic UI (for modal window)
 import 'semantic-ui-css/semantic.min.css'
 import { Dropdown } from 'semantic-ui-react'
+
+// SweetAlert 2
+import Swal from "sweetalert2";
 
 // Components
 import HomeComponent from '@Components/home/home.tsx'
@@ -28,23 +31,25 @@ import '@Components/footer/footer.scss'
 import '@Components/home/home.scss'
 import '@Components/modals/modals.scss'
 
-import deleteUser from '../../redux/reducers/redusers'
-
 const App: React.FunctionComponent = () => {
   
   const user = useSelector(state => state.authUser)
+  const isSignedIn = useSelector(state => state.isSignedIn)
   
   const [showButtons, setShowButtons] = useState(false)
 
-  if (user) {
-    setShowButtons(true)
-  } else {
-    console.log('User is null')
-  }
+  useEffect(() => {
+    if (isSignedIn) {
+      setShowButtons(true)
+    } else {
+      console.log('User is null')
+    }
+  }, [isSignedIn])
 
   const logOut = () => {
     localStorage.clear()
     setShowButtons(false)
+    Swal.fire('You\'ve signed out!')
   }
 
   return (
@@ -81,7 +86,7 @@ const App: React.FunctionComponent = () => {
                   <div className = 'header__list'>
                     <Link className = 'header__list-element' to = {ROUTES.USER}>
                       <div className = 'header__user-icon'></div>
-                      <p className = 'header__user-name'>Hello, {}</p>
+                      <p className = 'header__user-name'>Hello, {user.login}</p>
                     </Link>
                 
                     <Link className = 'header__list-element' to = {ROUTES.CART}>
