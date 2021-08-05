@@ -1,12 +1,11 @@
 import React, { useState, useCallback } from 'react'
-import { useDispatch ,useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import { Link, Redirect } from 'react-router-dom'
 import ROUTES from '@Components/routes.ts'
 
-import { setUser } from '../../redux/actions/actions';
-import { useEffect } from 'react'
+import { setUser } from '@/redux/actions/actions';
 
 const SignUpModal: React.FunctionComponent = () => {
 
@@ -26,16 +25,13 @@ const SignUpModal: React.FunctionComponent = () => {
     async function signUp() {
         try {
             await axios.post('http://localhost:3001/signup', {login, password}).then((response) => {
-                const userData = response.data
-                
-                for (let i = 0; i < userData.length; i++) {
-                    if (userData[i].login) {
-                        Swal.fire('You\'ve been signed up!')
-                        dispatch(() => setUser(userData[i])) 
-                        setRedirect(true)
-                    } else {
-                        Swal.fire(response.data)
-                    }
+                const userData = response.data                   
+                if (userData.login) {
+                    dispatch(setUser(userData))
+                    Swal.fire('You\'ve been signed up!')
+                    setRedirect(true)
+                } else {
+                    Swal.fire(response.data)
                 }
             })
         } catch (error) {
