@@ -1,13 +1,16 @@
 import React, { useState, useCallback } from "react"
+import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import { Redirect } from 'react-router'
 import { Link } from 'react-router-dom'
 import ROUTES from '@Components/routes.ts'
 
-import getUser from '../header/header'
+import { isSignedIn } from '@/redux/actions/actions'
 
 const SignInModal: React.FunctionComponent = () => {
+
+    const dispatch = useDispatch()
 
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
@@ -24,8 +27,9 @@ const SignInModal: React.FunctionComponent = () => {
                 const userData = response.data
 
                 if (userData.login) {
-                    Swal.fire(`Welcome, ${userData.login}`)
+                    dispatch(isSignedIn(true))
                     localStorage.setItem(userData.id, userData.login)
+                    Swal.fire(`Welcome, ${userData.login}`)
                     setRedirect(true)
                 } else {
                     Swal.fire(response.data)
@@ -52,7 +56,8 @@ const SignInModal: React.FunctionComponent = () => {
                         <input 
                             type="text" 
                             className = 'modalwindow__input-field'
-                            onChange = {(event) => setLogin(event.target.value)} 
+                            onChange = {(event) => setLogin(event.target.value)}
+                            value = {login}
                         />
                     </div>
     
@@ -62,6 +67,7 @@ const SignInModal: React.FunctionComponent = () => {
                             type = 'password'
                             className = 'modalwindow__input-field'
                             onChange = {(event) => setPassword(event.target.value)}
+                            value = {password}
                         />
                     </div>
                 </div>
