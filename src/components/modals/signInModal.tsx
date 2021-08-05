@@ -28,7 +28,7 @@ const SignInModal: React.FunctionComponent = () => {
 
                 if (userData.login) {
                     dispatch(isSignedIn(true))
-                    localStorage.setItem(userData.id, userData.login)
+                    localStorage.setItem('username', userData.login)
                     Swal.fire(`Welcome, ${userData.login}`)
                     setRedirect(true)
                 } else {
