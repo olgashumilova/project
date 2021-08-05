@@ -52,7 +52,7 @@ const HomeComponent: React.FunctionComponent = () => {
     return (
         <main className = 'home'>
 
-            <SearchBar />          
+            <SearchBar />        
 
             <div className = 'home__main'>
                <div className = 'home__categories'>

@@ -90,6 +90,7 @@ const SignUpModal: React.FunctionComponent = () => {
                         emptyFields()     
                     } else {
                         Swal.fire('Passwords don\'t match')
+                        emptyFields()
                 }}}>Submit</button>
             {redirect ? <Redirect to = {ROUTES.SIGNIN}></Redirect> : null}
         </div>
