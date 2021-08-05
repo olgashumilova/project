@@ -4,8 +4,8 @@ export const initialState = {
   users: [],
   products: [],
   authUser: null,
+  isSignedIn: false,
 }
-console.log(initialState.authUser);
 
 const reducer = (state = initialState, action: any) => {
     switch (action.type) {
@@ -20,6 +20,12 @@ const reducer = (state = initialState, action: any) => {
         return {
           ...state,
           authUser: action.payload,
+        }     
+      }
+      case ACTION_TYPES.IS_SIGNED_IN: {
+        return {
+          ...state,
+          isSignedIn: action.payload,
         }     
       }
       case ACTION_TYPES.DELETE_USER: {
