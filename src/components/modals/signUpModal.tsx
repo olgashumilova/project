@@ -27,7 +27,7 @@ const SignUpModal: React.FunctionComponent = () => {
             await axios.post('http://localhost:3001/signup', {login, password}).then((response) => {
                 const userData = response.data                   
                 if (userData.login) {
-                    dispatch(setUser(userData))
+                    dispatch(setUser(userData))                 
                     Swal.fire('You\'ve been signed up!')
                     setRedirect(true)
                 } else {
