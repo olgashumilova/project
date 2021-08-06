@@ -20,6 +20,7 @@ import Swal from "sweetalert2";
 import HomeComponent from '@Components/home/home.tsx'
 import FooterComponent from '@Components/footer/footer.tsx'
 import UserPage from '@Components/userPage/userPage.tsx'
+import EditUserPage from '@Components/editUserPage/editUserPage.tsx'
 
 // Modals
 import SignUpModal from '@Components/modals/signUpModal.tsx'
@@ -31,6 +32,7 @@ import '@Components/footer/footer.scss'
 import '@Components/home/home.scss'
 import '@Components/modals/modals.scss'
 import '@Components/userPage/userPage.scss'
+import '@Components/editUserPage/editUserPage.scss'
 
 const App: React.FunctionComponent = () => {
 
@@ -131,6 +133,9 @@ const App: React.FunctionComponent = () => {
       <Switch>
         <Route path = {ROUTES.USER}>
           <User />
+        </Route>
+        <Route path = {ROUTES.EDIT_USER}>
+          <EditUserPage />
         </Route>
         <Route path = {ROUTES.SIGNUP}>
           <SignUpModal />

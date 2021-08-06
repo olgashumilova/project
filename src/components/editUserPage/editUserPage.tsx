@@ -3,7 +3,7 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import { Redirect } from 'react-router'
 import ROUTES from '@Components/routes.ts'
-import ChangePassword from '../modals/changePassword'
+import ChangePassword from '@Components/modals/changePassword.tsx'
 
 const EditUserPage: React.FunctionComponent = () => {
 
