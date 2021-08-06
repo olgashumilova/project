@@ -58,19 +58,19 @@ const HomeComponent: React.FunctionComponent = () => {
                <div className = 'home__categories'>
                    <p className = 'home__title'>Categories</p>
                    <div className = 'home__categories-logos'>
-                   <Link className = 'home__link-container' to = {ROUTES.PRODUCTS}>
+                   <Link className = 'home__link-container' to = {ROUTES.PC_PAGE}>
                        <div className = 'home__logos-container'>
                           <img className = 'home__device-logo' src = {pcLogo} alt = "Pc logo"/>
                           <p className = 'home__text'>PC</p>
                        </div>
                     </Link>
-                    <Link className = 'home__link-container' to = {ROUTES.PRODUCTS}>
+                    <Link className = 'home__link-container' to = {ROUTES.PLAYSTATION_PAGE}>
                        <div className = 'home__logos-container'>
                           <img className = 'home__device-logo' src = {playstationLogo} alt = "Playstation Logo"/>
                           <p className = 'home__text'>Playstation 5</p>
                        </div>
                     </Link>
-                       <Link className = 'home__link-container' to = {ROUTES.PRODUCTS}>
+                       <Link className = 'home__link-container' to = {ROUTES.XBOX_PAGE}>
                             <div className = 'home__logos-container'>                          
                                 <img className = 'home__device-logo' src = {xboxLogo} alt = "Xbox logo"/>
                                 <p className = 'home__text'>XBox One</p>
