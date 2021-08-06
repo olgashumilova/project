@@ -1,80 +1,67 @@
 @import '@Styles/main.scss';
 
-.userpage {
+#box {
+    margin: 5% 10% 10% 10%;
+}
+
+.user-profile-container {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: $white-color;
+    --borderWidth: 2px;
+    background: rgb(17, 17, 17);
     @include regular-font;
 }
 
-.userpage__title {
-    @include title;
-    width: 80%;
-    padding-top: 3%;
+.user-profile-container:after {
+  content: '';
+  position: absolute;
+  top: calc(-1 * var(--borderWidth));
+  left: calc(-1 * var(--borderWidth));
+  height: calc(100% + var(--borderWidth) * 2);
+  width: calc(100% + var(--borderWidth) * 2);
+  background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82);
+  z-index: -1;
+  animation: animatedgradient 3s ease alternate infinite;
+  background-size: 300% 300%;
 }
+  
+@keyframes animatedgradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}  
 
-.userpage__main {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    width: 70%;
-    margin: 5% 0 10% 0;
-}
-
-.userpage__userpic-container {
+.user-profile {
     display: flex;
     flex-direction: column;
-
-    .userpage__image {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 250px;
-        height: 300px;
-        border-radius: 5%;
-        background-color: rgb(148, 148, 148);
-
-        .userpage__image-inner {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100px;
-            height: 100px;
-            text-transform: uppercase;
-            border: 1px solid white;
-        }
-    }
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    margin: 10%;
 }
 
-.userpage__button {
-    margin: 20% 0 0 0;
+.user-profile__button {
+    margin-bottom: 100px;
     @include button;
 }
 
-.userpage__buttons {
-    display: flex;
-    flex-direction: column;
+.user-profile__title {
+    @include title;
 }
 
-.userpage__input {
-    width: 100%;
-    height: 40px;
-    margin: 15px 0 15px 0;
+.user-profile__description {
     color: $white-color;
-    border-color: $white-color;
-    background-color: rgba(0, 0, 0, 0.329);
 }
 
-.userpage__input-description {
-    height: 200px;
-    resize: none;
+.user-profile__image {
+    width: 80%;
 }
-
-// .modalportal {
-//     position: absolute;
-//     top: 20%;
-//     left: 30%;
-//     z-index: 999;
-// }
