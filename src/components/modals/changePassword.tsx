@@ -1,18 +1,15 @@
 import React, { useState, useCallback } from "react"
-import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import { Redirect } from 'react-router'
-import { Link } from 'react-router-dom'
 import ROUTES from '@Components/routes.ts'
 
 const ChangePassword:React.FunctionComponent = () => {
 
-    const [showModal, setShowModal] = useState(false)
+    const [showModal, setShowModal] = useState(true)
 
     const [password, setPassword] = useState('')
     const [repeatPassword, setRepeatPassword] = useState('')
-    const [redirect, setRedirect] = useState(false)
 
     const emptyFields = useCallback (() => {
         setPassword('')
@@ -21,7 +18,7 @@ const ChangePassword:React.FunctionComponent = () => {
 
     const changePassword = async () => {
         try {
-            await axios.post('http://localhost:3001/changePassword', password).then((response) => {
+            await axios.post('http://localhost:3001/changePassword', { password }).then((response) => {
                 Swal.fire(response.data)               
             })
         } catch (error) {
@@ -30,16 +27,15 @@ const ChangePassword:React.FunctionComponent = () => {
     }
 
     return (
-        <div>
-            <div className = 'modalwindow'>
+
+        <div className = 'modal-wrapper'>
+            <div className = {showModal === true ? 'modalwindow' : 'modalwindow_hidden'}>
                 <div className = 'modalwindow__header'>
                     <p>Change password</p>
-                    <Link to = {ROUTES.USER}>
-                        <button className = 'modalwindow__close-button' onClick = {() => setShowModal(!showModal)}>x</button>
-                    </Link>
+                    <button className = 'modalwindow__close-button' onClick = {() => setShowModal(!showModal)}>x</button>
                 </div>
                 <div className = 'modalwindow__form'>
-    
+
                     <div className = 'modalwindow__input'>
                         <p>Password</p>
                         <input 
@@ -49,7 +45,6 @@ const ChangePassword:React.FunctionComponent = () => {
                             value = {password}
                         />
                     </div>
-
                     <div className = 'modalwindow__input'>
                         <p>Repeat password</p>
                         <input 
@@ -59,7 +54,6 @@ const ChangePassword:React.FunctionComponent = () => {
                             value = {repeatPassword}
                         />
                     </div>
-
                 </div>
                 <button 
                     className = 'modalwindow__button'
@@ -74,9 +68,8 @@ const ChangePassword:React.FunctionComponent = () => {
                     }}}>
                     Submit
                 </button>
-                {redirect ? <Redirect to = {ROUTES.USER}></Redirect> : null}
+                {redirect ? <Redirect to = {ROUTES.EDIT_USER}></Redirect> : null}
             </div>
-
         </div>
     )
 }
