@@ -26,6 +26,16 @@ const ChangePassword:React.FunctionComponent = () => {
         }
     }
 
+    const comparePasswords = () => {
+        if (password === repeatPassword) {
+            changePassword()
+            emptyFields()     
+        } else {
+            Swal.fire('Passwords don\'t match')
+            emptyFields()
+        }
+    }
+
     return (
 
         <div className = 'modal-wrapper'>
@@ -58,17 +68,9 @@ const ChangePassword:React.FunctionComponent = () => {
                 <button 
                     className = 'modalwindow__button'
                     type = 'submit'
-                    onClick = {() => {
-                        if (password === repeatPassword) {
-                            changePassword()
-                            emptyFields()     
-                        } else {
-                            Swal.fire('Passwords don\'t match')
-                            emptyFields()
-                    }}}>
+                    onClick = {comparePasswords}>
                     Submit
                 </button>
-                {redirect ? <Redirect to = {ROUTES.EDIT_USER}></Redirect> : null}
             </div>
         </div>
     )
