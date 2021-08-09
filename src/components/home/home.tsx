@@ -48,6 +48,15 @@ const HomeComponent: React.FunctionComponent = () => {
             console.log(error);
         })
     }
+        function fetchData() {
+            axios.get('http://localhost:3001/getTopGames').then((response) => {
+                setTopGames(response.data)
+            }).catch ((error) => {
+                console.log(error);
+            })
+        }
+        fetchData();
+    }, []);
 
     return (
         <main className = 'home'>
