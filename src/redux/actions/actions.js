@@ -12,6 +12,11 @@ export const setUser = (payload) => ({
     payload: {...payload},
 })
 
+export const getUserProfile = (payload) => ({
+    type: ACTION_TYPES.SET_USER,
+    payload: payload,
+})
+
 export const deleteUser = (payload) => ({
     type: ACTION_TYPES.DELETE_USER,
     payload: payload,
