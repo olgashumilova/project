@@ -52,6 +52,10 @@
             text-transform: uppercase;
             border: 1px solid white;
         }
+
+        .userpage__user-image {
+            width: 100%;
+        }
     }
 }
 .userpage__profile-desc {
@@ -60,8 +64,18 @@
 }
 
 .userpage__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 20% 0 0 0;
     @include button;
+}
+
+.userpage__button-back {
+    color: $white-color;
+    border: none;
+    background-color: $purple-color;
+    cursor: pointer;
 }
 
 .userpage__buttons {
