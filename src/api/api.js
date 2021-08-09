@@ -1,8 +1,12 @@
 import axios from 'axios'
 
 // Get queries
-export const getTopGames = axios.get('http://localhost:3001/getTopGames')
-export const getArrayOfUsers = axios.get('http://localhost:3001/getUsersArray')
+export const getTopGamesAPI = axios.get('http://localhost:3001/getTopGames')
+export const getArrayOfUsersAPI = axios.get('http://localhost:3001/getUsersArray')
+export const getProfileAPI = axios.get('http://localhost:3001/getProfile')
 
 // Post queries
-export const signUp = axios.post('http://localhost:3001/signup')
+export const signUpUrlAPI = 'http://localhost:3001/signup'
+export const signInUrlAPI = 'http://localhost:3001/signin'
+export const saveProfileUrlAPI = 'http://localhost:3001/saveProfile'
+export const changePasswordUrlAPI = 'http://localhost:3001/changePassword'

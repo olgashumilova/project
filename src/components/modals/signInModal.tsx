@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react"
+import React, { useState } from "react"
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import Swal from 'sweetalert2'
@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import ROUTES from '@Components/routes.ts'
 
 import { isSignedIn } from '@/redux/actions/actions'
+import { signInUrlAPI } from '@/api/api'
 
 const SignInModal: React.FunctionComponent = () => {
 
@@ -16,14 +17,14 @@ const SignInModal: React.FunctionComponent = () => {
     const [password, setPassword] = useState('')
     const [redirect, setRedirect] = useState(false)
 
-    const emptyFields = useCallback (() => {
+    const emptyFields = () => {
         setLogin('')
         setPassword('')
-    },[])
+    }
 
     async function signIn() {
         try {
-            await axios.post('http://localhost:3001/signin', {login, password}).then((response) => {
+            await axios.post(signInUrlAPI, {login, password}).then((response) => {
                 const userData = response.data
 
                 if (userData.login) {

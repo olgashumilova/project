@@ -5,6 +5,8 @@ import { Redirect } from 'react-router'
 import ROUTES from '@Components/routes.ts'
 import ChangePassword from '@Components/modals/changePassword.tsx'
 
+import { saveProfileUrlAPI } from '@/api/api'
+
 const EditUserPage: React.FunctionComponent = () => {
 
     const [showModal, setShowModal] = useState(false)
@@ -21,7 +23,7 @@ const EditUserPage: React.FunctionComponent = () => {
 
     const changeProfile = async () => {
         try {
-            await axios.post('http://localhost:3001/saveProfile', { newLogin, description, userImage }).then((response) => {
+            await axios.post(saveProfileUrlAPI, { newLogin, description, userImage }).then((response) => {
                 const userData = response.data
 
                 if (userData.description) {

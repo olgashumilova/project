@@ -4,6 +4,8 @@ import Swal from 'sweetalert2'
 import { Redirect } from 'react-router'
 import ROUTES from '@Components/routes.ts'
 
+import { changePasswordUrlAPI } from "@/api/api"
+
 const ChangePassword:React.FunctionComponent = () => {
 
     const [showModal, setShowModal] = useState(true)
@@ -18,11 +20,21 @@ const ChangePassword:React.FunctionComponent = () => {
 
     const changePassword = async () => {
         try {
-            await axios.post('http://localhost:3001/changePassword', { password }).then((response) => {
+            await axios.post(changePasswordUrlAPI, { password }).then((response) => {
                 Swal.fire(response.data)               
             })
         } catch (error) {
             console.log(error); 
+        }
+    }
+
+    const comparePasswords = () => {
+        if (password === repeatPassword) {
+            changePassword()
+            emptyFields()     
+        } else {
+            Swal.fire('Passwords don\'t match')
+            emptyFields()
         }
     }
 
@@ -58,17 +70,9 @@ const ChangePassword:React.FunctionComponent = () => {
                 <button 
                     className = 'modalwindow__button'
                     type = 'submit'
-                    onClick = {() => {
-                        if (password === repeatPassword) {
-                            changePassword()
-                            emptyFields()     
-                        } else {
-                            Swal.fire('Passwords don\'t match')
-                            emptyFields()
-                    }}}>
+                    onClick = {comparePasswords}>
                     Submit
                 </button>
-                {redirect ? <Redirect to = {ROUTES.EDIT_USER}></Redirect> : null}
             </div>
         </div>
     )
