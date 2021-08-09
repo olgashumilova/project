@@ -1,4 +1,4 @@
-@import '../../styles/main.scss';
+@import '@Styles/main.scss';
 
 .home {
     display: flex;
@@ -6,7 +6,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../../assets/background/background.jpg);
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../../assets/background/background.jpg) no-repeat;
     @include regular-font;
 }
 
@@ -15,11 +15,7 @@
 }
 
 .home__title {
-    width: 100%;
-    margin-top: 70px;
-    padding-bottom: 9px;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.98);
-    color: rgba(255, 255, 255, 0.98);
+    @include title;
 }
 
 .home__categories-logos {
@@ -46,6 +42,7 @@
     align-items: center;
     width: 100%;
     margin: 2%;
+    padding: 8% 0 10% 0;
     border: 3px rgba(0, 0, 0, 0.800) solid;
     border-bottom: 8px solid rgba(0, 0, 0, 0.800);
     border-radius: 20px;

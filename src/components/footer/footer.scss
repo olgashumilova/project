@@ -1,10 +1,11 @@
-@import '../../styles/main.scss';
+@import '@Styles/main.scss';
 
 .footer {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color:rgba(0, 0, 0, 0.800);
+    height: 20%;
+    background-color: rgba(0, 0, 0, 0.800);
     color: $white-color;
     @include regular-font;
 }
@@ -12,14 +13,14 @@
 .footer__title {
     display: flex;
     justify-content: center;
-    padding: 1%;
+    padding: 2% 0 0 0;
 }
 
 .footer__icons {
     display: flex;
     justify-content: center;
     height: 45px;
-    padding: 0 0 15px 0;
+    margin: 2%;
 }
 
 .footer__link {
@@ -28,5 +29,4 @@
 
 .footer__link:hover{
     margin: 5px
-    
 }

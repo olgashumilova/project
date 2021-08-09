@@ -1,43 +1,43 @@
-@import '../../styles/main.scss';
+@import '@Styles/main.scss';
 
 .searchbar {
-    width: 70%;
+  width: 70%;
 }
 
 .searchbar__input {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 30px;
-    margin: 5% 0 5% 0;
-    padding: 0.5% 0 0.5% 2%;
-    border-radius: 13px;
-    border: 1px solid;
-    border-color: $purple-color;
-    background-color: rgb(0, 0, 0, 0.800);
-    color: $white-color;
-    outline: none;
-    @include regular-font
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 40px;
+  margin: 5% 0 5% 0;
+  padding: 0.5% 0 0.5% 2%;
+  border-radius: 13px;
+  border: 1px solid;
+  border-color: $purple-color;
+  background-color: rgb(0, 0, 0, 0.800);
+  color: $white-color;
+  outline: none;
+  @include regular-font
 }
 
 .loader {
-    display: flex;
-    align-items: center;
-    height: 25px;
-    margin-left: 45%;
+  display: flex;
+  align-items: center;
+  height: 25px;
+  margin-left: 45%;
   }
 
 .loader:after {
-    content: " ";
-    display: flex;
-    width: 60px;
-    height: 60px;
-    margin: 8px;
-    border-radius: 50%;
-    border: 6px solid;
-    border-color: $white-color;
-    border-color: $white-color transparent $white-color transparent;
-    animation: loader 1.2s linear infinite;
+  content: " ";
+  display: flex;
+  width: 60px;
+  height: 60px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid;
+  border-color: $white-color;
+  border-color: $white-color transparent $white-color transparent;
+  animation: loader 1.2s linear infinite;
 }
 
 @keyframes loader {
@@ -50,7 +50,7 @@
 }
 
 .searchbar__result {
-    color: $white-color;
+  color: $white-color;
 }
 
 .game-cards {

@@ -1,4 +1,4 @@
-@import '../../styles/main.scss';
+@import '@Styles/main.scss';
 
 .header {
     display: flex;
@@ -10,31 +10,31 @@
 }
 
 .header__title {
-    width: 40%;
+    display: flex;
+    align-items: center;
+    width: 20%;
     @include bold-font;
     color: $white-color;
 }
 
 .header__nav {
-    width: 50%;
+    width: 70%;
     height: 100%;
 }
 
 .header__list {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
     height: 100%;
     padding: 0;
     margin: 0;
 }
 
 .header__list-element {
-    position: relative;
     display: flex;
-    width: 150px;
+    justify-content: center;
+    width: 40%;
     padding-top: 40px;
-    padding-left: 6%;
     color: $white-color;
     list-style-type: none;
     text-decoration: none;
@@ -42,6 +42,7 @@
 }
 
 .header__list-element:hover {
+    color: $white-color;
     background-color:rgba(255, 255, 255, 0.26);
     border-bottom: 5px solid;
     border-color: $purple-color;
@@ -51,45 +52,30 @@
     display: flex;
     justify-content: center;
     height: 28px;
-    padding-left: 10%;
     text-align: center;
     color: $white-color;
 }
 
-.triangle {
-    width: 0;
-    height: 0;
-    margin-left: 8px;
-    margin-top: 8.5px;
-    border-style: solid;
-    border-width: 7px 5.5px 0 5.5px;
-    border-color: $white-color transparent transparent transparent;
+// Signed In Buttons 
+
+.header__user-icon {
+    width: 55px;
+    height: 30px;
+    background: url(../../assets/headerIcons/userIcon.png) no-repeat;
 }
 
-.dropdownMenu {
-    position: absolute;
-    top: 50px;
-    display: none;
-    margin-top: 55px;
-    color: $white-color;
+.header__cart-icon {
+    width: 55px;
+    height: 30px;
+    border: none;
+    background: url(../../assets/headerIcons/cartIcon.png) no-repeat center;
+    cursor: pointer;
 }
 
-.header__dropdown-list {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    top: 100%;
-    left: 0px;
-    right: 0;
-    width: 80%;
-    padding: 20px;
-    color: $white-color;
-    list-style-type: none;
-    background-color: rgba(0, 0, 0, 0.800);
-}
-
-.header__dropdown-item {
-    padding-bottom: 15%;
+.header__logout-icon {
+    width: 55px;
+    height: 30px;
+    border: none;
+    background: url(../../assets/headerIcons/logOut.png) no-repeat center;
     cursor: pointer;
 }

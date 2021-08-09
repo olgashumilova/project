@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 
 // Game Card
-import GameCard from '../gameCard/gameCard'
-import '../gameCard/gameCard.scss'
+import GameCard from '@Components/gameCard/gameCard.tsx'
+import '@Components/gameCard/gameCard.scss'
 
 const SearchBar: React.FunctionComponent = () => {
 
@@ -30,7 +30,6 @@ const SearchBar: React.FunctionComponent = () => {
   async function fetchData() {
     await axios.get(`http://localhost:3001/search/${result}`).then((response) => {
       if (text.length != 0) {
-        console.log(text);
         setArrOfMatches(response.data)
       } else if (text.length === 0) {
         setArrOfMatches([])

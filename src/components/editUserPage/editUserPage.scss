@@ -1,0 +1,84 @@
+@import '@Styles/main.scss';
+
+.userpage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: $white-color;
+    @include regular-font;
+}
+
+.userpage__title {
+    @include title;
+    width: 80%;
+    font-size: larger;
+}
+
+.userpage__main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 70%;
+    margin: 5% 0 10% 0;
+    @media (min-width: 300px) and (max-width: 1000px) {      
+        flex-wrap: wrap;
+    }
+}
+
+.userpage__userpic-container {
+    display: flex;
+    flex-direction: column;
+
+    @media (max-width: 1000px) {      
+        margin-bottom: 10%;
+    }
+
+    .userpage__image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 250px;
+        height: 300px;
+        border-radius: 5%;
+        background-color: rgb(148, 148, 148);
+
+        .userpage__image-inner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100px;
+            height: 100px;
+            text-transform: uppercase;
+            border: 1px solid white;
+        }
+    }
+}
+.userpage__profile-desc {
+    width: 250px;
+    margin: 0 10% 0 10%;
+}
+
+.userpage__button {
+    margin: 20% 0 0 0;
+    @include button;
+}
+
+.userpage__buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.userpage__input {
+    width: 100%;
+    height: 40px;
+    margin: 15px 0 15px 0;
+    color: $white-color;
+    border-color: $white-color;
+    background-color: rgba(0, 0, 0, 0.329);
+}
+
+.userpage__input-description {
+    height: 200px;
+    resize: none;
+}

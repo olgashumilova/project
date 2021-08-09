@@ -5,7 +5,9 @@
   width: 25%;
   height: 300px;
   margin: 15% 0 0 35%;
-  background: rgba(0, 0, 0, 0.3);
+  font-size: 110%;
+  color: white;
+  background: rgba(0, 0, 0, 0.692);
   border-radius: 3%;
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 10px 10px 10px 10px rgba(0,0,0,0.22);
 }

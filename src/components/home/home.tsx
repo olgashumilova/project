@@ -1,30 +1,30 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom"
-import {ROUTES} from '../routes'
-import axios from 'axios'
+import ROUTES from '@Components/routes.ts'
 
 // Platform Logos Images
-import pcLogo from '@GamePlatformsLogos/pcLogo.png'
-import playstationLogo from '@GamePlatformsLogos/playstationLogo.png'
-import xboxLogo from '@GamePlatformsLogos/xboxLogo.png'
+import pcLogo from '@Assets/gamePlatformsLogos/pcLogo.png'
+import playstationLogo from '@Assets/gamePlatformsLogos/playstationLogo.png'
+import xboxLogo from '@Assets/gamePlatformsLogos/xboxLogo.png'
 
 // Search Bar Component
-import SearchBar from '../searchBar/searchBar'
-import '../searchBar/searchBar.scss'
+import SearchBar from '@Components/searchBar/searchBar.tsx'
+import '@Components/searchBar/searchBar.scss'
 
 // Game Card
-import GameCard from '../gameCard/gameCard'
-import '../gameCard/gameCard.scss'
+import GameCard from '@Components/gameCard/gameCard.tsx'
+import '@Components/gameCard/gameCard.scss'
 
 //Game Card Images
-import overwatch from '@GamesImages/overwatch.jpg'
-import minecraft from '@GamesImages/minecraft.jpg'
-import terraria from '@GamesImages/terraria.jpg'
+import overwatch from '@Assets/gamesImages/overwatch.jpg'
+import minecraft from '@Assets/gamesImages/minecraft.jpg'
+import terraria from '@Assets/gamesImages/terraria.jpg'
+
+import { getTopGamesAPI } from '../../api/api.js'
 
 const HomeComponent: React.FunctionComponent = () => {
 
-    interface IGamesArrray {
-        index: number,
+    interface IGamesArray {
         id: number,
         name: string,
         ageLimit: string,
@@ -36,20 +36,23 @@ const HomeComponent: React.FunctionComponent = () => {
     const [topGames, setTopGames] = useState([])
 
     useEffect(() => {
-        function fetchData() {
-            axios.get('http://localhost:3001/getTopGames').then((response) => {
-                setTopGames(response.data)
-            }).catch ((error) => {
-                console.log(error);
-            })
-        }
-        fetchData();
-    }, []);
+   
+        fetchData()
+
+    }, [])
+
+    async function fetchData () {
+        await getTopGamesAPI.then((response) => {
+            setTopGames(response.data)
+        }).catch ((error) => {
+            console.log(error);
+        })
+    }
 
     return (
         <main className = 'home'>
 
-            <SearchBar />          
+            <SearchBar />        
 
             <div className = 'home__main'>
                <div className = 'home__categories'>
@@ -98,9 +101,9 @@ const HomeComponent: React.FunctionComponent = () => {
                         <p className = 'home__title'>Top rated games</p>
 
                         <div className = 'home__game-cards'>
-                            {topGames.map((item: IGamesArrray) => {
+                            {topGames.map((item: IGamesArray, index) => {
                             return (
-                                <div key = {item.index}>
+                                <div key = {index}>
                                     <GameCard
                                         backgroundImage = {item.image}
                                         description = {item.description}
