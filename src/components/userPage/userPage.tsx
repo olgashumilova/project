@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import ROUTES from '@Components/routes.ts'
 
 import { getProfileAPI } from '@/api/api'
+import changeProfile from '../editUserPage/editUserPage'
 
 const UserPage: React.FunctionComponent = () => {
 
     const [userProfile, setUserProfile] = useState([])
+    console.log(userProfile);
 
     useEffect(() => {
     
       fetchData();
 
-    }, [])
+    }, [changeProfile])
 
     async function fetchData() {
         try {
@@ -21,7 +23,7 @@ const UserPage: React.FunctionComponent = () => {
                 const responseProfile = response.data
 
                 if (responseProfile.length !== 0) {
-                    setUserProfile(response.data)
+                    setUserProfile(responseProfile)
                 } else if (responseProfile.length === 0) {
                     setUserProfile([])
                 }      
@@ -34,12 +36,22 @@ const UserPage: React.FunctionComponent = () => {
     return (
         <div className = 'user-profile-container' id = 'box'>
 
-            {userProfile.map((user) => {         
+            {userProfile.map((user) => {
                 return (
                   <div className = 'user-profile' key = {user.id}>
                     <p className = 'user-profile__title'>{user.login}&#39;s profile page</p>
-                    <p className = 'user-profile__description'>{user.description}</p>
-                    <img className = 'user-profile__image' src = {user.userImage}></img>
+
+                    <div className = 'user-profile-main'>
+                        <div className = 'user-profile-main__image-container'>
+                            <img className = 'user-profile-main__image' src = {user.userImage} alt = 'User profile image' />
+                        </div>
+
+                        <div className = 'user-profile-main__text-container'>
+                            <p className = 'user-profile-main__Login'>Login: {user.login}</p>
+                            <p className = 'user-profile-main__description'>Profile description: {user.description}</p>
+                        </div>
+                    </div>
+
                   </div>
                 )
             })}
