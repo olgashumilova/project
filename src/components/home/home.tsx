@@ -20,7 +20,7 @@ import overwatch from '@Assets/gamesImages/overwatch.jpg'
 import minecraft from '@Assets/gamesImages/minecraft.jpg'
 import terraria from '@Assets/gamesImages/terraria.jpg'
 
-import { getTopGames } from '../../api/api.js'
+import { getTopGamesAPI } from '../../api/api.js'
 
 const HomeComponent: React.FunctionComponent = () => {
 
@@ -42,7 +42,7 @@ const HomeComponent: React.FunctionComponent = () => {
     }, [])
 
     async function fetchData () {
-        await getTopGames.then((response) => {
+        await getTopGamesAPI.then((response) => {
             setTopGames(response.data)
         }).catch ((error) => {
             console.log(error);

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import Swal from 'sweetalert2'
@@ -6,6 +6,7 @@ import { Link, Redirect } from 'react-router-dom'
 import ROUTES from '@Components/routes.ts'
 
 import { setUser } from '@/redux/actions/actions';
+import { signUpUrlAPI } from '@/api/api'
 
 const SignUpModal: React.FunctionComponent = () => {
 
@@ -16,15 +17,15 @@ const SignUpModal: React.FunctionComponent = () => {
     const [repeatPassword, setRepeatPassword] = useState('')
     const [redirect, setRedirect] = useState(false)
 
-    const emptyFields = useCallback (() => {
+    const emptyFields = () => {
         setLogin('')
         setPassword('')
         setRepeatPassword('')
-    },[])
+    }
     
     async function signUp() {
         try {
-            await axios.post('http://localhost:3001/signup', {login, password}).then((response) => {
+            await axios.post(signUpUrlAPI, {login, password}).then((response) => {
                 const userData = response.data                   
                 if (userData.login) {
                     dispatch(setUser(userData))                 
