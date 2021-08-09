@@ -4,6 +4,8 @@ import Swal from 'sweetalert2'
 import { Redirect } from 'react-router'
 import ROUTES from '@Components/routes.ts'
 
+import { changePasswordUrlAPI } from "@/api/api"
+
 const ChangePassword:React.FunctionComponent = () => {
 
     const [showModal, setShowModal] = useState(true)
@@ -18,7 +20,7 @@ const ChangePassword:React.FunctionComponent = () => {
 
     const changePassword = async () => {
         try {
-            await axios.post('http://localhost:3001/changePassword', { password }).then((response) => {
+            await axios.post(changePasswordUrlAPI, { password }).then((response) => {
                 Swal.fire(response.data)               
             })
         } catch (error) {

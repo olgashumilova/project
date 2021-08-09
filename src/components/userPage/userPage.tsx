@@ -3,6 +3,8 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import ROUTES from '@Components/routes.ts'
 
+import { getProfileAPI } from '@/api/api'
+
 const UserPage: React.FunctionComponent = () => {
 
     const [userProfile, setUserProfile] = useState([])
@@ -15,7 +17,7 @@ const UserPage: React.FunctionComponent = () => {
 
     async function fetchData() {
         try {
-            await axios.get(`http://localhost:3001/getProfile`).then((response) => {
+            await getProfileAPI.then((response) => {
                 const responseProfile = response.data
 
                 if (responseProfile.length !== 0) {
