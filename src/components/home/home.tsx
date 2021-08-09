@@ -47,7 +47,7 @@ const HomeComponent: React.FunctionComponent = () => {
         }).catch ((error) => {
             console.log(error);
         })
-    }
+    } 
 
     return (
         <main className = 'home'>
