@@ -6,7 +6,7 @@ import { Redirect } from 'react-router'
 import { Link } from 'react-router-dom'
 import ROUTES from '@Components/routes.ts'
 
-import { isSignedIn } from '@/redux/actions/actions'
+import { isSignedIn, getUserProfile } from '@/redux/actions/actions'
 import { signInUrlAPI } from '@/api/api'
 
 const SignInModal: React.FunctionComponent = () => {
@@ -29,7 +29,8 @@ const SignInModal: React.FunctionComponent = () => {
 
                 if (userData.login) {
                     dispatch(isSignedIn(true))
-                    localStorage.setItem('username', userData.login)          
+                    dispatch(getUserProfile(userData))
+                    localStorage.setItem('username', userData.login)       
                     Swal.fire(`Welcome, ${userData.login}`)
                     setRedirect(true)
                 } else {
