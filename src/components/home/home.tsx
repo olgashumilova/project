@@ -31,6 +31,7 @@ const HomeComponent: React.FunctionComponent = () => {
         rating: number,
         image: string,
         description: string,
+        price: number,
     }
 
     const [topGames, setTopGames] = useState([])
@@ -48,15 +49,6 @@ const HomeComponent: React.FunctionComponent = () => {
             console.log(error);
         })
     }
-        function fetchData() {
-            axios.get('http://localhost:3001/getTopGames').then((response) => {
-                setTopGames(response.data)
-            }).catch ((error) => {
-                console.log(error);
-            })
-        }
-        fetchData();
-    }, []);
 
     return (
         <main className = 'home'>
@@ -94,16 +86,19 @@ const HomeComponent: React.FunctionComponent = () => {
                             backgroundImage = {overwatch} 
                             description = 'Overwatch is a colorful team-based action game starring a diverse cast of powerful heroes. Travel the world, build a team, and contest objectives in exhilarating 6v6 combat.'
                             ageLimit = '12 +'
+                            price = 'Price: 20$'
                         />
                         <GameCard 
                             backgroundImage = {minecraft} 
                             description = 'Minecraft is a sandbox game. There is a virtual land where users can create their own worlds and experiences, using building blocks, resources discovered on the site and their own creativity.'
                             ageLimit = '3 +'
+                            price = 'Price: 8$'
                         />
                         <GameCard 
                             backgroundImage = {terraria} 
                             description = 'Terraria is a 2D sandbox game with gameplay that revolves around exploration, building, crafting, combat, survival, and mining, playable in both single-player and multiplayer modes.'
                             ageLimit = '6 +'
+                            price = 'Price: 15$'
                         />
                     </div>
                     <div>
@@ -117,6 +112,7 @@ const HomeComponent: React.FunctionComponent = () => {
                                         backgroundImage = {item.image}
                                         description = {item.description}
                                         ageLimit = {item.ageLimit}
+                                        price = {`Price: ${item.price}$`}
                                     />
                                 </div>
                             )})}
