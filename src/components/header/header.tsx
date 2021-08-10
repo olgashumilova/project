@@ -5,6 +5,7 @@ import {
   Switch,
   Route,
   Link,
+  Redirect,
 } from "react-router-dom"
 
 import ROUTES from '@Components/routes.ts'
@@ -84,9 +85,9 @@ const App: React.FunctionComponent = () => {
               <li className = 'header__list-element'>
                   <Dropdown text = 'Products'>
                       <Dropdown.Menu>
-                        <Dropdown.Item text = 'PC' onClick = {() => alert('PC Page')}/>
-                        <Dropdown.Item text = 'Playstation 5' onClick = {() => alert('Playstation 5 Page')}/>
-                        <Dropdown.Item text = 'XBox One' onClick = {() => alert('XBox One Page')}/>
+                        <Dropdown.Item text = 'PC' onClick = {() => <Redirect to = {ROUTES.USER}></Redirect>}/>
+                        <Dropdown.Item text = 'Playstation 5' onClick = {() => {<Redirect to = {ROUTES.PLAYSTATION_PAGE} />}}/>
+                        <Dropdown.Item text = 'XBox One' onClick = {() => {<Redirect to = {ROUTES.XBOX_PAGE} />}}/>
                       </Dropdown.Menu>
                   </Dropdown>
               </li>
