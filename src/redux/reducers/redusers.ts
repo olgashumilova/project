@@ -3,7 +3,7 @@ import { ACTION_TYPES } from '../const/actionTypes';
 export const initialState = {
   users: [],
   userProfile: [],
-  products: [],
+  filteredProducts: [],
   authUser: null,
   isSignedIn: false,
 }
@@ -27,7 +27,7 @@ const reducer = (state = initialState, action: any) => {
         return {
           ...state,
           userProfile: action.payload,
-        }     
+        }
       }
       case ACTION_TYPES.IS_SIGNED_IN: {
         return {
@@ -42,10 +42,10 @@ const reducer = (state = initialState, action: any) => {
             isSignedIn: false,
           }
       }
-      case ACTION_TYPES.GET_PRODUCTS: {
+      case ACTION_TYPES.GET_FILTERED_PRODUCTS: {
         return {
           ...state,
-          products: action.payload,
+          filteredProducts: action.payload,
         }
       }
       default: return state
