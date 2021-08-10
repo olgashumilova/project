@@ -22,10 +22,11 @@
 
 .loader {
   display: flex;
+  justify-content: center;
   align-items: center;
   height: 25px;
-  margin-left: 45%;
-  }
+  margin: 50px 0 50px 0;
+}
 
 .loader:after {
   content: " ";
