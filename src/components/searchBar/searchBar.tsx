@@ -10,8 +10,8 @@ const SearchBar: React.FunctionComponent = () => {
   interface IGamesArrray {
     id: number,
     name: string,
+    price: number,
     ageLimit: string,
-    rating: number,
     image: string,
     description: string,
   }
@@ -28,7 +28,7 @@ const SearchBar: React.FunctionComponent = () => {
   }, [text])
 
   async function fetchData() {
-    await axios.get(`http://localhost:3001/search/${result}`).then((response) => {
+    await axios.get(`http://localhost:3001/search/${text}`).then((response) => {
       if (text.length != 0) {
         setArrOfMatches(response.data)
       } else if (text.length === 0) {
@@ -40,7 +40,7 @@ const SearchBar: React.FunctionComponent = () => {
   }
 
   setTimeout(() => {
-    if (text.length != 0) {
+    if (text.length !== 0) {
       setResult(text)
     } else if (text.length === 0) {
       setResult('')
@@ -52,7 +52,7 @@ const SearchBar: React.FunctionComponent = () => {
     if (result !== text) {
       setIsLoading(true)
     } else if (result === text) {
-      setIsLoading(false) 
+      setIsLoading(false)
     }
   }, 300)
 
@@ -72,18 +72,22 @@ const SearchBar: React.FunctionComponent = () => {
       <div className = {isLoading ? 'loader' : ''}>{isLoading}</div>
 
       <div className = 'game-cards'>
-
-        {arrOfMatches.map((item: IGamesArrray) => {         
-            return (
-              <div key = {item.name}>
-                  <GameCard
-                      backgroundImage = {item.image}
-                      description = {item.description}
-                      ageLimit = {item.ageLimit}
-                  />
-              </div>
-            )
-          })}
+        {text.length !== 0 ? (
+            arrOfMatches.map((item: IGamesArrray) => {         
+              return (
+                <div key = {item.name}>
+                    <GameCard
+                        backgroundImage = {item.image}
+                        description = {item.description}
+                        ageLimit = {`${item.ageLimit} +`}
+                        price = {`Price: ${item.price}$`}
+                    />
+                </div>
+              )
+            })
+        ) : (
+          null
+        )}
       </div>
 
     </div>
