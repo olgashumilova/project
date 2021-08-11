@@ -5,7 +5,6 @@ import {
   Switch,
   Route,
   Link,
-  Redirect,
 } from "react-router-dom"
 
 import ROUTES from '@Components/routes.ts'
@@ -22,9 +21,9 @@ import HomeComponent from '@Components/home/home.tsx'
 import FooterComponent from '@Components/footer/footer.tsx'
 import UserPage from '@Components/userPage/userPage.tsx'
 import EditUserPage from '@Components/editUserPage/editUserPage.tsx'
-import PcProductsPage from "@Components/products/pcProductsPage/pcProductsPage.tsx"
-import XboxProductsPage from "@Components/products/xboxProductsPage/xboxProductsPage.tsx"
-import PlaystationProductsPage from "@Components/products/playstationProductsPage/playstationProductsPage.tsx";
+import PcProductsPage from "@Components/products/productsPages/pcProductsPage.tsx"
+import XboxProductsPage from "@Components/products/productsPages/xboxProductsPage.tsx"
+import PlaystationProductsPage from "@Components/products/productsPages/playstationProductsPage.tsx";
 
 // Modals
 import SignUpModal from '@Components/modals/signUpModal.tsx'
@@ -84,10 +83,18 @@ const App: React.FunctionComponent = () => {
             
               <li className = 'header__list-element'>
                   <Dropdown text = 'Products'>
-                      <Dropdown.Menu>
-                        <Dropdown.Item text = 'PC' onClick = {() => <Redirect to = {ROUTES.USER}></Redirect>}/>
-                        <Dropdown.Item text = 'Playstation 5' onClick = {() => {<Redirect to = {ROUTES.PLAYSTATION_PAGE} />}}/>
-                        <Dropdown.Item text = 'XBox One' onClick = {() => {<Redirect to = {ROUTES.XBOX_PAGE} />}}/>
+                      <Dropdown.Menu>  
+                        <Link to = {ROUTES.PC_PAGE}>
+                          <Dropdown.Item className = 'dropdown-link'>PC</Dropdown.Item>
+                        </Link>
+
+                        <Link to = {ROUTES.PLAYSTATION_PAGE}>
+                          <Dropdown.Item  className = 'dropdown-link'>Playstation 5</Dropdown.Item>
+                        </Link>
+
+                        <Link to = {ROUTES.XBOX_PAGE}>
+                          <Dropdown.Item className = 'dropdown-link'>XBox One</Dropdown.Item>
+                        </Link>
                       </Dropdown.Menu>
                   </Dropdown>
               </li>
