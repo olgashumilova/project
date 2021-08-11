@@ -111,7 +111,7 @@ const HomeComponent: React.FunctionComponent = () => {
                                     <GameCard
                                         backgroundImage = {item.image}
                                         description = {item.description}
-                                        ageLimit = {item.ageLimit}
+                                        ageLimit = {`${item.ageLimit} +`}
                                         price = {`Price: ${item.price}$`}
                                     />
                                 </div>
