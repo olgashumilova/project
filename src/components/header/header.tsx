@@ -23,7 +23,8 @@ import UserPage from '@Components/userPage/userPage.tsx'
 import EditUserPage from '@Components/editUserPage/editUserPage.tsx'
 import PcProductsPage from "@Components/products/productsPages/pcProductsPage.tsx"
 import XboxProductsPage from "@Components/products/productsPages/xboxProductsPage.tsx"
-import PlaystationProductsPage from "@Components/products/productsPages/playstationProductsPage.tsx";
+import PlaystationProductsPage from "@Components/products/productsPages/playstationProductsPage.tsx"
+import CartPage from "@Components/cart/cartPage.tsx"
 
 // Modals
 import SignUpModal from '@Components/modals/signUpModal.tsx'
@@ -37,6 +38,7 @@ import '@Components/modals/modals.scss'
 import '@Components/userPage/userPage.scss'
 import '@Components/editUserPage/editUserPage.scss'
 import '@Components/products/products.scss'
+import '@Components/cart/cartPage.scss'
 
 const App: React.FunctionComponent = () => {
 
@@ -143,6 +145,10 @@ const App: React.FunctionComponent = () => {
         </div>
       </header>
       <Switch>
+
+      <Route path = {ROUTES.CART}>
+          <CartPage />
+      </Route>
 
         <Route path = {ROUTES.PC_PAGE}>
           <PcProductsPage />
