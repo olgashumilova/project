@@ -30,5 +30,5 @@ export const isSignedIn = (payload) => ({
 // Products
 export const getFilteredProducts = (payload) => ({
     type: ACTION_TYPES.GET_FILTERED_PRODUCTS,
-    payload: payload,
+    payload: [...payload],
 })
