@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import ROUTES from '@Components/routes.ts'
-
-import { getProfileAPI } from '@/api/api'
-import changeProfile from '../editUserPage/editUserPage'
 
 const UserPage: React.FunctionComponent = () => {
 
