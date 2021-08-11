@@ -1,0 +1,37 @@
+@import '@Styles/main.scss';
+
+.cart {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 5% 0 5% 0;
+    @include regular-font;
+}
+
+.cart__title {
+    @include title;
+    width: 80%;
+}
+.cart__empty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 270px 0 300px 0;
+    color: white;
+    @include regular-font;
+}
+
+.empty-cart {
+    width: 30%;
+    height: 100px;
+    font-size: large;
+    background: url('../../assets/empty_cart.png') no-repeat center;
+}
+
+.cart__main {
+    color: blanchedalmond;
+}
