@@ -10,7 +10,7 @@ export const initialState = {
   totalQuantity: 0,
 }
 
-const reducer = (state = initialState, action: any) => {
+const reducer = (state = initialState, action) => {
     switch (action.type) {
     
       case ACTION_TYPES.GET_USERS: {
@@ -57,32 +57,11 @@ const reducer = (state = initialState, action: any) => {
           totalQuantity: state.totalQuantity + 1,
         }
       }
-      case ACTION_TYPES.DECREASE_ITEM: {
-        return {
-          ...state,
-          cart: [...state.cart, action.payload],
-          totalQuantity: state.totalQuantity - 1,
-        }
-      }
-      case ACTION_TYPES.INCREASE_ITEM: {
-        return {
-          ...state,
-          cart: [...state.cart, action.payload],
-          totalQuantity: state.totalQuantity + 1,
-        }
-      }
       case ACTION_TYPES.REMOVE_ITEM: {
         return {
           ...state,
           cart: state.cart.filter((item, index) => index !== action.payload),
           totalQuantity: state.totalQuantity - 1,
-        }
-      }
-      case ACTION_TYPES.CLEAR_CART: {
-        return { 
-          ...state, 
-          cart: [],
-          totalQuantity: 0
         }
       }
       default: return state
