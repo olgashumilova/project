@@ -33,5 +33,58 @@
 }
 
 .cart__main {
-    color: blanchedalmond;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 20px;
+    width: 80%;
+    border-bottom: 1px solid white;
+    color: $white-color;
+}
+
+.cart__products {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80%;
+    color: $white-color;
+}
+
+.game-border {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 3% 6% 3% 6%;
+    border-bottom: 1px solid;
+    border-color: $white-color;
+}
+
+.cart__game-button {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid;
+    border-color: $white-color;
+}
+
+.cart__total {
+    margin-top: 80px;
+    color: $white-color;
+    font-size: larger;
+}
+
+.cart__purchase-button {
+    @include button;
+    width: 10%;
+    margin-bottom: 50px;
+}
+
+.cart__change-quantity-btn {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    height: 25px;
+}
+
+.cart__current-item-amount {
+    margin: 0 5px 0 5px;
 }

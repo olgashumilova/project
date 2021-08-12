@@ -72,6 +72,15 @@
     cursor: pointer;
 }
 
+.header__cart-icon-amount {
+    width: 40%;
+    margin-top: 15px;
+    margin-left: 25px;
+    border-radius: 50px;
+    color: $white-color;
+    background-color: $purple-color;
+}
+
 .header__logout-icon {
     width: 55px;
     height: 30px;
