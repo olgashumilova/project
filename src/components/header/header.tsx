@@ -43,7 +43,7 @@ import '@Components/cart/cartPage.scss'
 const App: React.FunctionComponent = () => {
 
   const [showButtons, setShowButtons] = useState(false)
-
+  const cart = useSelector(state => state.cart)
   const isSignedIn = useSelector(state => state.isSignedIn)
 
   const userName = localStorage.getItem('username')
@@ -115,8 +115,8 @@ const App: React.FunctionComponent = () => {
                       <p className = 'header__user-name'>Hello, {userName}</p>
                     </Link>
                 
-                    <Link className = 'header__list-element' to = {ROUTES.CART}>
-                        <button className = 'header__cart-icon'></button>
+                    <Link className = 'header__list-element' to = {ROUTES.CART}>{/*totalQuantity < 0 ? 0 : totalQuantity*/}
+                        <button className = 'header__cart-icon'><p className = 'header__cart-icon-amount'>{cart.length}</p></button>
                     </Link>
                 
                     <Link className = 'header__list-element' to = {ROUTES.HOME}>
