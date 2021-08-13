@@ -11,7 +11,6 @@ import { saveProfileUrlAPI } from '@/api/api'
 const EditUserPage: React.FunctionComponent = () => {
 
     const [showModal, setShowModal] = useState(false)
-
     const [newLogin, setNewLogin] = useState('')
     const [description, setDescription] = useState('')
     const [userImage, setUserImage] = useState(null)

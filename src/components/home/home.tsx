@@ -106,16 +106,16 @@ const HomeComponent: React.FunctionComponent = () => {
 
                         <div className = 'home__game-cards'>
                             {topGames.map((item: IGamesArray, index) => {
-                            return (
-                                <div key = {index}>
-                                    <GameCard
-                                        backgroundImage = {item.image}
-                                        description = {item.description}
-                                        ageLimit = {`${item.ageLimit} +`}
-                                        price = {`Price: ${item.price}$`}
-                                    />
-                                </div>
-                            )})}
+                                return (
+                                    <div key = {index}>
+                                        <GameCard
+                                            backgroundImage = {item.image}
+                                            description = {item.description}
+                                            ageLimit = {`${item.ageLimit} +`}
+                                            price = {`Price: ${item.price}$`}
+                                        />
+                                    </div>
+                                )})}
                         </div>                                      
                     </div>
                </div>
