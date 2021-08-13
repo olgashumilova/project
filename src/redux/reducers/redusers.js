@@ -8,6 +8,7 @@ export const initialState = {
   isSignedIn: false,
   cart: [],
   totalQuantity: 0,
+  currentGameCard: null,
 }
 
 const reducer = (state = initialState, action) => {
@@ -48,6 +49,12 @@ const reducer = (state = initialState, action) => {
         return {
           ...state,
           filteredProducts: action.payload,
+        }
+      }
+      case ACTION_TYPES.CURRENT_GAME_CARD: {
+        return {
+          ...state,
+          currentGameCard: action.payload,
         }
       }
       case ACTION_TYPES.ADD_ITEM: {
