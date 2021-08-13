@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import {
   BrowserRouter as Router,
   Switch,
@@ -29,6 +29,7 @@ import CartPage from "@Components/cart/cartPage.tsx"
 // Modals
 import SignUpModal from '@Components/modals/signUpModal.tsx'
 import SignInModal from '@Components/modals/signInModal.tsx'
+import EditGameCardModal from "../modals/editGameCardModal";
 
 // Scss
 import '@Components/header/header.scss'
@@ -42,9 +43,14 @@ import '@Components/cart/cartPage.scss'
 
 const App: React.FunctionComponent = () => {
 
+  const dispatch = useDispatch()
+
+  const [showModal, setShowModal] = useState(false)
   const [showButtons, setShowButtons] = useState(false)
   const cart = useSelector(state => state.cart)
+
   const isSignedIn = useSelector(state => state.isSignedIn)
+  const user = useSelector(state => state.userProfile)
 
   const userName = localStorage.getItem('username')
 
@@ -70,9 +76,18 @@ const App: React.FunctionComponent = () => {
     Swal.fire('You\'ve signed out!')
   }
 
+  function modalRenderer() {
+    if (showModal) {
+      return <EditGameCardModal />
+    } else {
+        null
+    }  
+}
+
   return (
     <Router>
       <header className = 'header'>
+      <div className = 'modalportal'>{modalRenderer()}</div>
         <div className = 'header__title'>
           <h1>Game Store</h1>
         </div>
@@ -112,16 +127,34 @@ const App: React.FunctionComponent = () => {
                   <div className = 'header__list'>
                     <Link className = 'header__list-element' to = {ROUTES.USER}>
                       <div className = 'header__user-icon'></div>
-                      <p className = 'header__user-name'>Hello, {userName}</p>
+                      <p className = 'header__user-name'>Hello, {userName || user.login}</p>
                     </Link>
                 
-                    <Link className = 'header__list-element' to = {ROUTES.CART}>{/*totalQuantity < 0 ? 0 : totalQuantity*/}
-                        <button className = 'header__cart-icon'><p className = 'header__cart-icon-amount'>{cart.length}</p></button>
-                    </Link>
-                
-                    <Link className = 'header__list-element' to = {ROUTES.HOME}>
-                        <button className = 'header__logout-icon' onClick = {() => logOut() }></button>
-                    </Link>
+                  {userName === 'admin' ? (
+                    <div className = 'header__nav'>
+                      <div className = 'header__list'>
+                        
+                        <button className = 'header__create-card-button' onClick = {() => setShowModal(!showModal)}>Create Card</button>
+                        
+                        <Link className = 'header__list-element' to = {ROUTES.HOME}>
+                          <button className = 'header__logout-icon' onClick = {() => logOut() }></button>
+                        </Link>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className = 'header__nav'>
+                      <div className = 'header__list'>
+                        <Link className = 'header__list-element' to = {ROUTES.CART}>
+                          <button className = 'header__cart-icon'><p className = 'header__cart-icon-amount'>{cart.length}</p></button>
+                        </Link>
+                    
+                        <Link className = 'header__list-element' to = {ROUTES.HOME}>
+                            <button className = 'header__logout-icon' onClick = {() => logOut() }></button>
+                        </Link>
+                      </div>
+                    </div>
+                  )}
+                    
                   </div>
                 </div>
               ) : (
