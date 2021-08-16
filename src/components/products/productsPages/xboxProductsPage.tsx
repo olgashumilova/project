@@ -27,7 +27,7 @@ const XboxProductsPage: React.FunctionComponent = () => {
     return (
         <div>
             <ProductsPage
-                title = 'PC'
+                title = 'Xbox One'
                 searchbar = { <SearchByPC /> }
                 productPlatform = { xboxProducts }
             />
