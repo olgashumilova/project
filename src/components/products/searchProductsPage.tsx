@@ -52,15 +52,15 @@ const SearchProductsPage: React.FunctionComponent = (props) => {
             if (value === 'All genres') {
                 dispatch(getFilteredProducts(productsArray.filter((game) => game.genre)))
             } else if (value === 'Shooter') {
-                dispatch(getFilteredProducts(productsArray.filter((game) => game.genre == 'Shooter')))
+                dispatch(getFilteredProducts(productsArray.filter((game) => game.genre == value)))
             } else if (value === 'Sandbox') {
-                dispatch(getFilteredProducts(productsArray.filter((game) => game.genre == 'Sandbox')))
+                dispatch(getFilteredProducts(productsArray.filter((game) => game.genre == value)))
             } else if (value === 'RPG') {
-                dispatch(getFilteredProducts(productsArray.filter((game) => game.genre == 'RPG')))
+                dispatch(getFilteredProducts(productsArray.filter((game) => game.genre == value)))
             } else if (value === 'Simulator') {
-                dispatch(getFilteredProducts(productsArray.filter((game) => game.genre == 'Simulator')))
+                dispatch(getFilteredProducts(productsArray.filter((game) => game.genre == value)))
             } else if (value === 'Action-adventure') {
-                dispatch(getFilteredProducts(productsArray.filter((game) => game.genre == 'Action-adventure')))
+                dispatch(getFilteredProducts(productsArray.filter((game) => game.genre == value)))
             }
         }, 500)
         setTimeout(() => { setIsLoading(false) }, 800); 
