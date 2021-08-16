@@ -59,9 +59,13 @@
 // Signed In Buttons 
 
 .header__user-icon {
-    width: 55px;
+    width: 80%;
     height: 30px;
     background: url(../../assets/headerIcons/userIcon.png) no-repeat;
+}
+
+.header__user-name{
+    width: 100%;
 }
 
 .header__cart-icon {
