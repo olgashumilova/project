@@ -41,7 +41,7 @@ const ProductsPage: React.FunctionComponent = (props) => {
                filteredProducts.map((game) => {
                     return (
                         <div key = {game.index}>
-                            {game.platform.pc ? (
+                            {productPlatform ? (
                                 <GameCard className = 'catalog-gamecard' 
                                     backgroundImage = {game.image} 
                                     description = {game.description}
