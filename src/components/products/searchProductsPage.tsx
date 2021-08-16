@@ -72,15 +72,15 @@ const SearchProductsPage: React.FunctionComponent = (props) => {
             if (value === 'All ages') {
                 dispatch(getFilteredProducts(productsArray.filter((game) => game.ageLimit)))
             } else if (value === '3 +') {
-                dispatch(getFilteredProducts(productsArray.filter((game) => (game.ageLimit === 3))))
+                dispatch(getFilteredProducts(productsArray.filter((game) => (game.ageLimit === 3 ))))
             } else if (value === '6 +') {
-                dispatch(getFilteredProducts(productsArray.filter((game) => game.ageLimit === 6)))
+                dispatch(getFilteredProducts(productsArray.filter((game) => game.ageLimit >= 3 && game.ageLimit <= 6)))
             } else if (value === '12 +') {
-                dispatch(getFilteredProducts(productsArray.filter((game) => game.ageLimit === 12)))
+                dispatch(getFilteredProducts(productsArray.filter((game) => game.ageLimit >= 3 && game.ageLimit <= 12)))
             } else if (value === '16 +') {
-                dispatch(getFilteredProducts(productsArray.filter((game) => game.ageLimit === 16)))
+                dispatch(getFilteredProducts(productsArray.filter((game) => game.ageLimit >= 3 && game.ageLimit <= 16)))
             } else if (value === '18 +') {
-                dispatch(getFilteredProducts(productsArray.filter((game) => game.ageLimit === 18)))
+                dispatch(getFilteredProducts(productsArray.filter((game) => game.ageLimit >= 3 && game.ageLimit <= 18)))
             }
         }, 500)
         setTimeout(() => { setIsLoading(false) }, 800); 
