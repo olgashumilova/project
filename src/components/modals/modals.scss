@@ -19,7 +19,7 @@ body {
 }
 
 .modal-wrapper {
-	position: absolute;
+	position: fixed;
 	left: 0;
 	top: 0;
 	width: 100%; 
@@ -173,5 +173,5 @@ body {
 }
 
 .edit-modalwindow__form {
-    width: 80%;
+    width: 100%;
 }
