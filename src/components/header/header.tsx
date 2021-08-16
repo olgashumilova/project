@@ -21,6 +21,9 @@ import HomeComponent from '@Components/home/home.tsx'
 import FooterComponent from '@Components/footer/footer.tsx'
 import UserPage from '@Components/userPage/userPage.tsx'
 import EditUserPage from '@Components/editUserPage/editUserPage.tsx'
+import PcProductsPage from "@Components/products/productsPages/pcProductsPage.tsx"
+import XboxProductsPage from "@Components/products/productsPages/xboxProductsPage.tsx"
+import PlaystationProductsPage from "@Components/products/productsPages/playstationProductsPage.tsx";
 
 // Modals
 import SignUpModal from '@Components/modals/signUpModal.tsx'
@@ -33,6 +36,7 @@ import '@Components/home/home.scss'
 import '@Components/modals/modals.scss'
 import '@Components/userPage/userPage.scss'
 import '@Components/editUserPage/editUserPage.scss'
+import '@Components/products/products.scss'
 
 const App: React.FunctionComponent = () => {
 
@@ -79,10 +83,18 @@ const App: React.FunctionComponent = () => {
             
               <li className = 'header__list-element'>
                   <Dropdown text = 'Products'>
-                      <Dropdown.Menu>
-                        <Dropdown.Item text = 'PC' onClick = {() => alert('PC Page')}/>
-                        <Dropdown.Item text = 'Playstation 5' onClick = {() => alert('Playstation 5 Page')}/>
-                        <Dropdown.Item text = 'XBox One' onClick = {() => alert('XBox One Page')}/>
+                      <Dropdown.Menu>  
+                        <Link to = {ROUTES.PC_PAGE}>
+                          <Dropdown.Item className = 'dropdown-link'>PC</Dropdown.Item>
+                        </Link>
+
+                        <Link to = {ROUTES.PLAYSTATION_PAGE}>
+                          <Dropdown.Item  className = 'dropdown-link'>Playstation 5</Dropdown.Item>
+                        </Link>
+
+                        <Link to = {ROUTES.XBOX_PAGE}>
+                          <Dropdown.Item className = 'dropdown-link'>XBox One</Dropdown.Item>
+                        </Link>
                       </Dropdown.Menu>
                   </Dropdown>
               </li>
@@ -131,27 +143,47 @@ const App: React.FunctionComponent = () => {
         </div>
       </header>
       <Switch>
+
+        <Route path = {ROUTES.PC_PAGE}>
+          <PcProductsPage />
+        </Route>
+
+        <Route path = {ROUTES.XBOX_PAGE}>
+          <XboxProductsPage />
+        </Route>
+
+        <Route path = {ROUTES.PLAYSTATION_PAGE}>
+          <PlaystationProductsPage />
+        </Route>
+
         <Route path = {ROUTES.USER}>
           <User />
         </Route>
+
         <Route path = {ROUTES.EDIT_USER}>
           <EditUserPage />
         </Route>
+
         <Route path = {ROUTES.SIGNUP}>
           <SignUpModal />
         </Route>
+
         <Route path = {ROUTES.SIGNIN}>
           <SignInModal />
         </Route>
+
         <Route path = {ROUTES.ABOUT}>
           <About />
         </Route>
+
         <Route path = {ROUTES.PRODUCTS}>
           <Products />
         </Route>
+
         <Route path = {ROUTES.HOME}>
           <Home />
         </Route>
+
       </Switch>
       <FooterComponent />
     </Router>

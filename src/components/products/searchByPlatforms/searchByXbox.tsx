@@ -5,13 +5,14 @@ import axios from 'axios'
 import GameCard from '@Components/gameCard/gameCard.tsx'
 import '@Components/gameCard/gameCard.scss'
 
-const SearchBar: React.FunctionComponent = () => {
+const SearchByXbox: React.FunctionComponent = () => {
 
   interface IGamesArrray {
     id: number,
     name: string,
     price: number,
     ageLimit: string,
+    rating: number,
     image: string,
     description: string,
   }
@@ -28,7 +29,7 @@ const SearchBar: React.FunctionComponent = () => {
   }, [text])
 
   async function fetchData() {
-    await axios.get(`http://localhost:3001/search/${text}`).then((response) => {
+    await axios.get(`http://localhost:3001/xboxgames/${text}`).then((response) => {
       if (text.length != 0) {
         setArrOfMatches(response.data)
       } else if (text.length === 0) {
@@ -79,7 +80,7 @@ const SearchBar: React.FunctionComponent = () => {
                     <GameCard
                         backgroundImage = {item.image}
                         description = {item.description}
-                        ageLimit = {`${item.ageLimit} +`}
+                        ageLimit = {item.ageLimit}
                         price = {`Price: ${item.price}$`}
                     />
                 </div>
@@ -94,4 +95,4 @@ const SearchBar: React.FunctionComponent = () => {
   );
 }
 
-export default SearchBar
+export default SearchByXbox

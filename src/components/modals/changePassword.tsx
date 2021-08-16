@@ -1,8 +1,6 @@
 import React, { useState, useCallback } from "react"
 import axios from 'axios'
 import Swal from 'sweetalert2'
-import { Redirect } from 'react-router'
-import ROUTES from '@Components/routes.ts'
 
 import { changePasswordUrlAPI } from "@/api/api"
 

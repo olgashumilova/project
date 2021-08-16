@@ -31,6 +31,7 @@ const HomeComponent: React.FunctionComponent = () => {
         rating: number,
         image: string,
         description: string,
+        price: number,
     }
 
     const [topGames, setTopGames] = useState([])
@@ -48,15 +49,6 @@ const HomeComponent: React.FunctionComponent = () => {
             console.log(error);
         })
     }
-        function fetchData() {
-            axios.get('http://localhost:3001/getTopGames').then((response) => {
-                setTopGames(response.data)
-            }).catch ((error) => {
-                console.log(error);
-            })
-        }
-        fetchData();
-    }, []);
 
     return (
         <main className = 'home'>
@@ -67,19 +59,19 @@ const HomeComponent: React.FunctionComponent = () => {
                <div className = 'home__categories'>
                    <p className = 'home__title'>Categories</p>
                    <div className = 'home__categories-logos'>
-                   <Link className = 'home__link-container' to = {ROUTES.PRODUCTS}>
+                   <Link className = 'home__link-container' to = {ROUTES.PC_PAGE}>
                        <div className = 'home__logos-container'>
                           <img className = 'home__device-logo' src = {pcLogo} alt = "Pc logo"/>
                           <p className = 'home__text'>PC</p>
                        </div>
                     </Link>
-                    <Link className = 'home__link-container' to = {ROUTES.PRODUCTS}>
+                    <Link className = 'home__link-container' to = {ROUTES.PLAYSTATION_PAGE}>
                        <div className = 'home__logos-container'>
                           <img className = 'home__device-logo' src = {playstationLogo} alt = "Playstation Logo"/>
                           <p className = 'home__text'>Playstation 5</p>
                        </div>
                     </Link>
-                       <Link className = 'home__link-container' to = {ROUTES.PRODUCTS}>
+                       <Link className = 'home__link-container' to = {ROUTES.XBOX_PAGE}>
                             <div className = 'home__logos-container'>                          
                                 <img className = 'home__device-logo' src = {xboxLogo} alt = "Xbox logo"/>
                                 <p className = 'home__text'>XBox One</p>
@@ -94,16 +86,19 @@ const HomeComponent: React.FunctionComponent = () => {
                             backgroundImage = {overwatch} 
                             description = 'Overwatch is a colorful team-based action game starring a diverse cast of powerful heroes. Travel the world, build a team, and contest objectives in exhilarating 6v6 combat.'
                             ageLimit = '12 +'
+                            price = 'Price: 20$'
                         />
                         <GameCard 
                             backgroundImage = {minecraft} 
                             description = 'Minecraft is a sandbox game. There is a virtual land where users can create their own worlds and experiences, using building blocks, resources discovered on the site and their own creativity.'
                             ageLimit = '3 +'
+                            price = 'Price: 8$'
                         />
                         <GameCard 
                             backgroundImage = {terraria} 
                             description = 'Terraria is a 2D sandbox game with gameplay that revolves around exploration, building, crafting, combat, survival, and mining, playable in both single-player and multiplayer modes.'
                             ageLimit = '6 +'
+                            price = 'Price: 15$'
                         />
                     </div>
                     <div>
@@ -116,7 +111,8 @@ const HomeComponent: React.FunctionComponent = () => {
                                     <GameCard
                                         backgroundImage = {item.image}
                                         description = {item.description}
-                                        ageLimit = {item.ageLimit}
+                                        ageLimit = {`${item.ageLimit} +`}
+                                        price = {`Price: ${item.price}$`}
                                     />
                                 </div>
                             )})}

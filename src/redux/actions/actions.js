@@ -12,6 +12,11 @@ export const setUser = (payload) => ({
     payload: {...payload},
 })
 
+export const getUserProfile = (payload) => ({
+    type: ACTION_TYPES.GET_USER_PROFILE,
+    payload: {...payload},
+})
+
 export const deleteUser = (payload) => ({
     type: ACTION_TYPES.DELETE_USER,
     payload: payload,
@@ -23,13 +28,7 @@ export const isSignedIn = (payload) => ({
 })
 
 // Products
-export const getProducts = () => {
-    return (dispatch) => {
-        axios.get('http://localhost:3001/getProducts').then((response) => {
-          dispatch({
-            type: ACTION_TYPES.GET_PRODUCTS,
-            payload: response.data,
-          })
-        })
-    }
-}
+export const getFilteredProducts = (payload) => ({
+    type: ACTION_TYPES.GET_FILTERED_PRODUCTS,
+    payload: [...payload],
+})
