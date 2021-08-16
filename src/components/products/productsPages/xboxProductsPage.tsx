@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import SearchByPC from '@Components/products/searchByPlatforms/searchByPC.tsx'
+import SearchByPlatform from '@Components/products/searchByPlatforms/searchByPlatform.tsx'
 import ProductsPage from '@Components/products/productsPage.tsx'
 import { getProductsAPI } from '@/api/api'
 
@@ -14,7 +14,7 @@ const XboxProductsPage: React.FunctionComponent = () => {
             const response = await getProductsAPI
             const productsArray = response.data
             const newArr = productsArray.filter((game) => game.platform.xbox )
-            setXboxProducts(newArr)
+            setXboxProducts(newArr)          
         } catch (error) {
             console.log(error);
         }   
@@ -28,7 +28,7 @@ const XboxProductsPage: React.FunctionComponent = () => {
         <div>
             <ProductsPage
                 title = 'Xbox One'
-                searchbar = { <SearchByPC /> }
+                searchbar = { <SearchByPlatform searchAPI = {`http://localhost:3001/xboxgames/`}/> }
                 productPlatform = { xboxProducts }
             />
         </div>

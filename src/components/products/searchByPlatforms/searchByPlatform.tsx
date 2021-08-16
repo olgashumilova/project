@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
+import PropTypes from 'prop-types'
 
 // Game Card
 import GameCard from '@Components/gameCard/gameCard.tsx'
 import '@Components/gameCard/gameCard.scss'
 
-const SearchByXbox: React.FunctionComponent = () => {
+const SearchByPlatform: React.FunctionComponent = (props) => {
+
+    SearchByPlatform.propTypes = {
+        searchAPI: PropTypes.string,
+    }
 
   interface IGamesArrray {
     id: number,
@@ -29,7 +34,7 @@ const SearchByXbox: React.FunctionComponent = () => {
   }, [text])
 
   async function fetchData() {
-    await axios.get(`http://localhost:3001/xboxgames/${text}`).then((response) => {
+    await axios.get(`${props.searchAPI}${text}`).then((response) => {
       if (text.length != 0) {
         setArrOfMatches(response.data)
       } else if (text.length === 0) {
@@ -95,4 +100,4 @@ const SearchByXbox: React.FunctionComponent = () => {
   );
 }
 
-export default SearchByXbox
+export default SearchByPlatform

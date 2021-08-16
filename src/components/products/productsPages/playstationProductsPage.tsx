@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import SearchByPC from '@Components/products/searchByPlatforms/searchByPC.tsx'
+import SearchByPlatform from '@Components/products/searchByPlatforms/searchByPlatform.tsx'
 import ProductsPage from '@Components/products/productsPage.tsx'
 import { getProductsAPI } from '@/api/api'
 
@@ -28,7 +28,7 @@ const PlaystationProductsPage: React.FunctionComponent = () => {
         <div>
             <ProductsPage
                 title = 'Playstation'
-                searchbar = { <SearchByPC /> }
+                searchbar = { <SearchByPlatform searchAPI = {`http://localhost:3001/playstationgames/`} /> }
                 productPlatform = { playstationProducts }
             />
         </div>
