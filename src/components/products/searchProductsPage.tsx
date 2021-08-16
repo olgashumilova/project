@@ -14,6 +14,7 @@ const SearchProductsPage: React.FunctionComponent = (props) => {
         title: PropTypes.string,
         filterByPlatform: PropTypes.array,
         searchbar: PropTypes.object,
+        productPlatform: PropTypes.array,
     }
 
     const options = [
@@ -340,6 +341,7 @@ const SearchProductsPage: React.FunctionComponent = (props) => {
 
                 <div className = {isLoading ? 'loader' : ''}>{isLoading}</div>
                 <div className = 'catalog'>
+                    {props.productPlatform}
                     {props.filterByPlatform}
                 </div>
             </div>
