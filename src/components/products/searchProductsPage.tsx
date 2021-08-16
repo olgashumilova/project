@@ -51,15 +51,7 @@ const SearchProductsPage: React.FunctionComponent = (props) => {
         setTimeout (() => {
             if (value === 'All genres') {
                 dispatch(getFilteredProducts(productsArray.filter((game) => game.genre)))
-            } else if (value === 'Shooter') {
-                dispatch(getFilteredProducts(productsArray.filter((game) => game.genre == value)))
-            } else if (value === 'Sandbox') {
-                dispatch(getFilteredProducts(productsArray.filter((game) => game.genre == value)))
-            } else if (value === 'RPG') {
-                dispatch(getFilteredProducts(productsArray.filter((game) => game.genre == value)))
-            } else if (value === 'Simulator') {
-                dispatch(getFilteredProducts(productsArray.filter((game) => game.genre == value)))
-            } else if (value === 'Action-adventure') {
+            } else if (value) {
                 dispatch(getFilteredProducts(productsArray.filter((game) => game.genre == value)))
             }
         }, 500)
@@ -71,15 +63,15 @@ const SearchProductsPage: React.FunctionComponent = (props) => {
         setTimeout (() => {
             if (value === 'All ages') {
                 dispatch(getFilteredProducts(productsArray.filter((game) => game.ageLimit)))
-            } else if (value === '3 +') {
+            } else if (value === '3') {
                 dispatch(getFilteredProducts(productsArray.filter((game) => (game.ageLimit === 3 ))))
-            } else if (value === '6 +') {
+            } else if (value === '6') {
                 dispatch(getFilteredProducts(productsArray.filter((game) => game.ageLimit >= 3 && game.ageLimit <= 6)))
-            } else if (value === '12 +') {
+            } else if (value === '12') {
                 dispatch(getFilteredProducts(productsArray.filter((game) => game.ageLimit >= 3 && game.ageLimit <= 12)))
-            } else if (value === '16 +') {
+            } else if (value === '16') {
                 dispatch(getFilteredProducts(productsArray.filter((game) => game.ageLimit >= 3 && game.ageLimit <= 16)))
-            } else if (value === '18 +') {
+            } else if (value === '18') {
                 dispatch(getFilteredProducts(productsArray.filter((game) => game.ageLimit >= 3 && game.ageLimit <= 18)))
             }
         }, 500)
@@ -233,6 +225,9 @@ const SearchProductsPage: React.FunctionComponent = (props) => {
         setTimeout(() => { setIsLoading(false) }, 800); 
     }
 
+    const listGenres = ['Shooter', 'RPG', 'Sandbox', 'Action-adventure', 'Simulator']
+    const listAgeLimit = [3, 6, 12, 16, 18]
+
     return (
         <div className = 'products-page'>
 
@@ -269,30 +264,12 @@ const SearchProductsPage: React.FunctionComponent = (props) => {
                             <span className = 'products-page__selectors'>All genres</span>
                         </li>
 
-                        <li>
-                            <input name = 'genreFilter' type = 'radio' onChange = {() => filterByGenre('Shooter')}></input>
-                            <span className = 'products-page__selectors'>Shooter</span> 
-                        </li>
-
-                        <li>
-                            <input name = 'genreFilter' type = 'radio' onChange = {() => filterByGenre('Sandbox')}></input>
-                            <span className = 'products-page__selectors'>Sandbox</span>
-                        </li>
-
-                        <li>
-                            <input name = 'genreFilter' type = 'radio' onChange = {() => filterByGenre('RPG')}></input>
-                            <span className = 'products-page__selectors'>RPG</span>                      
-                        </li>
-
-                        <li>
-                            <input name = 'genreFilter' type = 'radio' onChange = {() => filterByGenre('Simulator')}></input>
-                            <span className = 'products-page__selectors'>Simulator</span>                      
-                        </li>
-
-                        <li>
-                            <input name = 'genreFilter' type = 'radio' onChange = {() => filterByGenre('Action-adventure')}></input>
-                            <span className = 'products-page__selectors'>Action-adventure</span>
-                        </li>
+                        {listGenres.map((genre, index) => (
+                            <li key = {index}>
+                                <input name = 'genreFilter' type = 'radio' value = {genre} onChange = {(event) => filterByGenre(event.target.value)}></input>
+                                <span className = 'products-page__selectors'>{genre}</span>
+                            </li>
+                        ))}
                     </ul>
                 </div>
 
@@ -304,31 +281,12 @@ const SearchProductsPage: React.FunctionComponent = (props) => {
                             <span className = 'products-page__selectors'>All ages</span>
                         </li>
 
-                        <li>
-                            <input name = 'ageFilter' type = 'radio' onChange = {() => filterByAge('3 +')}></input>
-                            <span className = 'products-page__selectors'>3 +</span> 
-                        </li>
-
-                        <li>
-                            <input name = 'ageFilter' type = 'radio' onChange = {() => filterByAge('6 +')}></input>
-                            <span className = 'products-page__selectors'>6 +</span>
-                        </li>
-
-                        <li>
-                            <input name = 'ageFilter' type = 'radio' onChange = {() => filterByAge('12 +')}></input>
-                            <span className = 'products-page__selectors'>12 +</span>                      
-                        </li>
-
-                        <li>
-                            <input name = 'ageFilter' type = 'radio' onChange = {() => filterByAge('16 +')}></input>
-                            <span className = 'products-page__selectors'>16 + </span>                      
-                        </li>
-
-                        <li>
-                            <input name = 'ageFilter' type = 'radio' onChange = {() => filterByAge('18 +')}></input>
-                            <span className = 'products-page__selectors'>18 +</span>                      
-                        </li>
-
+                        {listAgeLimit.map((age, index) => (
+                            <li key = {index}>
+                                <input name = 'ageFilter' type = 'radio' value = {age} onChange = {(event) => filterByAge(event.target.value)}></input>
+                                <span className = 'products-page__selectors'>{age} +</span>
+                            </li>
+                        ))}
                     </ul>
                     
                 </div>
