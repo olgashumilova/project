@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from "react"
 import { useSelector } from "react-redux"
 import axios from 'axios'
 import Swal from 'sweetalert2'
-import { getProductsAPI } from '@/api/api'
+import { addNewGameAPI } from '@/api/api'
 
 const EditGameCardModal:React.FunctionComponent = () => {
 
@@ -26,7 +26,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
             setGameImage('')
             setGameDescription('')
             setGameAgeLimit('')
-            setGamePlatform('')
+            setGamePlatform(null)
         } else {
             setGameName(currentGameCard.name)
             setGameGenre(currentGameCard.genre)
@@ -34,7 +34,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
             setGameImage(currentGameCard.image)
             setGameDescription(currentGameCard.description)
             setGameAgeLimit(currentGameCard.ageLimit)
-            setGamePlatform(Object.keys(currentGameCard.platform))
+            setGamePlatform(Object.keys(currentGameCard.platform + ' '))
         }
         
     }, [currentGameCard])
@@ -125,7 +125,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
                             <p>Platform</p>
                             <input
                                 type = 'text'
-                                className = 'modalwindow__input-field'
+                                className = 'modalwindow__input-field' // setGamePlatform(Object.create(Object.prototype, {platform: {value: event.target.value }}))}
                                 onChange = {(event) => setGamePlatform(event.target.value)}
                                 value = {platform}
                             />
@@ -139,16 +139,16 @@ const EditGameCardModal:React.FunctionComponent = () => {
                         className = 'edit-modalwindow__button'
                         type = 'submit'
                         onClick = {async() => {
-                            const response = await axios.put('http://localhost:3001/order', {
+                            const response = await axios.post(addNewGameAPI, {
                                 gameName,
                                 genre,
                                 price,
                                 gameImage,
                                 description,
                                 ageLimit,
-                                platform
+                                platform,
                             })
-                            Swal.fire(response.data);
+                            console.log(response.data);
                         }}>Submit</button>
 
                     <button 
