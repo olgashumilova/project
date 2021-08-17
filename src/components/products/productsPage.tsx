@@ -8,7 +8,7 @@ import '@Components/gameCard/gameCard.scss'
 
 import SearchProductsPage from '@Components/products/searchProductsPage.tsx'
 
-const ProductsPage: React.FunctionComponent = (props) => {
+const ProductsPage: React.FunctionComponent<{title, filterByPlatform, searchbar, productPlatform, displayGames}> = (props) => {
 
     ProductsPage.propTypes = {
         title: PropTypes.string,
