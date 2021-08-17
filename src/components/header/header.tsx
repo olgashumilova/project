@@ -25,6 +25,7 @@ import PcProductsPage from "@Components/products/productsPages/pcProductsPage.ts
 import XboxProductsPage from "@Components/products/productsPages/xboxProductsPage.tsx"
 import PlaystationProductsPage from "@Components/products/productsPages/playstationProductsPage.tsx"
 import CartPage from "@Components/cart/cartPage.tsx"
+import AboutPage from "@Components/aboutPage/aboutPage.tsx"
 
 // Modals
 import SignUpModal from '@Components/modals/signUpModal.tsx'
@@ -40,6 +41,7 @@ import '@Components/userPage/userPage.scss'
 import '@Components/editUserPage/editUserPage.scss'
 import '@Components/products/products.scss'
 import '@Components/cart/cartPage.scss'
+import '@Components/aboutPage/aboutPage.scss'
 
 const App: React.FunctionComponent = () => {
 
@@ -238,7 +240,7 @@ function Products() {
 }
 
 function About() {
-  return <h2>About</h2>;
+  return <AboutPage />;
 }
 
 function User() {
