@@ -6,9 +6,11 @@ export const initialState = {
   filteredProducts: [],
   authUser: null,
   isSignedIn: false,
+  cart: [],
+  totalQuantity: 0,
 }
 
-const reducer = (state = initialState, action: any) => {
+const reducer = (state = initialState, action) => {
     switch (action.type) {
     
       case ACTION_TYPES.GET_USERS: {
@@ -46,6 +48,20 @@ const reducer = (state = initialState, action: any) => {
         return {
           ...state,
           filteredProducts: action.payload,
+        }
+      }
+      case ACTION_TYPES.ADD_ITEM: {
+        return {
+          ...state,
+          cart: [...state.cart, action.payload],
+          totalQuantity: state.totalQuantity + 1,
+        }
+      }
+      case ACTION_TYPES.REMOVE_ITEM: {
+        return {
+          ...state,
+          cart: state.cart.filter((item, index) => index !== action.payload),
+          totalQuantity: state.totalQuantity - 1,
         }
       }
       default: return state
