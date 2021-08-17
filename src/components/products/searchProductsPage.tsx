@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types'
-import { Dropdown } from 'semantic-ui-react'
 import { getProductsAPI } from '@/api/api';
 import { getFilteredProducts } from '@/redux/actions/actions'
-import 'semantic-ui-css/semantic.min.css'
+import { Dropdown } from 'semantic-ui-react'
 
-const SearchProductsPage: React.FunctionComponent = (props) => {
+import 'semantic-ui-css/semantic.min.css'
+import { setTimeout } from 'core-js';
+
+const SearchProductsPage: React.FunctionComponent<{title, filterByPlatform, searchbar, productPlatform}> = (props) => {
 
     const dispatch = useDispatch()
 
@@ -14,6 +16,7 @@ const SearchProductsPage: React.FunctionComponent = (props) => {
         title: PropTypes.string,
         filterByPlatform: PropTypes.array,
         searchbar: PropTypes.object,
+        productPlatform: PropTypes.array,
     }
 
     const options = [
@@ -24,6 +27,9 @@ const SearchProductsPage: React.FunctionComponent = (props) => {
     const [type, setType] = useState('ascending')
     const [productsArray, setProductsArray] = useState([])
     const [isLoading, setIsLoading] = useState(false)
+
+    const listGenres = ['Shooter', 'RPG', 'Sandbox', 'Action-adventure', 'Simulator']
+    const listAgeLimit = [3, 6, 12, 16, 18]
 
     const changeOptionType = (e) => {
         setType(e.target.value)
@@ -45,53 +51,37 @@ const SearchProductsPage: React.FunctionComponent = (props) => {
 
     // Filters____________________________________________________________________________________________
 
-    const filterByGenre = (value) => {
-        setTimeout(() => { setIsLoading(true) }, 0);
-        setTimeout (() => {
+    async function filterByGenre(value) {
+        setIsLoading(true)
+        await setTimeout(() => {
             if (value === 'All genres') {
                 dispatch(getFilteredProducts(productsArray.filter((game) => game.genre)))
-            } else if (value === 'Shooter') {
-                dispatch(getFilteredProducts(productsArray.filter((game) => game.genre == 'Shooter')))
-            } else if (value === 'Sandbox') {
-                dispatch(getFilteredProducts(productsArray.filter((game) => game.genre == 'Sandbox')))
-            } else if (value === 'RPG') {
-                dispatch(getFilteredProducts(productsArray.filter((game) => game.genre == 'RPG')))
-            } else if (value === 'Simulator') {
-                dispatch(getFilteredProducts(productsArray.filter((game) => game.genre == 'Simulator')))
-            } else if (value === 'Action-adventure') {
-                dispatch(getFilteredProducts(productsArray.filter((game) => game.genre == 'Action-adventure')))
+            } else if (value) {
+                dispatch(getFilteredProducts(productsArray.filter((game) => game.genre == value)))
             }
+            setIsLoading(false)
         }, 500)
-        setTimeout(() => { setIsLoading(false) }, 800); 
     }
 
-    const filterByAge = (value) => {
-        setTimeout(() => { setIsLoading(true) }, 0);
-        setTimeout (() => {
+    async function filterByAge(value) {
+        setIsLoading(true)
+        await setTimeout(() => {
             if (value === 'All ages') {
                 dispatch(getFilteredProducts(productsArray.filter((game) => game.ageLimit)))
-            } else if (value === '3 +') {
-                dispatch(getFilteredProducts(productsArray.filter((game) => (game.ageLimit === 3))))
-            } else if (value === '6 +') {
-                dispatch(getFilteredProducts(productsArray.filter((game) => game.ageLimit === 6)))
-            } else if (value === '12 +') {
-                dispatch(getFilteredProducts(productsArray.filter((game) => game.ageLimit === 12)))
-            } else if (value === '16 +') {
-                dispatch(getFilteredProducts(productsArray.filter((game) => game.ageLimit === 16)))
-            } else if (value === '18 +') {
-                dispatch(getFilteredProducts(productsArray.filter((game) => game.ageLimit === 18)))
+            } else if (value) {
+                dispatch(getFilteredProducts(productsArray.filter((game) => (game.ageLimit >= 3 && game.ageLimit <= value))))
             }
+            setIsLoading(false)
         }, 500)
-        setTimeout(() => { setIsLoading(false) }, 800); 
     }
 
     // Sorting____________________________________________________________________________________________
 
     // Sort by name ascending
 
-    const sortByNameAsc = () => {
-        setTimeout(() => { setIsLoading(true) }, 0);
-        setTimeout (() => {
+    async function sortByNameAsc() {
+        setIsLoading(true)
+        await setTimeout(() => {
             const result = productsArray.sort((a, b) => {
                 const nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase()
                 if (nameA < nameB)
@@ -100,16 +90,16 @@ const SearchProductsPage: React.FunctionComponent = (props) => {
                   return 1
                 return 0
             })
-            return dispatch(getFilteredProducts(result))
+            dispatch(getFilteredProducts(result))
+            setIsLoading(false)
         }, 500)
-        setTimeout(() => { setIsLoading(false) }, 800); 
     }
 
     // Sort by name descending
 
-    const sortByNameDesc = () => {
-        setTimeout(() => { setIsLoading(true) }, 500);
-        setTimeout (() => {
+    async function sortByNameDesc() {
+        setIsLoading(true)
+        await setTimeout(() => {
             const result = productsArray.sort((a, b) => {
                 const nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase()
                 nameA > nameB ? -1 : 1
@@ -119,16 +109,16 @@ const SearchProductsPage: React.FunctionComponent = (props) => {
                   return 1
                 return 0
             })
-            return dispatch(getFilteredProducts(result))
-        }, 600)
-        setTimeout(() => { setIsLoading(false) }, 800); 
+            dispatch(getFilteredProducts(result))
+            setIsLoading(false)
+        }, 500)
     }
 
     // Sort by rating ascending
 
-    const sortByRatingAsc = () => {
-        setTimeout(() => { setIsLoading(true) }, 500);
-        setTimeout (() => {
+    async function sortByRatingAsc() {
+        setIsLoading(true)
+        await setTimeout(() => {
             const result = productsArray.sort((a, b) => {
                 const ratingA = a.rating, ratingB = b.rating
                 if (ratingA < ratingB)
@@ -137,16 +127,16 @@ const SearchProductsPage: React.FunctionComponent = (props) => {
                   return 1
                 return 0
             })
-            return dispatch(getFilteredProducts(result))
-        }, 600)
-        setTimeout(() => { setIsLoading(false) }, 800);      
+            dispatch(getFilteredProducts(result))
+            setIsLoading(false)
+        }, 500)
     }
 
     // Sort by rating descending
 
-    const sortByRatingDesc = () => {
-        setTimeout(() => { setIsLoading(true) }, 500);
-        setTimeout (() => {
+    async function sortByRatingDesc() {
+        setIsLoading(true)
+        await setTimeout(() => {
             const result = productsArray.sort((a, b) => {
                 const ratingA = a.rating, ratingB = b.rating
                 if (ratingA > ratingB)
@@ -155,16 +145,16 @@ const SearchProductsPage: React.FunctionComponent = (props) => {
                   return 1
                 return 0
             })
-            return dispatch(getFilteredProducts(result))
-        }, 600)
-        setTimeout(() => { setIsLoading(false) }, 800);      
+            dispatch(getFilteredProducts(result))
+            setIsLoading(false)
+        }, 500)
     }
 
     // Sort by price ascending
 
-    const sortByPriceAsc = () => {
-        setTimeout(() => { setIsLoading(true) }, 500);
-        setTimeout (() => {
+    async function sortByPriceAsc() {
+        setIsLoading(true)
+        await setTimeout(() => {
             const result = productsArray.sort((a, b) => {
                 const priceA = a.price, priceB = b.price
                 if (priceA < priceB)
@@ -173,16 +163,16 @@ const SearchProductsPage: React.FunctionComponent = (props) => {
                   return 1
                 return 0
             })
-            return dispatch(getFilteredProducts(result))
-        }, 600)
-        setTimeout(() => { setIsLoading(false) }, 800); 
+            dispatch(getFilteredProducts(result))
+            setIsLoading(false)
+        }, 500)
     }
 
     // Sort by price descending
 
-    const sortByPriceDesc = () => {
-        setTimeout(() => { setIsLoading(true) }, 500);
-        setTimeout (() => {
+    async function sortByPriceDesc() {
+        setIsLoading(true)
+        await setTimeout(() => {
             const result = productsArray.sort((a, b) => {
                 const priceA = a.price, priceB = b.price
                 if (priceA > priceB)
@@ -191,16 +181,16 @@ const SearchProductsPage: React.FunctionComponent = (props) => {
                   return 1
                 return 0
             })
-            return dispatch(getFilteredProducts(result))
-        }, 600)
-        setTimeout(() => { setIsLoading(false) }, 800); 
+            dispatch(getFilteredProducts(result))
+            setIsLoading(false)
+        }, 500)
     }
 
     // Sort by age ascending
 
-    const sortByAgeAsc = () => {
-        setTimeout(() => { setIsLoading(true) }, 500);
-        setTimeout (() => {
+    async function sortByAgeAsc() {
+        setIsLoading(true)
+        await setTimeout(() => {
             const result = productsArray.sort((a, b) => {
                 const ageLimitA = a.ageLimit, ageLimitB = b.ageLimit
                 if (ageLimitA < ageLimitB)
@@ -209,16 +199,16 @@ const SearchProductsPage: React.FunctionComponent = (props) => {
                   return 1
                 return 0
             })
-            return dispatch(getFilteredProducts(result))
-        }, 600)
-        setTimeout(() => { setIsLoading(false) }, 800); 
+            dispatch(getFilteredProducts(result))
+            setIsLoading(false)
+        }, 500)
     }
 
     // Sort by age descending
 
-    const sortByAgeDesc = () => {
-        setTimeout(() => { setIsLoading(true) }, 500);
-        setTimeout (() => {
+    async function sortByAgeDesc() {
+        setIsLoading(true)
+        await setTimeout(() => {
             const result = productsArray.sort((a, b) => {
                 const ageLimitA = a.ageLimit, ageLimitB = b.ageLimit
                 if (ageLimitA > ageLimitB)
@@ -227,9 +217,9 @@ const SearchProductsPage: React.FunctionComponent = (props) => {
                   return 1
                 return 0
             })
-            return dispatch(getFilteredProducts(result))
-        }, 600)
-        setTimeout(() => { setIsLoading(false) }, 800); 
+            dispatch(getFilteredProducts(result))
+            setIsLoading(false)
+        }, 500)
     }
 
     return (
@@ -268,30 +258,12 @@ const SearchProductsPage: React.FunctionComponent = (props) => {
                             <span className = 'products-page__selectors'>All genres</span>
                         </li>
 
-                        <li>
-                            <input name = 'genreFilter' type = 'radio' onChange = {() => filterByGenre('Shooter')}></input>
-                            <span className = 'products-page__selectors'>Shooter</span> 
-                        </li>
-
-                        <li>
-                            <input name = 'genreFilter' type = 'radio' onChange = {() => filterByGenre('Sandbox')}></input>
-                            <span className = 'products-page__selectors'>Sandbox</span>
-                        </li>
-
-                        <li>
-                            <input name = 'genreFilter' type = 'radio' onChange = {() => filterByGenre('RPG')}></input>
-                            <span className = 'products-page__selectors'>RPG</span>                      
-                        </li>
-
-                        <li>
-                            <input name = 'genreFilter' type = 'radio' onChange = {() => filterByGenre('Simulator')}></input>
-                            <span className = 'products-page__selectors'>Simulator</span>                      
-                        </li>
-
-                        <li>
-                            <input name = 'genreFilter' type = 'radio' onChange = {() => filterByGenre('Action-adventure')}></input>
-                            <span className = 'products-page__selectors'>Action-adventure</span>
-                        </li>
+                        {listGenres.map((genre, index) => (
+                            <li key = {index}>
+                                <input name = 'genreFilter' type = 'radio' value = {genre} onChange = {(event) => filterByGenre(event.target.value)}></input>
+                                <span className = 'products-page__selectors'>{genre}</span>
+                            </li>
+                        ))}
                     </ul>
                 </div>
 
@@ -303,31 +275,12 @@ const SearchProductsPage: React.FunctionComponent = (props) => {
                             <span className = 'products-page__selectors'>All ages</span>
                         </li>
 
-                        <li>
-                            <input name = 'ageFilter' type = 'radio' onChange = {() => filterByAge('3 +')}></input>
-                            <span className = 'products-page__selectors'>3 +</span> 
-                        </li>
-
-                        <li>
-                            <input name = 'ageFilter' type = 'radio' onChange = {() => filterByAge('6 +')}></input>
-                            <span className = 'products-page__selectors'>6 +</span>
-                        </li>
-
-                        <li>
-                            <input name = 'ageFilter' type = 'radio' onChange = {() => filterByAge('12 +')}></input>
-                            <span className = 'products-page__selectors'>12 +</span>                      
-                        </li>
-
-                        <li>
-                            <input name = 'ageFilter' type = 'radio' onChange = {() => filterByAge('16 +')}></input>
-                            <span className = 'products-page__selectors'>16 + </span>                      
-                        </li>
-
-                        <li>
-                            <input name = 'ageFilter' type = 'radio' onChange = {() => filterByAge('18 +')}></input>
-                            <span className = 'products-page__selectors'>18 +</span>                      
-                        </li>
-
+                        {listAgeLimit.map((age, index) => (
+                            <li key = {index}>
+                                <input name = 'ageFilter' type = 'radio' value = {age} onChange = {(event) => filterByAge(event.target.value)}></input>
+                                <span className = 'products-page__selectors'>{age} +</span>
+                            </li>
+                        ))}
                     </ul>
                     
                 </div>
@@ -340,6 +293,7 @@ const SearchProductsPage: React.FunctionComponent = (props) => {
 
                 <div className = {isLoading ? 'loader' : ''}>{isLoading}</div>
                 <div className = 'catalog'>
+                    {props.productPlatform}
                     {props.filterByPlatform}
                 </div>
             </div>

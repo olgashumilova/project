@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Swal from 'sweetalert2'
 import axios from 'axios'
@@ -48,7 +48,7 @@ const CartPage: React.FunctionComponent = () => {
                     return (
                         <div className = 'cart__products' key = {index}>
                         
-                            <div className = 'game-border'> <p>{game.name}</p> </div>
+                            <p className = 'game-border'>{game.name}</p>
                             <div className = 'game-border'>
                                 <select>
                                     <option>PC</option>
@@ -56,19 +56,19 @@ const CartPage: React.FunctionComponent = () => {
                                     <option>Xbox</option>
                                 </select>
                             </div>
-                            <div className = 'game-border'> <p>{today}</p> </div>
+                            <p className = 'game-border'>{today}</p>
                             <div className = 'game-border'>
-                            <div className = 'cart__change-quantity-btn'>
-                                <button className = 'cart__change-quantity-btn' onClick = {() => {
-                                    game.amount <= 0 ? game.amount = 1 : setItemCount(--game.amount)
-                                }}> - </button>
-                                <p className = 'cart__current-item-amount'>{game.amount}</p>
-                                <button className = 'cart__change-quantity-btn' onClick = {() => {
-                                    setItemCount(++game.amount)
-                                }}> + </button>
+                                <div className = 'cart__change-quantity-btn'>
+                                    <button className = 'cart__change-quantity-btn' onClick = {() => {
+                                        game.amount <= 0 ? game.amount = 1 : setItemCount(--game.amount)
+                                    }}> - </button>
+                                    <p className = 'cart__current-item-amount'>{game.amount}</p>
+                                    <button className = 'cart__change-quantity-btn' onClick = {() => {
+                                        setItemCount(++game.amount)
+                                    }}> + </button>
+                                </div>
                             </div>
-                            </div>
-                            <div className = 'game-border'> <p>{game.price * game.amount}$</p> </div>
+                            <p className = 'game-border'>{game.price * game.amount}$</p>
                             <div className = 'cart__game-button' onClick = {() => dispatch(removeItemFromCart(index))}><button>x</button></div> 
                         </div>
                     )
