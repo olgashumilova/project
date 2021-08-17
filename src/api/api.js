@@ -12,5 +12,6 @@ export const signInUrlAPI = 'http://localhost:3001/signin'
 export const saveProfileUrlAPI = 'http://localhost:3001/saveProfile'
 export const changePasswordUrlAPI = 'http://localhost:3001/changePassword'
 export const sendOrderToServerAPI = 'http://localhost:3001/order'
-export const addNewGameAPI = 'http://localhost:3001/product'
 
+// Common query
+export const productAPI = 'http://localhost:3001/product'
