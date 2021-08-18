@@ -175,3 +175,11 @@ body {
 .edit-modalwindow__form {
     width: 100%;
 }
+
+.modalwindow__checkbox-input {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80%;
+    margin: 15% 2% 2% 13%;
+}
