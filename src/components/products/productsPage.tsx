@@ -18,9 +18,11 @@ const ProductsPage: React.FunctionComponent<{title, filterByPlatform, searchbar,
         productPlatform: PropTypes.array,
     }
 
+    const productPlatform = props.productPlatform
+
     const filteredProducts = useSelector(state => state.filteredProducts)
 
-    function displayGames(productPlatform) {
+    function displayGames() {
         if (filteredProducts.length === 0) {
             return (
                 productPlatform.map((game) => {
@@ -41,14 +43,32 @@ const ProductsPage: React.FunctionComponent<{title, filterByPlatform, searchbar,
                filteredProducts.map((game) => {
                     return (
                         <div key = {game.index}>
-                            {productPlatform ? (
+                            {game.platform.pc ? (
                                 <GameCard className = 'catalog-gamecard' 
                                     backgroundImage = {game.image} 
                                     description = {game.description}
                                     ageLimit = {`${game.ageLimit} +`}
                                     price = {`Price: ${game.price}$`}
                                 />
-                            ) : null}  
+                            ) : null}
+                            
+                            {game.platform.playstation ? (
+                                <GameCard className = 'catalog-gamecard' 
+                                    backgroundImage = {game.image} 
+                                    description = {game.description}
+                                    ageLimit = {`${game.ageLimit} +`}
+                                    price = {`Price: ${game.price}$`}
+                                />
+                            ) : null}
+
+                            {game.platform.xbox ? (
+                                <GameCard className = 'catalog-gamecard' 
+                                    backgroundImage = {game.image} 
+                                    description = {game.description}
+                                    ageLimit = {`${game.ageLimit} +`}
+                                    price = {`Price: ${game.price}$`}
+                                />
+                            ) : null}
                         </div>
                     )
                 })
@@ -61,7 +81,7 @@ const ProductsPage: React.FunctionComponent<{title, filterByPlatform, searchbar,
             <SearchProductsPage
                 title = {props.title}
                 searchbar = {props.searchbar}
-                filterByPlatform = {displayGames(props.productPlatform)}
+                filterByPlatform = {displayGames()}
             />
         </div>
     ) 

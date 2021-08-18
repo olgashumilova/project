@@ -9,6 +9,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
     const currentGameCard = useSelector(state => state.currentGameCard)
 
     const [showModal, setShowModal] = useState(true)
+    const [checked, setChecked] = useState(false)
 
     const [gameName, setGameName] = useState('')
     const [gameGenre, setGameGenre] = useState('')
@@ -16,7 +17,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
     const [gameImage, setGameImage] = useState('')
     const [gameDescription, setGameDescription] = useState('')
     const [gameAgeLimit, setGameAgeLimit] = useState('')
-    const [gamePlatform, setGamePlatform] = useState(null)
+    const [gamePlatform, setGamePlatform] = useState({})
 
     useEffect(() => {
         if (currentGameCard === null) {
@@ -26,8 +27,9 @@ const EditGameCardModal:React.FunctionComponent = () => {
             setGameImage('')
             setGameDescription('')
             setGameAgeLimit('')
-            setGamePlatform(null)
+            setGamePlatform({})
         } else {
+            checkValue()
             setGameName(currentGameCard.name)
             setGameGenre(currentGameCard.genre)
             setGamePrice(currentGameCard.price)
@@ -54,7 +56,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
             gameImage,
             gameDescription,
             gameAgeLimit,
-            gamePlatform: gamePlatform.split(' '),
+            gamePlatform,
         })
         console.log(response.data);
     }
@@ -67,7 +69,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
             gameImage,
             gameDescription,
             gameAgeLimit,
-            gamePlatform: gamePlatform.split(' '),
+            gamePlatform,
         })
         console.log(response.data);
         // Swal.fire(response.data);
@@ -83,15 +85,34 @@ const EditGameCardModal:React.FunctionComponent = () => {
             confirmButtonText: 'Yes, delete it'
         }).then(async (result) => {
             if (result.isConfirmed) {
-                const response = await axios.delete(`http://localhost:3001/product/${currentGameCard.id}`)
-                console.log(response.data)
-              Swal.fire(
-                'Deleted!',
-                'Your file has been deleted.',
-                'success'
-              )
+                await axios.delete(`http://localhost:3001/product/${currentGameCard.id}`)
+                Swal.fire(
+                  'Deleted!',
+                  'Game card has been deleted.',
+                  'success'
+                )
             }
         })
+    }
+
+    const checkValue = () => {
+        const pcPlatformOfCurrentCard = 'pc' in currentGameCard.platform
+        const playstationPlatformOfCurrentCard = 'playstation' in currentGameCard.platform
+        const xboxPlatformOfCurrentCard = 'xbox' in currentGameCard.platform
+
+        pcPlatformOfCurrentCard ? setChecked(true) : setChecked(false)
+        playstationPlatformOfCurrentCard ? setChecked(true) : setChecked(false)
+        xboxPlatformOfCurrentCard ? setChecked(true) : setChecked(false)
+        
+        console.log(xboxPlatformOfCurrentCard);
+    }
+
+    const handleInputChange = (event) => {
+        const target = event.target
+        const value = target.checked ? target.value : null
+        const name = target.name
+
+        value === null ? delete gamePlatform[name] : setGamePlatform(Object.assign(gamePlatform, ({ [name]: value })))
     }
 
     return (
@@ -166,15 +187,35 @@ const EditGameCardModal:React.FunctionComponent = () => {
                                 value = {gameAgeLimit}
                             />
                         </div>
-                        <div className = 'modalwindow__input'>
-                            <p>Platform</p>
-                            <input
-                                type = 'text'
-                                className = 'modalwindow__input-field'
-                                onChange = {(event) => setGamePlatform(event.target.value)}
-                                value = {gamePlatform}
-                            />
-                        </div>
+
+                            <div className = 'modalwindow__checkbox-input'>
+                                <input 
+                                    type = 'checkbox' 
+                                    name = 'pc'
+                                    checked = {'pc' in currentGameCard.platform}
+                                    onChange = {handleInputChange}
+                                    value = {'pc'}
+                                />
+                                <p>PC</p>
+
+                                <input 
+                                    type = 'checkbox' 
+                                    name = 'playstation'
+                                    checked = {'playstation' in currentGameCard.platform}
+                                    onChange = {handleInputChange}
+                                    value = {'playstation'}
+                                />
+                                <p>Playstation</p>
+
+                                <input 
+                                   type = 'checkbox' 
+                                   name = 'xbox'
+                                   checked = {'xbox' in currentGameCard.platform}
+                                   onChange = {handleInputChange}
+                                   value = {'xbox'}
+                                />
+                                <p>Xbox</p>
+                            </div>
 
                     </div>
                 </div>
@@ -186,7 +227,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
                         onClick = {() => {
                             currentGameCard === null ? addGame() : editGame()
                             setShowModal(!showModal)
-                            Swal.fire('Game card has been edited')
+                            // Swal.fire('Game card has been edited')
                         }}>Submit
                     </button>
                     <button 
