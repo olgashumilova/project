@@ -1,11 +1,10 @@
 import { ACTION_TYPES } from '../const/actionTypes';
 
 export const initialState = {
-  users: [],
   userProfile: [],
-  filteredProducts: [],
   authUser: null,
   isSignedIn: false,
+  filteredProducts: [],
   cart: [],
   totalQuantity: 0,
   currentGameCard: null,
@@ -13,13 +12,7 @@ export const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-    
-      case ACTION_TYPES.GET_USERS: {
-        return {
-          ...state,
-          users: [...state.users, action.payload],
-        }
-      }
+
       case ACTION_TYPES.SET_USER: {
         return {
           ...state,
@@ -37,13 +30,6 @@ const reducer = (state = initialState, action) => {
           ...state,
           isSignedIn: action.payload,
         }     
-      }
-      case ACTION_TYPES.DELETE_USER: {
-          return {
-            ...state,
-            authUser: null,
-            isSignedIn: false,
-          }
       }
       case ACTION_TYPES.GET_FILTERED_PRODUCTS: {
         return {
