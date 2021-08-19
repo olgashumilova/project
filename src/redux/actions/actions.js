@@ -16,11 +16,6 @@ export const getUserProfile = (payload) => ({
     payload: {...payload},
 })
 
-export const deleteUser = (payload) => ({
-    type: ACTION_TYPES.DELETE_USER,
-    payload: payload,
-})
-
 export const isSignedIn = (payload) => ({
     type: ACTION_TYPES.IS_SIGNED_IN,
     payload: payload,
