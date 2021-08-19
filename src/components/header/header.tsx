@@ -132,7 +132,7 @@ const App: React.FunctionComponent = () => {
                       <p className = 'header__user-name'>Hello, {userName || user.login}</p>
                     </Link>
                 
-                  {userName === 'admin' ? (
+                  {user.login === 'admin' || userName === 'admin' ? (
                     <div className = 'header__nav'>
                       <div className = 'header__list'>
                         
