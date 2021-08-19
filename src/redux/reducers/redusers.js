@@ -43,6 +43,12 @@ const reducer = (state = initialState, action) => {
           currentGameCard: action.payload,
         }
       }
+      case ACTION_TYPES.DELETE_CURRENT_GAME_CARD: {
+        return {
+          ...state,
+          currentGameCard: null,
+        }
+      }
       case ACTION_TYPES.ADD_ITEM: {
         return {
           ...state,

@@ -1,20 +1,24 @@
-import React, { useState, useCallback, useEffect } from "react"
-import { useSelector } from "react-redux"
+import React, { useState, useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux"
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import { productAPI } from '@/api/api'
+import { deleteCurrentGameCard } from '../../redux/actions/actions'
 
 const EditGameCardModal:React.FunctionComponent = () => {
+
+    const dispatch = useDispatch()
 
     const currentGameCard = useSelector(state => state.currentGameCard)
 
     const [showModal, setShowModal] = useState(true)
-    const [checked, setChecked] = useState(false)
 
+    const [gameId, setGameId] = useState('')
     const [gameName, setGameName] = useState('')
     const [gameGenre, setGameGenre] = useState('')
     const [gamePrice, setGamePrice] = useState('')
     const [gameImage, setGameImage] = useState('')
+    const [gameRating, setGameRating] = useState('')
     const [gameDescription, setGameDescription] = useState('')
     const [gameAgeLimit, setGameAgeLimit] = useState('')
     const [gamePlatform, setGamePlatform] = useState({})
@@ -25,18 +29,20 @@ const EditGameCardModal:React.FunctionComponent = () => {
             setGameGenre('')
             setGamePrice('')
             setGameImage('')
+            setGameRating('')
             setGameDescription('')
             setGameAgeLimit('')
             setGamePlatform({})
         } else {
-            checkValue()
+            setGameId(currentGameCard.id)
             setGameName(currentGameCard.name)
             setGameGenre(currentGameCard.genre)
             setGamePrice(currentGameCard.price)
             setGameImage(currentGameCard.image)
+            setGameRating(currentGameCard.rating)
             setGameDescription(currentGameCard.description)
             setGameAgeLimit(currentGameCard.ageLimit)
-            setGamePlatform(Object.keys(currentGameCard.platform))
+            setGamePlatform({})
         }
     }, [currentGameCard])
 
@@ -58,11 +64,13 @@ const EditGameCardModal:React.FunctionComponent = () => {
             gameAgeLimit,
             gamePlatform,
         })
-        console.log(response.data);
+        console.log(response.data)
+        // Swal.fire('Game card has been created');
     }
 
     const editGame = async() => {
         const response = await axios.put(productAPI, {
+            gameId,
             gameName,
             gameGenre,
             gamePrice,
@@ -72,6 +80,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
             gamePlatform,
         })
         console.log(response.data);
+        // dispatch(deleteCurrentGameCard(currentGameCard))
         // Swal.fire(response.data);
     }
 
@@ -91,28 +100,44 @@ const EditGameCardModal:React.FunctionComponent = () => {
                   'Game card has been deleted.',
                   'success'
                 )
+                // dispatch(deleteCurrentGameCard(currentGameCard))
             }
         })
     }
 
-    const checkValue = () => {
-        const pcPlatformOfCurrentCard = 'pc' in currentGameCard.platform
-        const playstationPlatformOfCurrentCard = 'playstation' in currentGameCard.platform
-        const xboxPlatformOfCurrentCard = 'xbox' in currentGameCard.platform
-
-        pcPlatformOfCurrentCard ? setChecked(true) : setChecked(false)
-        playstationPlatformOfCurrentCard ? setChecked(true) : setChecked(false)
-        xboxPlatformOfCurrentCard ? setChecked(true) : setChecked(false)
-        
-        console.log(xboxPlatformOfCurrentCard);
-    }
+    const [pcChecked, setPcChecked] = useState('pc' in currentGameCard.platform)
+    const [playstationChecked, setPlaystationChecked] = useState('playstation' in currentGameCard.platform)
+    const [xboxChecked, setXboxChecked] = useState('xbox' in currentGameCard.platform)
 
     const handleInputChange = (event) => {
         const target = event.target
         const value = target.checked ? target.value : null
         const name = target.name
 
-        value === null ? delete gamePlatform[name] : setGamePlatform(Object.assign(gamePlatform, ({ [name]: value })))
+        if (value === null) {
+            delete gamePlatform[name]
+            if (target.value === 'pc') {
+                setPcChecked(!pcChecked)
+            } else if (target.value === 'playstation') {
+                setPlaystationChecked(!playstationChecked)
+            } else if (target.value === 'xbox') {
+                setXboxChecked(!xboxChecked)
+            }
+        } else if (value) {
+
+            if (value === target.value) {
+                setGamePlatform(Object.assign(gamePlatform, ({ [name]: value })))
+                if (target.value === 'pc') {
+                    setPcChecked(!pcChecked)
+                } else if (target.value === 'playstation') {
+                    setPlaystationChecked(!playstationChecked)
+                } else if (target.value === 'xbox') {
+                    setXboxChecked(!xboxChecked)
+                }
+            }
+        }
+        console.log(value);
+        console.log(target.value)
     }
 
     return (
@@ -155,7 +180,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
                         <div className = 'modalwindow__input'>
                             <p>Price</p>
                             <input 
-                                type = 'text'
+                                type = 'number'
                                 className = 'modalwindow__input-field'
                                 onChange = {(event) => setGamePrice(event.target.value)}
                                 value = {gamePrice}
@@ -171,6 +196,15 @@ const EditGameCardModal:React.FunctionComponent = () => {
                             />
                         </div>
                         <div className = 'modalwindow__input'>
+                            <p>Rating</p>
+                            <input 
+                                type = 'number' min = '0' max = '5'
+                                className = 'modalwindow__input-field'
+                                onChange = {(event) => setGameRating(event.target.value)}
+                                value = {gameRating}
+                            />
+                        </div>
+                        <div className = 'modalwindow__input'>
                             <p>Description</p>
                             <textarea 
                                 className = 'modalwindow__desc-input-field'
@@ -181,7 +215,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
                         <div className = 'modalwindow__input'>
                             <p>Age</p>
                             <input
-                                type = 'text'
+                                type = 'number' min = '3' max = '18'
                                 className = 'modalwindow__input-field'
                                 onChange = {(event) => setGameAgeLimit(event.target.value)}
                                 value = {gameAgeLimit}
@@ -192,7 +226,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
                                 <input 
                                     type = 'checkbox' 
                                     name = 'pc'
-                                    checked = {'pc' in currentGameCard.platform}
+                                    checked = {pcChecked}
                                     onChange = {handleInputChange}
                                     value = {'pc'}
                                 />
@@ -201,18 +235,18 @@ const EditGameCardModal:React.FunctionComponent = () => {
                                 <input 
                                     type = 'checkbox' 
                                     name = 'playstation'
-                                    checked = {'playstation' in currentGameCard.platform}
+                                    checked = {playstationChecked}
                                     onChange = {handleInputChange}
                                     value = {'playstation'}
                                 />
                                 <p>Playstation</p>
 
                                 <input 
-                                   type = 'checkbox' 
-                                   name = 'xbox'
-                                   checked = {'xbox' in currentGameCard.platform}
-                                   onChange = {handleInputChange}
-                                   value = {'xbox'}
+                                    type = 'checkbox' 
+                                    name = 'xbox'
+                                    checked = {xboxChecked}
+                                    onChange = {handleInputChange}
+                                    value = {'xbox'}
                                 />
                                 <p>Xbox</p>
                             </div>
@@ -227,7 +261,6 @@ const EditGameCardModal:React.FunctionComponent = () => {
                         onClick = {() => {
                             currentGameCard === null ? addGame() : editGame()
                             setShowModal(!showModal)
-                            // Swal.fire('Game card has been edited')
                         }}>Submit
                     </button>
                     <button 

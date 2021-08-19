@@ -32,6 +32,11 @@ export const getCurrentGameCard = (payload) => ({
     payload: {...payload},
 })
 
+export const deleteCurrentGameCard = (payload) => ({
+    type: ACTION_TYPES.DELETE_CURRENT_GAME_CARD,
+    payload: {...payload},
+})
+
 // Cart actions
 export const addItemToCart = (item) => ({
     type: ACTION_TYPES.ADD_ITEM,
