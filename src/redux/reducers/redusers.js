@@ -1,6 +1,7 @@
 import { ACTION_TYPES } from '../const/actionTypes';
 
 export const initialState = {
+  products: [],
   userProfile: [],
   authUser: null,
   isSignedIn: false,
@@ -30,6 +31,12 @@ const reducer = (state = initialState, action) => {
           ...state,
           isSignedIn: action.payload,
         }     
+      }
+      case ACTION_TYPES.GET_PRODUCTS_ARRAY: {
+        return {
+          ...state,
+          products: action.payload,
+        }
       }
       case ACTION_TYPES.GET_FILTERED_PRODUCTS: {
         return {
