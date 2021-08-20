@@ -11,7 +11,7 @@ import iconEarlyAccess from '@Assets/aboutPageIcons/icon-earlyaccess.svg'
 const AboutPage: React.FunctionComponent = () => {
     return (
         <div className = 'about-page'>
-            <p>We are constantly working to bring new updates and features to Game Store, such as:</p>
+            <p className = 'about-page__title'>We are constantly working to bring new updates and features to Game Store, such as:</p>
 
             <div className = 'about-page__main'>
                 <div className = 'about-page__container'>
