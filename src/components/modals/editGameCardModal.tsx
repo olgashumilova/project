@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import { productAPI } from '@/api/api'
-import { deleteCurrentGameCard } from '../../redux/actions/actions'
+import { getProductsArray } from '@/redux/actions/actions'
 
 const EditGameCardModal:React.FunctionComponent = () => {
 
@@ -21,7 +21,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
     const [gameRating, setGameRating] = useState('')
     const [gameDescription, setGameDescription] = useState('')
     const [gameAgeLimit, setGameAgeLimit] = useState('')
-    const [gamePlatform, setGamePlatform] = useState({})
+    const [gamePlatform, setGamePlatform] = useState(null)
 
     useEffect(() => {
         if (currentGameCard === null) {
@@ -42,7 +42,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
             setGameRating(currentGameCard.rating)
             setGameDescription(currentGameCard.description)
             setGameAgeLimit(currentGameCard.ageLimit)
-            setGamePlatform({})
+            setGamePlatform(currentGameCard.platform)
         }
     }, [currentGameCard])
 
@@ -65,6 +65,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
             gamePlatform,
         })
         console.log(response.data)
+        dispatch(getProductsArray(response.data))
         // Swal.fire('Game card has been created');
     }
 
@@ -105,9 +106,9 @@ const EditGameCardModal:React.FunctionComponent = () => {
         })
     }
 
-    const [pcChecked, setPcChecked] = useState('pc' in currentGameCard.platform)
-    const [playstationChecked, setPlaystationChecked] = useState('playstation' in currentGameCard.platform)
-    const [xboxChecked, setXboxChecked] = useState('xbox' in currentGameCard.platform)
+    const [pcChecked, setPcChecked] = useState(currentGameCard !== null ? 'pc' in currentGameCard.platform : false)
+    const [playstationChecked, setPlaystationChecked] = useState(currentGameCard !== null ? 'playstation' in currentGameCard.platform : false)
+    const [xboxChecked, setXboxChecked] = useState(currentGameCard !== null ? 'xbox' in currentGameCard.platform : false)
 
     const handleInputChange = (event) => {
         const target = event.target
@@ -124,7 +125,6 @@ const EditGameCardModal:React.FunctionComponent = () => {
                 setXboxChecked(!xboxChecked)
             }
         } else if (value) {
-
             if (value === target.value) {
                 setGamePlatform(Object.assign(gamePlatform, ({ [name]: value })))
                 if (target.value === 'pc') {
@@ -136,8 +136,6 @@ const EditGameCardModal:React.FunctionComponent = () => {
                 }
             }
         }
-        console.log(value);
-        console.log(target.value)
     }
 
     return (
