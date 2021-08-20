@@ -30,6 +30,7 @@ const PlaystationProductsPage: React.FunctionComponent = () => {
                 title = 'Playstation'
                 searchbar = { <SearchByPlatform searchAPI = {`http://localhost:3001/playstationgames/`} /> }
                 productPlatform = { playstationProducts }
+                platform = 'playstation'
             />
         </div>
     ) 

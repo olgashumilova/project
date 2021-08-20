@@ -30,6 +30,7 @@ const XboxProductsPage: React.FunctionComponent = () => {
                 title = 'Xbox One'
                 searchbar = { <SearchByPlatform searchAPI = {`http://localhost:3001/xboxgames/`}/> }
                 productPlatform = { xboxProducts }
+                platform = 'xbox'
             />
         </div>
     ) 
