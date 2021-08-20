@@ -93,16 +93,57 @@ const App: React.FunctionComponent = () => {
         <div className = 'header__title'>
           <h1>Game Store</h1>
         </div>
+        <div className = 'burger-menu'>
+          <Dropdown>
+            <Dropdown.Menu className = 'header__dropdown'>
+              <Link to = {ROUTES.HOME}>
+                <Dropdown.Item className = 'dropdown-link'>Home</Dropdown.Item>
+              </Link>
+              <Link to = {ROUTES.PC_PAGE}>
+                <Dropdown.Item className = 'dropdown-link'>PC</Dropdown.Item>
+              </Link>
+              <Link to = {ROUTES.PLAYSTATION_PAGE}>
+                <Dropdown.Item className = 'dropdown-link'>Playstation 5</Dropdown.Item>
+              </Link>
+              <Link to = {ROUTES.XBOX_PAGE}>
+                <Dropdown.Item className = 'dropdown-link'>XBox One</Dropdown.Item>
+              </Link>
+              {user.login === 'admin' || userName === 'admin' ? (
+                <Dropdown.Item className = 'dropdown-link'>
+                  <button className = 'dropdown-button' onClick = {() => setShowModal(!showModal)}>Create Card</button>
+                </Dropdown.Item>
+              ) : (
+                <div>
+                  <Link className = 'header__list-element' to = {ROUTES.CART}>
+                    <Dropdown.Item className = 'dropdown-link'>
+                      <button className = 'header__cart-icon'>
+                        <p className = 'header__cart-icon-amount'>{cart.length}</p>
+                      </button>
+                    </Dropdown.Item>
+                    
+                  </Link>
+                </div>
+              )}
+              <Link to = {ROUTES.SIGNIN}>
+                <Dropdown.Item className = 'dropdown-link'>Sign In</Dropdown.Item>
+              </Link>
+              <Link to = {ROUTES.SIGNUP}>
+                <Dropdown.Item className = 'dropdown-link'>Sign Up</Dropdown.Item>
+              </Link>
+              <Dropdown.Item className = 'dropdown-link'>
+                      <button className = 'dropdown-button' onClick = {() => logOut() }>Log Out</button>
+                    </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </div>
         <div className = 'header__nav'>
           <ul className = 'header__list'>
-            
             <Link className = ' header__list-element' to = {ROUTES.HOME}>
               <li className = 'header__link'>Home</li>
             </Link>
-            
               <li className = 'header__list-element'>
                   <Dropdown text = 'Products'>
-                      <Dropdown.Menu>  
+                      <Dropdown.Menu className = 'header__dropdown'>  
                         <Link to = {ROUTES.PC_PAGE}>
                           <Dropdown.Item className = 'dropdown-link'>PC</Dropdown.Item>
                         </Link>
@@ -125,15 +166,13 @@ const App: React.FunctionComponent = () => {
             </Link>
 
               {showButtons ? (
-                <div className = 'header__nav'>
                   <div className = 'header__list'>
-                    <Link className = 'header__list-element' to = {ROUTES.USER}>
+                    <Link className = 'header__user-list-element' to = {ROUTES.USER}>
                       <div className = 'header__user-icon'></div>
                       <p className = 'header__user-name'>Hello, {userName || user.login}</p>
                     </Link>
                 
                   {user.login === 'admin' || userName === 'admin' ? (
-                    <div className = 'header__nav'>
                       <div className = 'header__list'>
                         
                         <button className = 'header__create-card-button' onClick = {() => setShowModal(!showModal)}>Create Card</button>
@@ -142,9 +181,7 @@ const App: React.FunctionComponent = () => {
                           <button className = 'header__logout-icon' onClick = {() => logOut() }></button>
                         </Link>
                       </div>
-                    </div>
                   ) : (
-                    <div className = 'header__nav'>
                       <div className = 'header__list'>
                         <Link className = 'header__list-element' to = {ROUTES.CART}>
                           <button className = 'header__cart-icon'><p className = 'header__cart-icon-amount'>{cart.length}</p></button>
@@ -154,28 +191,24 @@ const App: React.FunctionComponent = () => {
                             <button className = 'header__logout-icon' onClick = {() => logOut() }></button>
                         </Link>
                       </div>
-                    </div>
                   )}
                     
-                  </div>
                 </div>
               ) : (
-                <div className = 'header__nav'>
-                  <div className = 'header__list'>
-                    <Link className = 'header__list-element' to = {ROUTES.SIGNIN}>
+                  <div className = 'header__signin-list'>
+                    <Link className = 'header__signin-list-element' to = {ROUTES.SIGNIN}>
                       <li className = 'header__link'>
                         Sign In
                       </li>
                     </Link>
-                    <Link className = 'header__list-element' to = {ROUTES.SIGNUP}>
+                    <Link className = 'header__signin-list-element' to = {ROUTES.SIGNUP}>
                       <li className = 'header__link'>
                         Sign Up
                       </li>
                     </Link>
                   </div>
-                </div>
+                // </div>
               )}
-            
           </ul>
         </div>
       </header>
