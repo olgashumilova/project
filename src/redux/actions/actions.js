@@ -22,6 +22,11 @@ export const isSignedIn = (payload) => ({
 })
 
 // Products actions
+export const getProductsArray = (payload) => ({
+    type: ACTION_TYPES.GET_PRODUCTS_ARRAY,
+    payload: payload,
+})
+
 export const getFilteredProducts = (payload) => ({
     type: ACTION_TYPES.GET_FILTERED_PRODUCTS,
     payload: [...payload],
