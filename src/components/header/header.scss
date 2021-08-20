@@ -119,6 +119,13 @@ h1 {
     color:rgba(0, 0, 0, 0.9);
 }
 
+.dropdown-button {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+}
+
 .header__create-card-button {
     display: flex;
     justify-content: center;
