@@ -15,12 +15,7 @@ import '@Components/searchBar/searchBar.scss'
 import GameCard from '@Components/gameCard/gameCard.tsx'
 import '@Components/gameCard/gameCard.scss'
 
-//Game Card Images
-import overwatch from '@Assets/gamesImages/overwatch.jpg'
-import minecraft from '@Assets/gamesImages/minecraft.jpg'
-import terraria from '@Assets/gamesImages/terraria.jpg'
-
-import { getTopGamesAPI } from '../../api/api.js'
+import { getTopGamesAPI, getRecentProductsAPI } from '../../api/api.js'
 
 const HomeComponent: React.FunctionComponent = () => {
 
@@ -35,10 +30,13 @@ const HomeComponent: React.FunctionComponent = () => {
     }
 
     const [topGames, setTopGames] = useState([])
+    const [recentProducts, setRecentProducts] = useState([])
+    
 
     useEffect(() => {
    
         fetchData()
+        getRecentProducts()
 
     }, [])
 
@@ -49,6 +47,15 @@ const HomeComponent: React.FunctionComponent = () => {
             console.log(error);
         })
     }
+
+    async function getRecentProducts () {
+        await getRecentProductsAPI.then((response) => {
+            setRecentProducts(response.data)
+        }).catch ((error) => {
+            console.log(error);
+        })
+    }
+    
 
     return (
         <main className = 'home'>
@@ -82,24 +89,18 @@ const HomeComponent: React.FunctionComponent = () => {
                <div>
                    <p className = 'home__title'>New games</p>
                    <div className = 'home__game-cards'>
-                        <GameCard 
-                            backgroundImage = {overwatch} 
-                            description = 'Overwatch is a colorful team-based action game starring a diverse cast of powerful heroes. Travel the world, build a team, and contest objectives in exhilarating 6v6 combat.'
-                            ageLimit = '12 +'
-                            price = 'Price: 20$'
-                        />
-                        <GameCard 
-                            backgroundImage = {minecraft} 
-                            description = 'Minecraft is a sandbox game. There is a virtual land where users can create their own worlds and experiences, using building blocks, resources discovered on the site and their own creativity.'
-                            ageLimit = '3 +'
-                            price = 'Price: 8$'
-                        />
-                        <GameCard 
-                            backgroundImage = {terraria} 
-                            description = 'Terraria is a 2D sandbox game with gameplay that revolves around exploration, building, crafting, combat, survival, and mining, playable in both single-player and multiplayer modes.'
-                            ageLimit = '6 +'
-                            price = 'Price: 15$'
-                        />
+                        {recentProducts.map((game, index) => {
+                            return (
+                                <div key = {index}>
+                                    <GameCard
+                                        backgroundImage = {game.image}
+                                        description = {game.description}
+                                        ageLimit = {`${game.ageLimit} +`}
+                                        price = {`Price: ${game.price}$`}
+                                    />
+                                </div>
+                            ) 
+                        })}
                     </div>
                     <div>
                         <p className = 'home__title'>Top rated games</p>

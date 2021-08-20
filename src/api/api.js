@@ -5,6 +5,7 @@ export const getTopGamesAPI = axios.get('http://localhost:3001/getTopGames')
 export const getArrayOfUsersAPI = axios.get('http://localhost:3001/getUsersArray')
 export const getProfileAPI = axios.get('http://localhost:3001/getProfile')
 export const getProductsAPI = axios.get('http://localhost:3001/getProducts')
+export const getRecentProductsAPI = axios.get('http://localhost:3001/getRecentProducts')
 
 // Post queries
 export const signUpUrlAPI = 'http://localhost:3001/signup'
