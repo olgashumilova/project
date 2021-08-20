@@ -64,9 +64,9 @@ const EditGameCardModal:React.FunctionComponent = () => {
             gameAgeLimit,
             gamePlatform,
         })
-        console.log(response.data)
+        // console.log(response.data)
         dispatch(getProductsArray(response.data))
-        // Swal.fire('Game card has been created');
+        Swal.fire('Game card has been created');
     }
 
     const editGame = async() => {
