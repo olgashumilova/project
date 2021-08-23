@@ -38,6 +38,12 @@ const reducer = (state = initialState, action) => {
           products: action.payload,
         }
       }
+      case ACTION_TYPES.ADD_GAME_TO_PRODUCTS: {
+        return {
+          ...state,
+          products: state.products.concat(action.payload)
+        }
+      }
       case ACTION_TYPES.GET_FILTERED_PRODUCTS: {
         return {
           ...state,
@@ -48,12 +54,6 @@ const reducer = (state = initialState, action) => {
         return {
           ...state,
           currentGameCard: action.payload,
-        }
-      }
-      case ACTION_TYPES.DELETE_CURRENT_GAME_CARD: {
-        return {
-          ...state,
-          currentGameCard: null,
         }
       }
       case ACTION_TYPES.ADD_ITEM: {
