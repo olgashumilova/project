@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types'
 import { getProductsAPI } from '@/api/api';
-import { getFilteredProducts, getProductsArray } from '@/redux/actions/actions'
+import { getFilteredProducts } from '@/redux/actions/actions'
 import { Dropdown } from 'semantic-ui-react'
 
 import 'semantic-ui-css/semantic.min.css'
@@ -24,11 +24,12 @@ const SearchProductsPage: React.FunctionComponent<{title, filterByPlatform, sear
         { label: "Descending", value: "descending"},
     ]
 
+    const [products, setProducts] = useState([])
+    
     const [type, setType] = useState('ascending')
-    // const [productsArray, setProductsArray] = useState([])
     const [isLoading, setIsLoading] = useState(false)
 
-    const products = useSelector(state => state.products)
+    const productsState = useSelector(state => state.products)
     
     const listGenres = ['Shooter', 'RPG', 'Sandbox', 'Action-adventure', 'Simulator']
     const listAgeLimit = [3, 6, 12, 16, 18]
@@ -40,8 +41,7 @@ const SearchProductsPage: React.FunctionComponent<{title, filterByPlatform, sear
     async function getProducts() {
         try {
             await getProductsAPI.then((response) => {
-                dispatch(getProductsArray(response.data))
-                // setProductsArray(response.data)
+                setProducts(productsState.length !== 0 ? productsState : response.data)
             })
         } catch (error) {
             console.log(error);         

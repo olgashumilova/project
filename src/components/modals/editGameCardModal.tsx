@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import { productAPI } from '@/api/api'
-import { getProductsArray } from '@/redux/actions/actions'
+import { addGameToProductsArray, getProductsArray } from '@/redux/actions/actions'
 
 const EditGameCardModal:React.FunctionComponent = () => {
 
@@ -64,8 +64,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
             gameAgeLimit,
             gamePlatform,
         })
-        // console.log(response.data)
-        dispatch(getProductsArray(response.data))
+        dispatch(addGameToProductsArray(response.data))
         Swal.fire('Game card has been created');
     }
 
@@ -80,9 +79,8 @@ const EditGameCardModal:React.FunctionComponent = () => {
             gameAgeLimit,
             gamePlatform,
         })
-        console.log(response.data);
-        // dispatch(deleteCurrentGameCard(currentGameCard))
-        // Swal.fire(response.data);
+        dispatch(getProductsArray(response.data))
+        Swal.fire('Game has been edited');
     }
 
     const deleteGame = async() => {
@@ -95,13 +93,14 @@ const EditGameCardModal:React.FunctionComponent = () => {
             confirmButtonText: 'Yes, delete it'
         }).then(async (result) => {
             if (result.isConfirmed) {
-                await axios.delete(`http://localhost:3001/product/${currentGameCard.id}`)
-                Swal.fire(
-                  'Deleted!',
-                  'Game card has been deleted.',
-                  'success'
-                )
-                // dispatch(deleteCurrentGameCard(currentGameCard))
+                await axios.delete(`http://localhost:3001/product/${currentGameCard.id}`).then((response) => {
+                    Swal.fire(
+                        'Deleted!',
+                        'Game card has been deleted.',
+                        'success'
+                    )
+                    dispatch(getProductsArray(response.data))
+                })
             }
         })
     }
