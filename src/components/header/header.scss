@@ -25,6 +25,10 @@ h1 {
     height: 100%;
     padding-left: 30%;
 
+    @media (min-width: 1024px) {
+        padding-left: 20%;
+    }
+
     @media (min-width: 280px) and (max-width: 1024px) {
         display: none;
     }
