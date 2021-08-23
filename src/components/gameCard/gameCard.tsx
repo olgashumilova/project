@@ -70,7 +70,6 @@ const GameCard: React.FunctionComponent <{backgroundImage: string, description: 
                     <p>{ageLimit}</p>
                     <p>{price}</p>
                     <button className = 'back__card-button' onClick = {() => {
-                        dispatchItem()
                         Swal.fire(`Added to cart`)
                     }}>Add to cart</button>
                     <button className = 'back__card-button edit-card-button' onClick = {() => showModalAndDispatch()}>Edit</button>
