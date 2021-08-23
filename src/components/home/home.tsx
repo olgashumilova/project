@@ -37,8 +37,6 @@ const HomeComponent: React.FunctionComponent = () => {
     const [recentProducts, setRecentProducts] = useState([])
 
     const products = useSelector(state => state.products)
-    console.log(products);
-    console.log(recentProducts);
 
     async function getProducts() {
         try {
