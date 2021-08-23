@@ -11,7 +11,7 @@ body {
     align-items: center;
     width: 40%;
     height: 500px;
-    margin: 10% 0 10% 30%;
+    margin: 200px 0 200px 30%;
     z-index: 9999;
     color: $white-color;
     background-color: rgba(0, 0, 0, 0.877);
@@ -65,7 +65,11 @@ body {
     flex-direction: row;
     justify-content: space-between;
     width: 80%;
+    height: 35px;
     margin: 2% 2% 2% 13%;
+    @media (max-width: 1105px) {
+        flex-wrap: wrap;
+    }
 }
 
 .modalwindow__button {
@@ -88,6 +92,7 @@ body {
 
 .modalwindow__input-field {
     width: 60%;
+    margin-left: 20px;
 }
 
 //_______________________________________________________________________________________________________
