@@ -43,6 +43,9 @@ import '@Components/products/products.scss'
 import '@Components/cart/cartPage.scss'
 import '@Components/aboutPage/aboutPage.scss'
 
+import { getProductsAPI } from '@/api/api'
+import { getProductsArray } from '@/redux/actions/actions'
+
 const App: React.FunctionComponent = () => {
 
   const dispatch = useDispatch()
@@ -84,7 +87,21 @@ const App: React.FunctionComponent = () => {
     } else {
         null
     }  
-}
+  }
+
+  async function getProducts() {
+    try {
+        await getProductsAPI.then((response) => {
+            dispatch(getProductsArray(response.data))
+        })
+    } catch (error) {
+        console.log(error);         
+    }   
+  }
+
+  useEffect(() => {
+    getProducts()
+  }, [])
 
   return (
     <Router>
