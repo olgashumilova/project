@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from "react-router-dom"
 import ROUTES from '@Components/routes.ts'
 
@@ -15,7 +16,8 @@ import '@Components/searchBar/searchBar.scss'
 import GameCard from '@Components/gameCard/gameCard.tsx'
 import '@Components/gameCard/gameCard.scss'
 
-import { getTopGamesAPI, getRecentProductsAPI } from '../../api/api.js'
+import { getTopGamesAPI, getRecentProductsAPI, getProductsAPI } from '@/api/api'
+import { getProductsArray } from '@/redux/actions/actions'
 
 const HomeComponent: React.FunctionComponent = () => {
 
@@ -29,16 +31,24 @@ const HomeComponent: React.FunctionComponent = () => {
         price: number,
     }
 
+    const dispatch = useDispatch()
+
     const [topGames, setTopGames] = useState([])
     const [recentProducts, setRecentProducts] = useState([])
-    
 
-    useEffect(() => {
-   
-        fetchData()
-        getRecentProducts()
+    const products = useSelector(state => state.products)
+    console.log(products);
+    console.log(recentProducts);
 
-    }, [])
+    async function getProducts() {
+        try {
+            await getProductsAPI.then((response) => {
+                dispatch(getProductsArray(response.data))
+            })
+        } catch (error) {
+            console.log(error);         
+        }   
+    }
 
     async function fetchData () {
         await getTopGamesAPI.then((response) => {
@@ -50,11 +60,20 @@ const HomeComponent: React.FunctionComponent = () => {
 
     async function getRecentProducts () {
         await getRecentProductsAPI.then((response) => {
-            setRecentProducts(response.data)
+            setRecentProducts(products.length !== 0 ? products.slice(Math.max(products.length - 3, 0)) : response.data)
         }).catch ((error) => {
             console.log(error);
         })
     }
+
+    useEffect(() => {
+        getProducts()
+        fetchData()
+    }, [])
+
+    useEffect(() => {
+        getRecentProducts()
+    }, [products])
     
 
     return (
