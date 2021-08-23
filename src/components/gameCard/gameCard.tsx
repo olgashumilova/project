@@ -94,4 +94,4 @@ const GameCard: React.FunctionComponent <{backgroundImage: string, description: 
     }
 }
 
-export default GameCard
+export default React.memo(GameCard)

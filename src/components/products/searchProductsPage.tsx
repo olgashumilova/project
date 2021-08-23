@@ -305,4 +305,4 @@ const SearchProductsPage: React.FunctionComponent<{title, filterByPlatform, sear
     )
 }
 
-export default SearchProductsPage
+export default React.memo(SearchProductsPage)

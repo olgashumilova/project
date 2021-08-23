@@ -100,4 +100,4 @@ const SearchByPlatform: React.FunctionComponent = (props) => {
   );
 }
 
-export default SearchByPlatform
+export default React.memo(SearchByPlatform)
