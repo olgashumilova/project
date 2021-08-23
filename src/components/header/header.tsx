@@ -115,45 +115,58 @@ const App: React.FunctionComponent = () => {
           <h1>Game Store</h1>
         </div>
         <div className = 'burger-menu'>
-          <Dropdown>
-            <Dropdown.Menu className = 'header__dropdown'>
+          <Dropdown className = 'burger-menu__wrap'>
+            <Dropdown.Menu className = 'burger-menu__dropdown'>
               <Link to = {ROUTES.HOME}>
                 <Dropdown.Item className = 'dropdown-link'>Home</Dropdown.Item>
               </Link>
-              <Link to = {ROUTES.PC_PAGE}>
+              <Link to = {showButtons ? ROUTES.PC_PAGE : ROUTES.SIGNIN}>
                 <Dropdown.Item className = 'dropdown-link'>PC</Dropdown.Item>
               </Link>
-              <Link to = {ROUTES.PLAYSTATION_PAGE}>
+              <Link to = {showButtons ? ROUTES.PLAYSTATION_PAGE : ROUTES.SIGNIN}>
                 <Dropdown.Item className = 'dropdown-link'>Playstation 5</Dropdown.Item>
               </Link>
-              <Link to = {ROUTES.XBOX_PAGE}>
+              <Link to = {showButtons ? ROUTES.XBOX_PAGE : ROUTES.SIGNIN}>
                 <Dropdown.Item className = 'dropdown-link'>XBox One</Dropdown.Item>
               </Link>
-              {user.login === 'admin' || userName === 'admin' ? (
-                <Dropdown.Item className = 'dropdown-link'>
-                  <button className = 'dropdown-button' onClick = {() => setShowModal(!showModal)}>Create Card</button>
-                </Dropdown.Item>
+              <Link to = {showButtons ? ROUTES.ABOUT : ROUTES.SIGNIN}>
+                <Dropdown.Item className = 'dropdown-link'>About</Dropdown.Item>
+              </Link>
+
+              {showButtons ? (
+                <div>
+                  <Link to = {ROUTES.USER}>
+                    <Dropdown.Item className = 'dropdown-link'>
+                      <p>Hello, {userName || user.login}</p>
+                    </Dropdown.Item>
+                  </Link>
+                  
+                  {user.login === 'admin' || userName === 'admin' ? (
+                    <Dropdown.Item className = 'dropdown-link'>
+                      <button className = 'dropdown-button' onClick = {() => setShowModal(!showModal)}>Create Card</button>
+                    </Dropdown.Item>
+                  ) : (
+                    <div>
+                      <Link to = {ROUTES.CART}>
+                        <Dropdown.Item className = 'dropdown-link'>Cart: {cart.length} item{cart.length > 1 || cart.length === 0 ? 's' : null}</Dropdown.Item>
+                      </Link>
+                    </div>
+                  )}
+                </div>
+                
               ) : (
                 <div>
-                  <Link className = 'header__list-element' to = {ROUTES.CART}>
-                    <Dropdown.Item className = 'dropdown-link'>
-                      <button className = 'header__cart-icon'>
-                        <p className = 'header__cart-icon-amount'>{cart.length}</p>
-                      </button>
-                    </Dropdown.Item>
-                    
+                  <Link to = {ROUTES.SIGNIN}>
+                    <Dropdown.Item className = 'dropdown-link'>Sign In</Dropdown.Item>
+                  </Link>
+                  <Link to = {ROUTES.SIGNUP}>
+                    <Dropdown.Item className = 'dropdown-link'>Sign Up</Dropdown.Item>
                   </Link>
                 </div>
               )}
-              <Link to = {ROUTES.SIGNIN}>
-                <Dropdown.Item className = 'dropdown-link'>Sign In</Dropdown.Item>
-              </Link>
-              <Link to = {ROUTES.SIGNUP}>
-                <Dropdown.Item className = 'dropdown-link'>Sign Up</Dropdown.Item>
-              </Link>
-              <Dropdown.Item className = 'dropdown-link'>
+              <Dropdown.Item>
                 <button className = 'dropdown-button' onClick = {() => logOut() }>Log Out</button>
-                </Dropdown.Item>
+              </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </div>
