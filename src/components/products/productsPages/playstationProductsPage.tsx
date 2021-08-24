@@ -13,7 +13,7 @@ const PlaystationProductsPage: React.FunctionComponent = () => {
     const [playstationProducts, setPlaystationProducts] = useState([])
     const [playstationProductsFromAPI, setPlaystationProductsFromAPI] = useState([])
 
-    async function filterProducts() {
+    async function filterProducts(): Promise<void> {
         try {
             const response = await getProductsAPI
             const productsArray = response.data

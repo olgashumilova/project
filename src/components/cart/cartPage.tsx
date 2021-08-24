@@ -3,13 +3,14 @@ import { useSelector, useDispatch } from 'react-redux'
 import Swal from 'sweetalert2'
 import axios from 'axios'
 import { sendOrderToServerAPI } from '@/api/api'
-import { removeItemFromCart } from '@/redux/actions/actions'
+import { removeItemFromCart } from '@/redux/actions/actions.ts'
 
 const CartPage: React.FunctionComponent = () => {
 
     const dispatch = useDispatch()
 
     const cart = useSelector(state => state.cart)
+    
     let totalPrice = 0
 
     const [itemCount, setItemCount] = useState(1);
@@ -51,17 +52,17 @@ const CartPage: React.FunctionComponent = () => {
                             <p className = 'game-border'>{today}</p>
                             <div className = 'game-border'>
                                 <div className = 'cart__change-quantity-btn'>
-                                    <button className = 'cart__change-quantity-btn' onClick = {() => {
+                                    <button className = 'cart__change-quantity-btn' onClick = {(): void => {
                                         game.amount <= 0 ? game.amount = 1 : setItemCount(--game.amount)
                                     }}> - </button>
                                     <p className = 'cart__current-item-amount'>{game.amount}</p>
-                                    <button className = 'cart__change-quantity-btn' onClick = {() => {
+                                    <button className = 'cart__change-quantity-btn' onClick = {(): void => {
                                         setItemCount(++game.amount)
                                     }}> + </button>
                                 </div>
                             </div>
                             <p className = 'game-border'>{game.price * game.amount}$</p>
-                            <div className = 'cart__game-button' onClick = {() => dispatch(removeItemFromCart(index))}>
+                            <div className = 'cart__game-button' onClick = {(): void => dispatch(removeItemFromCart(index))}>
                                 <button className = 'cart__game-button-close'></button>
                             </div> 
                         </div>
@@ -69,7 +70,7 @@ const CartPage: React.FunctionComponent = () => {
                 })}
                 <p className = 'cart__total'>Games cost: {totalPrice}$</p>
                 <button className = 'cart__purchase-button' onClick = {
-                    async () => {
+                    async (): Promise<void> => {
                         const response = await axios.post(sendOrderToServerAPI, {cart})
                         Swal.fire(response.data);
                 }}>Buy</button>

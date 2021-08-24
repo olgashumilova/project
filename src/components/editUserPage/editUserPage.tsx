@@ -8,7 +8,7 @@ import ROUTES from '@Components/routes.ts'
 import ChangePassword from '@Components/modals/changePassword.tsx'
 
 import { saveProfileUrlAPI } from '@/api/api'
-import { getUserProfile } from '@/redux/actions/actions'
+import { getUserProfile } from '@/redux/actions/actions.ts'
 
 const EditUserPage: React.FunctionComponent = () => {
 
@@ -25,7 +25,7 @@ const EditUserPage: React.FunctionComponent = () => {
         setDescription('')
     },[])
 
-    const changeProfile = async () => {
+    const changeProfile = async (): Promise<void> => {
         try {
             await axios.post(saveProfileUrlAPI, { newLogin, description, userImage }).then((response) => {
                 const userData = response.data
@@ -45,7 +45,7 @@ const EditUserPage: React.FunctionComponent = () => {
         }
     }
 
-    function modalRenderer() {
+    function modalRenderer(): JSX.Element {
         if (showModal) {
             return <ChangePassword />
         } else {
@@ -53,7 +53,7 @@ const EditUserPage: React.FunctionComponent = () => {
         }  
     }
 
-    const displayImage = () => {
+    const displayImage = (): JSX.Element => {
         if (userImage === null) {
             return <div className = 'userpage__image-inner'>No picture</div>
         } else {
@@ -77,7 +77,7 @@ const EditUserPage: React.FunctionComponent = () => {
                     <input 
                         type = 'file' 
                         className = 'userpage__input' 
-                        onChange = {(event) => setUserImage(URL.createObjectURL(event.target.files[0]))}>
+                        onChange = {(event): void => setUserImage(URL.createObjectURL(event.target.files[0]))}>
                     </input>     
                 </div>
 
@@ -86,21 +86,21 @@ const EditUserPage: React.FunctionComponent = () => {
                     <input 
                         type = 'text' 
                         className = 'userpage__input'
-                        onChange = {(event) => setNewLogin(event.target.value)}
+                        onChange = {(event): void => setNewLogin(event.target.value)}
                         value = {newLogin}>
                     </input>
 
                     <p>Add profile description</p>
                     <textarea 
                         className = 'userpage__input userpage__input-description'
-                        onChange = {(event) => setDescription(event.target.value)}
+                        onChange = {(event): void => setDescription(event.target.value)}
                         value = {description}>
                     </textarea>
                 </div>
 
                 <div className = 'userpage__buttons'>
-                    <button className = 'userpage__button' onClick = {() => {changeProfile(); emptyFields()}}>Save profile</button>
-                    <button className = 'userpage__button' onClick = {() => setShowModal(!showModal)}>Change password</button>
+                    <button className = 'userpage__button' onClick = {(): void => {changeProfile(); emptyFields()}}>Save profile</button>
+                    <button className = 'userpage__button' onClick = {(): void => setShowModal(!showModal)}>Change password</button>
                     <Link className = 'userpage__button' to = {ROUTES.USER}>
                         <button className = 'userpage__button-back'>Back</button>
                     </Link>

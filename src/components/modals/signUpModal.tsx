@@ -5,7 +5,7 @@ import Swal from 'sweetalert2'
 import { Link, Redirect } from 'react-router-dom'
 import ROUTES from '@Components/routes.ts'
 
-import { setUser } from '@/redux/actions/actions';
+import { setUser } from '@/redux/actions/actions.ts';
 import { signUpUrlAPI } from '@/api/api'
 
 const SignUpModal: React.FunctionComponent = () => {
@@ -17,13 +17,13 @@ const SignUpModal: React.FunctionComponent = () => {
     const [repeatPassword, setRepeatPassword] = useState('')
     const [redirect, setRedirect] = useState(false)
 
-    const emptyFields = () => {
+    const emptyFields = (): void => {
         setLogin('')
         setPassword('')
         setRepeatPassword('')
     }
     
-    async function signUp() {
+    async function signUp(): Promise<void> {
         try {
             await axios.post(signUpUrlAPI, {login, password}).then((response) => {
                 const userData = response.data                   
@@ -56,7 +56,7 @@ const SignUpModal: React.FunctionComponent = () => {
                     <input 
                         type="text" 
                         className = 'modalwindow__input-field'
-                        onChange = {(event) => setLogin(event.target.value)}
+                        onChange = {(event): void => setLogin(event.target.value)}
                         value = {login}
                     />
                 </div>
@@ -66,7 +66,7 @@ const SignUpModal: React.FunctionComponent = () => {
                     <input 
                         type = 'password'
                         className = 'modalwindow__input-field'
-                        onChange = {(event) => setPassword(event.target.value)}
+                        onChange = {(event): void => setPassword(event.target.value)}
                         value = {password}
                     />
                 </div>
@@ -76,7 +76,7 @@ const SignUpModal: React.FunctionComponent = () => {
                     <input 
                         type = 'password'
                         className = 'modalwindow__input-field'
-                        onChange = {(event) => setRepeatPassword(event.target.value)}
+                        onChange = {(event): void => setRepeatPassword(event.target.value)}
                         value = {repeatPassword}
                     />
                 </div>
@@ -85,7 +85,7 @@ const SignUpModal: React.FunctionComponent = () => {
             <button 
                 className = 'modalwindow__button'
                 type = 'submit'
-                onClick = {() => {
+                onClick = {(): void => {
                     if (password === repeatPassword) {
                         signUp()
                         emptyFields()     

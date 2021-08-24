@@ -27,7 +27,7 @@ const SearchBar: React.FunctionComponent = () => {
 
   }, [text])
 
-  async function fetchData() {
+  async function fetchData(): Promise<void> {
     await axios.get(`http://localhost:3001/search/${text}`).then((response) => {
       if (text.length != 0) {
         setArrOfMatches(response.data)
@@ -61,7 +61,7 @@ const SearchBar: React.FunctionComponent = () => {
       
       <input 
           className = 'searchbar__input'
-          onChange = {(event) => {
+          onChange = {(event): void => {
             setText(event.target.value)
             }
           }

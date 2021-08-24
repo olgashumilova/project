@@ -23,7 +23,7 @@ const ProductsPage: React.FunctionComponent<{title, filterByPlatform, searchbar,
     const platform = props.platform
     const filteredProducts = useSelector(state => state.filteredProducts)
 
-    function displayGames() {
+    function displayGames(): void {
         if (filteredProducts.length === 0) {
             return (
                 productPlatform.map((game) => {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Swal from 'sweetalert2'
 import { useDispatch } from 'react-redux'
-import { addItemToCart, getCurrentGameCard } from '@/redux/actions/actions'
+import { addItemToCart, getCurrentGameCard } from '@/redux/actions/actions.ts'
 import { getProductsAPI } from '@/api/api'
 import EditGameCardModal from '@Components/modals/editGameCardModal'
 
@@ -19,7 +19,7 @@ const GameCard: React.FunctionComponent <{backgroundImage: string, description: 
     const [showModal, setShowModal] = useState(false)
     const [productsArray, setProductsArray] = useState([])
 
-    async function getProducts() {
+    async function getProducts(): Promise<void> {
         try {
             await getProductsAPI.then((response) => {
                 setProductsArray(response.data)
@@ -33,7 +33,7 @@ const GameCard: React.FunctionComponent <{backgroundImage: string, description: 
         getProducts()
     }, [])
 
-    function dispatchItem() {
+    function dispatchItem(): void {
         for (let i = 0; i < productsArray.length; i++) {
             if (productsArray[i].description === description) {
                 dispatch(addItemToCart(productsArray[i]))
@@ -41,7 +41,7 @@ const GameCard: React.FunctionComponent <{backgroundImage: string, description: 
         }
     }
 
-    function showModalAndDispatch() {
+    function showModalAndDispatch(): void {
         for (let i = 0; i < productsArray.length; i++) {
             if (productsArray[i].description === description) {
                 dispatch(getCurrentGameCard(productsArray[i]))
@@ -50,7 +50,7 @@ const GameCard: React.FunctionComponent <{backgroundImage: string, description: 
         }
     }
 
-    function modalRenderer() {
+    function modalRenderer(): JSX.Element {
         if (showModal) {
             return <EditGameCardModal />
         } else {
@@ -69,10 +69,10 @@ const GameCard: React.FunctionComponent <{backgroundImage: string, description: 
                     <p className = 'back__description'>{description}</p>
                     <p>{ageLimit}</p>
                     <p>{price}</p>
-                    <button className = 'back__card-button' onClick = {() => {
+                    <button className = 'back__card-button' onClick = {(): void => {
                         Swal.fire(`Added to cart`)
                     }}>Add to cart</button>
-                    <button className = 'back__card-button edit-card-button' onClick = {() => showModalAndDispatch()}>Edit</button>
+                    <button className = 'back__card-button edit-card-button' onClick = {(): void => showModalAndDispatch()}>Edit</button>
                 </div>
                 </div>
             </div>
@@ -85,7 +85,7 @@ const GameCard: React.FunctionComponent <{backgroundImage: string, description: 
                     <p className = 'back__description'>{description}</p>
                     <p>{ageLimit}</p>
                     <p>{price}</p>
-                    <button className = 'back__card-button' onClick = {() => {
+                    <button className = 'back__card-button' onClick = {(): void => {
                         dispatchItem()
                         Swal.fire(`Added to cart`)
                     }}>Add to cart</button></div>

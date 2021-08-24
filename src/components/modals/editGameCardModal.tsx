@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import { productAPI } from '@/api/api'
-import { addGameToProductsArray, getProductsArray } from '@/redux/actions/actions'
+import { addGameToProductsArray, getProductsArray } from '@/redux/actions/actions.ts'
 
 const EditGameCardModal:React.FunctionComponent = () => {
 
@@ -46,7 +46,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
         }
     }, [currentGameCard])
 
-    const displayImage = () => {
+    const displayImage = (): void => {
         if (!gameImage) {
             return <div className = 'userpage__image-inner'>No picture</div>
         } else {
@@ -54,7 +54,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
         }
     }
 
-    const addGame = async() => {
+    const addGame = async(): Promise<void> => {
         const response = await axios.post(productAPI, {
             gameName,
             gameGenre,
@@ -68,7 +68,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
         Swal.fire('Game card has been created');
     }
 
-    const editGame = async() => {
+    const editGame = async(): Promise<void> => {
         const response = await axios.put(productAPI, {
             gameId,
             gameName,
@@ -83,7 +83,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
         Swal.fire('Game has been edited');
     }
 
-    const deleteGame = async() => {
+    const deleteGame = async(): Promise<void> => {
         Swal.fire({
             title: `Are you sure  you want to delete the product ${gameName}?`,
             icon: 'warning',
@@ -109,7 +109,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
     const [playstationChecked, setPlaystationChecked] = useState(currentGameCard !== null ? 'playstation' in currentGameCard.platform : false)
     const [xboxChecked, setXboxChecked] = useState(currentGameCard !== null ? 'xbox' in currentGameCard.platform : false)
 
-    const handleInputChange = (event) => {
+    const handleInputChange = (event): void => {
         const target = event.target
         const value = target.checked ? target.value : null
         const name = target.name
@@ -143,7 +143,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
             <div className = {showModal === true ? 'edit-modalwindow' : 'edit-modalwindow_hidden'}>
                 <div className = 'edit-modalwindow__header'>
                     <p>Edit Card</p>
-                    <button className = 'modalwindow__close-button' onClick = {() => setShowModal(!showModal)}></button>
+                    <button className = 'modalwindow__close-button' onClick = {(): void => setShowModal(!showModal)}></button>
                 </div>
                 <div className = 'modalwindow__main-headers'>
                     <p>Card Image</p>
@@ -161,7 +161,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
                             <input 
                                 type = 'text'
                                 className = 'modalwindow__input-field'
-                                onChange = {(event) => setGameName(event.target.value)}
+                                onChange = {(event): void => setGameName(event.target.value)}
                                 value = {gameName}
                             />
                         </div>
@@ -170,7 +170,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
                             <input 
                                 type = 'text'
                                 className = 'modalwindow__input-field'
-                                onChange = {(event) => setGameGenre(event.target.value)}
+                                onChange = {(event): void => setGameGenre(event.target.value)}
                                 value = {gameGenre}
                             />
                         </div>
@@ -179,7 +179,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
                             <input 
                                 type = 'number'
                                 className = 'modalwindow__input-field'
-                                onChange = {(event) => setGamePrice(event.target.value)}
+                                onChange = {(event): void => setGamePrice(event.target.value)}
                                 value = {gamePrice}
                             />
                         </div>
@@ -188,7 +188,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
                             <input 
                                 type = 'text'
                                 className = 'modalwindow__input-field'
-                                onChange = {(event) => setGameImage(event.target.value)}
+                                onChange = {(event): void => setGameImage(event.target.value)}
                                 value = {gameImage}
                             />
                         </div>
@@ -197,7 +197,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
                             <input 
                                 type = 'number' min = '0' max = '5'
                                 className = 'modalwindow__input-field'
-                                onChange = {(event) => setGameRating(event.target.value)}
+                                onChange = {(event): void => setGameRating(event.target.value)}
                                 value = {gameRating}
                             />
                         </div>
@@ -205,7 +205,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
                             <p className = 'modalwindow__fieldname'>Description</p>
                             <input 
                                 className = 'modalwindow__input-field'
-                                onChange = {(event) => setGameDescription(event.target.value)}
+                                onChange = {(event): void => setGameDescription(event.target.value)}
                                 value = {gameDescription}
                             />
                         </div>
@@ -214,7 +214,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
                             <input
                                 type = 'number' min = '3' max = '18'
                                 className = 'modalwindow__input-field'
-                                onChange = {(event) => setGameAgeLimit(event.target.value)}
+                                onChange = {(event): void => setGameAgeLimit(event.target.value)}
                                 value = {gameAgeLimit}
                             />
                         </div>
@@ -262,14 +262,14 @@ const EditGameCardModal:React.FunctionComponent = () => {
                     <button 
                         className = 'edit-modalwindow__button'
                         type = 'submit'
-                        onClick = {() => {
+                        onClick = {(): void => {
                             currentGameCard === null ? addGame() : editGame()
                             setShowModal(!showModal)
                         }}>Submit
                     </button>
                     <button 
                         className = 'edit-modalwindow__button'
-                        onClick = {() => { 
+                        onClick = {(): void => { 
                             setShowModal(!showModal)
                             deleteGame() 
                         }}>Delete card

@@ -17,7 +17,7 @@ import GameCard from '@Components/gameCard/gameCard.tsx'
 import '@Components/gameCard/gameCard.scss'
 
 import { getTopGamesAPI, getRecentProductsAPI, getProductsAPI } from '@/api/api'
-import { getProductsArray } from '@/redux/actions/actions'
+import { getProductsArray } from '@/redux/actions/actions.ts'
 
 const HomeComponent: React.FunctionComponent = () => {
 
@@ -38,7 +38,7 @@ const HomeComponent: React.FunctionComponent = () => {
 
     const products = useSelector(state => state.products)
 
-    async function getProducts() {
+    async function getProducts(): Promise<void> {
         try {
             await getProductsAPI.then((response) => {
                 dispatch(getProductsArray(response.data))
@@ -48,7 +48,7 @@ const HomeComponent: React.FunctionComponent = () => {
         }   
     }
 
-    async function fetchData () {
+    async function fetchData (): Promise<void> {
         await getTopGamesAPI.then((response) => {
             setTopGames(response.data)
         }).catch ((error) => {
@@ -56,7 +56,7 @@ const HomeComponent: React.FunctionComponent = () => {
         })
     }
 
-    async function getRecentProducts () {
+    async function getRecentProducts (): Promise<void> {
         await getRecentProductsAPI.then((response) => {
             setRecentProducts(products.length !== 0 ? products.slice(Math.max(products.length - 3, 0)) : response.data)
         }).catch ((error) => {

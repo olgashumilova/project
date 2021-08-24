@@ -1,3 +1,5 @@
+import React  from 'react'
+
 // Logo
 import ubisoftLogo from '@Assets/gameCompaniesLogos/ubisoftLogo.png'
 import rockstarGamesLogo from '@Assets/gameCompaniesLogos/rockstarGamesLogo.png'

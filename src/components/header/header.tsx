@@ -48,7 +48,7 @@ import '@Components/aboutPage/aboutPage.scss'
 import { getProductsAPI } from '@/api/api'
 
 // Redux actions
-import { getProductsArray } from '@/redux/actions/actions'
+import { getProductsArray } from '@/redux/actions/actions.ts'
 
 const App: React.FunctionComponent = () => {
 
@@ -70,13 +70,13 @@ const App: React.FunctionComponent = () => {
     }
   }, [user, userName])
 
-  const logOut = () => {
+  const logOut = (): void => {
     localStorage.clear()
     setShowButtons(false)
     Swal.fire('You\'ve signed out!')
   }
 
-  function modalRenderer() {
+  function modalRenderer(): JSX.Element {
     if (showModal) {
       return <EditGameCardModal />
     } else {
@@ -84,7 +84,7 @@ const App: React.FunctionComponent = () => {
     }  
   }
 
-  async function getProducts() {
+  async function getProducts(): Promise<void> {
     try {
       await getProductsAPI.then((response) => {
           dispatch(getProductsArray(response.data))
@@ -134,7 +134,7 @@ const App: React.FunctionComponent = () => {
                   
                   {user.login === 'admin' || userName === 'admin' ? (
                     <Dropdown.Item className = 'dropdown-link'>
-                      <button className = 'dropdown-button' onClick = {() => setShowModal(!showModal)}>Create Card</button>
+                      <button className = 'dropdown-button' onClick = {(): void => setShowModal(!showModal)}>Create Card</button>
                     </Dropdown.Item>
                   ) : (
                     <div>
@@ -156,7 +156,7 @@ const App: React.FunctionComponent = () => {
                 </div>
               )}
               <Dropdown.Item>
-                <button className = 'dropdown-button' onClick = {() => logOut() }>Log Out</button>
+                <button className = 'dropdown-button' onClick = {(): void => logOut() }>Log Out</button>
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
@@ -198,10 +198,10 @@ const App: React.FunctionComponent = () => {
                   {user.login === 'admin' || userName === 'admin' ? (
                     <div className = 'header__list'>
                       
-                      <button className = 'header__create-card-button' onClick = {() => setShowModal(!showModal)}>Create Card</button>
+                      <button className = 'header__create-card-button' onClick = {(): void => setShowModal(!showModal)}>Create Card</button>
                       
                       <Link className = 'header__list-element' to = {ROUTES.HOME}>
-                        <button className = 'header__logout-icon' onClick = {() => logOut() }></button>
+                        <button className = 'header__logout-icon' onClick = {(): void => logOut() }></button>
                       </Link>
                     </div>
                   ) : (
@@ -211,7 +211,7 @@ const App: React.FunctionComponent = () => {
                       </Link>
                   
                       <Link className = 'header__list-element' to = {ROUTES.HOME}>
-                          <button className = 'header__logout-icon' onClick = {() => logOut() }></button>
+                          <button className = 'header__logout-icon' onClick = {(): void => logOut() }></button>
                       </Link>
                     </div>
                   )}

@@ -16,7 +16,7 @@ const ChangePassword:React.FunctionComponent = () => {
         setRepeatPassword('')
     },[])
 
-    const changePassword = async () => {
+    const changePassword = async (): Promise<void> => {
         try {
             await axios.post(changePasswordUrlAPI, { password }).then((response) => {
                 Swal.fire(response.data)               
@@ -26,7 +26,7 @@ const ChangePassword:React.FunctionComponent = () => {
         }
     }
 
-    const comparePasswords = () => {
+    const comparePasswords = (): void => {
         if (password === repeatPassword) {
             changePassword()
             emptyFields()     
@@ -42,7 +42,7 @@ const ChangePassword:React.FunctionComponent = () => {
             <div className = {showModal === true ? 'modalwindow' : 'modalwindow_hidden'}>
                 <div className = 'modalwindow__header'>
                     <p >Change password</p>
-                    <button className = 'modalwindow__close-button' onClick = {() => setShowModal(!showModal)}></button>
+                    <button className = 'modalwindow__close-button' onClick = {(): void => setShowModal(!showModal)}></button>
                 </div>
                 <div className = 'modalwindow__form'>
 
@@ -51,7 +51,7 @@ const ChangePassword:React.FunctionComponent = () => {
                         <input 
                             type = 'password'
                             className = 'modalwindow__input-field'
-                            onChange = {(event) => setPassword(event.target.value)}
+                            onChange = {(event): void => setPassword(event.target.value)}
                             value = {password}
                         />
                     </div>
@@ -60,7 +60,7 @@ const ChangePassword:React.FunctionComponent = () => {
                         <input 
                             type = 'password'
                             className = 'modalwindow__input-field'
-                            onChange = {(event) => setRepeatPassword(event.target.value)}
+                            onChange = {(event): void => setRepeatPassword(event.target.value)}
                             value = {repeatPassword}
                         />
                     </div>

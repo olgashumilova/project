@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types'
 import { getProductsAPI } from '@/api/api';
-import { getFilteredProducts } from '@/redux/actions/actions'
+import { getFilteredProducts } from '@/redux/actions/actions.ts'
 import { Dropdown } from 'semantic-ui-react'
 
 import 'semantic-ui-css/semantic.min.css'
@@ -34,11 +34,11 @@ const SearchProductsPage: React.FunctionComponent<{title, filterByPlatform, sear
     const listGenres = ['Shooter', 'RPG', 'Sandbox', 'Action-adventure', 'Simulator']
     const listAgeLimit = [3, 6, 12, 16, 18]
 
-    const changeOptionType = (e) => {
+    const changeOptionType = (e): void => {
         setType(e.target.value)
     }
 
-    async function getProducts() {
+    async function getProducts(): Promise<void> {
         try {
             await getProductsAPI.then((response) => {
                 setProducts(productsState.length !== 0 ? productsState : response.data)
@@ -54,7 +54,7 @@ const SearchProductsPage: React.FunctionComponent<{title, filterByPlatform, sear
 
     // Filters____________________________________________________________________________________________
 
-    async function filterByGenre(value) {
+    async function filterByGenre(value): Promise<void> {
         setIsLoading(true)
         await setTimeout(() => {
             if (value === 'All genres') {
@@ -66,7 +66,7 @@ const SearchProductsPage: React.FunctionComponent<{title, filterByPlatform, sear
         }, 500)
     }
 
-    async function filterByAge(value) {
+    async function filterByAge(value): Promise<void> {
         setIsLoading(true)
         await setTimeout(() => {
             if (value === 'All ages') {
@@ -82,7 +82,7 @@ const SearchProductsPage: React.FunctionComponent<{title, filterByPlatform, sear
 
     // Sort by name ascending
 
-    async function sortByNameAsc() {
+    async function sortByNameAsc(): Promise<void> {
         setIsLoading(true)
         await setTimeout(() => {
             const result = products.sort((a, b) => {
@@ -100,7 +100,7 @@ const SearchProductsPage: React.FunctionComponent<{title, filterByPlatform, sear
 
     // Sort by name descending
 
-    async function sortByNameDesc() {
+    async function sortByNameDesc(): Promise<void> {
         setIsLoading(true)
         await setTimeout(() => {
             const result = products.sort((a, b) => {
@@ -119,7 +119,7 @@ const SearchProductsPage: React.FunctionComponent<{title, filterByPlatform, sear
 
     // Sort by rating ascending
 
-    async function sortByRatingAsc() {
+    async function sortByRatingAsc(): Promise<void> {
         setIsLoading(true)
         await setTimeout(() => {
             const result = products.sort((a, b) => {
@@ -137,7 +137,7 @@ const SearchProductsPage: React.FunctionComponent<{title, filterByPlatform, sear
 
     // Sort by rating descending
 
-    async function sortByRatingDesc() {
+    async function sortByRatingDesc(): Promise<void> {
         setIsLoading(true)
         await setTimeout(() => {
             const result = products.sort((a, b) => {
@@ -155,7 +155,7 @@ const SearchProductsPage: React.FunctionComponent<{title, filterByPlatform, sear
 
     // Sort by price ascending
 
-    async function sortByPriceAsc() {
+    async function sortByPriceAsc(): Promise<void> {
         setIsLoading(true)
         await setTimeout(() => {
             const result = products.sort((a, b) => {
@@ -173,7 +173,7 @@ const SearchProductsPage: React.FunctionComponent<{title, filterByPlatform, sear
 
     // Sort by price descending
 
-    async function sortByPriceDesc() {
+    async function sortByPriceDesc(): Promise<void> {
         setIsLoading(true)
         await setTimeout(() => {
             const result = products.sort((a, b) => {
@@ -191,7 +191,7 @@ const SearchProductsPage: React.FunctionComponent<{title, filterByPlatform, sear
 
     // Sort by age ascending
 
-    async function sortByAgeAsc() {
+    async function sortByAgeAsc(): Promise<void> {
         setIsLoading(true)
         await setTimeout(() => {
             const result = products.sort((a, b) => {
@@ -209,7 +209,7 @@ const SearchProductsPage: React.FunctionComponent<{title, filterByPlatform, sear
 
     // Sort by age descending
 
-    async function sortByAgeDesc() {
+    async function sortByAgeDesc(): Promise<void> {
         setIsLoading(true)
         await setTimeout(() => {
             const result = products.sort((a, b) => {
@@ -236,10 +236,10 @@ const SearchProductsPage: React.FunctionComponent<{title, filterByPlatform, sear
                     <p>Criteria</p>
                     <Dropdown text = 'Select'>
                         <Dropdown.Menu className = 'products-page__select'>
-                            <Dropdown.Item text = 'Name' onClick = {() => type === 'ascending' ? sortByNameAsc() : sortByNameDesc()}/>
-                            <Dropdown.Item text = 'Rating' onClick = {() => type === 'ascending' ? sortByRatingAsc() : sortByRatingDesc()}/>
-                            <Dropdown.Item text = 'Price' onClick = {() => type === 'ascending' ? sortByPriceAsc() : sortByPriceDesc()}/>
-                            <Dropdown.Item text = 'Age Limit' onClick = {() => type === 'ascending' ? sortByAgeAsc() : sortByAgeDesc()}/>
+                            <Dropdown.Item text = 'Name' onClick = {(): Promise<void> => type === 'ascending' ? sortByNameAsc() : sortByNameDesc()}/>
+                            <Dropdown.Item text = 'Rating' onClick = {(): Promise<void> => type === 'ascending' ? sortByRatingAsc() : sortByRatingDesc()}/>
+                            <Dropdown.Item text = 'Price' onClick = {(): Promise<void> => type === 'ascending' ? sortByPriceAsc() : sortByPriceDesc()}/>
+                            <Dropdown.Item text = 'Age Limit' onClick = {(): Promise<void> => type === 'ascending' ? sortByAgeAsc() : sortByAgeDesc()}/>
                         </Dropdown.Menu>
                     </Dropdown>
                 </div>
@@ -257,13 +257,13 @@ const SearchProductsPage: React.FunctionComponent<{title, filterByPlatform, sear
                     <p className = 'products-page__title'>Genres</p>
                     <ul className = 'products-page__selection-list'>
                         <li>
-                            <input name = 'genreFilter' type = 'radio' onChange = {() => filterByGenre('All genres')}></input>
+                            <input name = 'genreFilter' type = 'radio' onChange = {(): void => filterByGenre('All genres')}></input>
                             <span className = 'products-page__selectors'>All genres</span>
                         </li>
 
                         {listGenres.map((genre, index) => (
                             <li key = {index}>
-                                <input name = 'genreFilter' type = 'radio' value = {genre} onChange = {(event) => filterByGenre(event.target.value)}></input>
+                                <input name = 'genreFilter' type = 'radio' value = {genre} onChange = {(event): void => filterByGenre(event.target.value)}></input>
                                 <span className = 'products-page__selectors'>{genre}</span>
                             </li>
                         ))}
@@ -274,13 +274,13 @@ const SearchProductsPage: React.FunctionComponent<{title, filterByPlatform, sear
                     <p className = 'products-page__title'>Age</p>
                     <ul className = 'products-page__selection-list'>
                         <li>
-                            <input name = 'ageFilter' type = 'radio' onChange = {() => filterByAge('All ages')}></input>
+                            <input name = 'ageFilter' type = 'radio' onChange = {(): void => filterByAge('All ages')}></input>
                             <span className = 'products-page__selectors'>All ages</span>
                         </li>
 
                         {listAgeLimit.map((age, index) => (
                             <li key = {index}>
-                                <input name = 'ageFilter' type = 'radio' value = {age} onChange = {(event) => filterByAge(event.target.value)}></input>
+                                <input name = 'ageFilter' type = 'radio' value = {age} onChange = {(event): void => filterByAge(event.target.value)}></input>
                                 <span className = 'products-page__selectors'>{age} +</span>
                             </li>
                         ))}

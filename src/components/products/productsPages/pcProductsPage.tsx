@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import SearchByPlatform from '@Components/products/searchByPlatforms/searchByPlatform.tsx'
 import ProductsPage from '@Components/products/productsPage.tsx'
 import { getProductsAPI } from '@/api/api'
@@ -13,7 +13,7 @@ const PcProductsPage: React.FunctionComponent = () => {
     const [pcProducts, setPcProducts] = useState([])
     const [pcProductsFromAPI, setPcProductsFromAPI] = useState([])
 
-    async function filterProducts() {
+    async function filterProducts(): Promise<void> {
         try {
             const response = await getProductsAPI
             const productsArray = response.data

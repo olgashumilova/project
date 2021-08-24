@@ -33,7 +33,7 @@ const SearchByPlatform: React.FunctionComponent = (props) => {
 
   }, [text])
 
-  async function fetchData() {
+  async function fetchData(): Promise<void> {
     await axios.get(`${props.searchAPI}${text}`).then((response) => {
       if (text.length != 0) {
         setArrOfMatches(response.data)
@@ -67,7 +67,7 @@ const SearchByPlatform: React.FunctionComponent = (props) => {
       
       <input 
           className = 'searchbar__input'
-          onChange = {(event) => {
+          onChange = {(event): void => {
             setText(event.target.value)
             }
           }

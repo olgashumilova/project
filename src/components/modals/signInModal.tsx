@@ -6,7 +6,7 @@ import { Redirect } from 'react-router'
 import { Link } from 'react-router-dom'
 import ROUTES from '@Components/routes.ts'
 
-import { isSignedIn, getUserProfile } from '@/redux/actions/actions'
+import { isSignedIn, getUserProfile } from '@/redux/actions/actions.ts'
 import { signInUrlAPI } from '@/api/api'
 
 const SignInModal: React.FunctionComponent = () => {
@@ -17,12 +17,12 @@ const SignInModal: React.FunctionComponent = () => {
     const [password, setPassword] = useState('')
     const [redirect, setRedirect] = useState(false)
 
-    const emptyFields = () => {
+    const emptyFields = (): void => {
         setLogin('')
         setPassword('')
     }
 
-    async function signIn() {
+    async function signIn(): Promise<void> {
         try {
             await axios.post(signInUrlAPI, {login, password}).then((response) => {
                 const userData = response.data
@@ -58,7 +58,7 @@ const SignInModal: React.FunctionComponent = () => {
                         <input 
                             type="text" 
                             className = 'modalwindow__input-field'
-                            onChange = {(event) => setLogin(event.target.value)}
+                            onChange = {(event): void => setLogin(event.target.value)}
                             value = {login}
                         />
                     </div>
@@ -68,7 +68,7 @@ const SignInModal: React.FunctionComponent = () => {
                         <input 
                             type = 'password'
                             className = 'modalwindow__input-field'
-                            onChange = {(event) => setPassword(event.target.value)}
+                            onChange = {(event): void => setPassword(event.target.value)}
                             value = {password}
                         />
                     </div>
@@ -76,7 +76,7 @@ const SignInModal: React.FunctionComponent = () => {
                 <button 
                     className = 'modalwindow__button'
                     type = 'submit'
-                    onClick = {() => {
+                    onClick = {(): void => {
                         signIn()
                         emptyFields()
                     }}>
