@@ -47,14 +47,14 @@ const SignInModal: React.FunctionComponent = () => {
         <div>
             <div className = 'modalwindow'>
                 <div className = 'modalwindow__header'>
-                    <p>Authorization</p>
+                    <p className = 'modalwindow__fieldname'>Authorization</p>
                     <Link to = {ROUTES.HOME}>
-                        <button className = 'modalwindow__close-button'>x</button>
+                        <button className = 'modalwindow__close-button'></button>
                     </Link>
                 </div>
                 <div className = 'modalwindow__form'>
                     <div className = 'modalwindow__input'>
-                        <p>Login</p>
+                        <p className = 'modalwindow__fieldname'>Login</p>
                         <input 
                             type="text" 
                             className = 'modalwindow__input-field'
@@ -64,7 +64,7 @@ const SignInModal: React.FunctionComponent = () => {
                     </div>
     
                     <div className = 'modalwindow__input'>
-                        <p>Password</p>
+                        <p className = 'modalwindow__fieldname'>Password</p>
                         <input 
                             type = 'password'
                             className = 'modalwindow__input-field'

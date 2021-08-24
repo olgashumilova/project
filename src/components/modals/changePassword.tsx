@@ -41,13 +41,13 @@ const ChangePassword:React.FunctionComponent = () => {
         <div className = {showModal === true ? 'modal-wrapper' : 'modal-wrapper_hidden'}>
             <div className = {showModal === true ? 'modalwindow' : 'modalwindow_hidden'}>
                 <div className = 'modalwindow__header'>
-                    <p>Change password</p>
-                    <button className = 'modalwindow__close-button' onClick = {() => setShowModal(!showModal)}>x</button>
+                    <p >Change password</p>
+                    <button className = 'modalwindow__close-button' onClick = {() => setShowModal(!showModal)}></button>
                 </div>
                 <div className = 'modalwindow__form'>
 
                     <div className = 'modalwindow__input'>
-                        <p>Password</p>
+                        <p className = 'modalwindow__fieldname'>Password</p>
                         <input 
                             type = 'password'
                             className = 'modalwindow__input-field'
@@ -56,7 +56,7 @@ const ChangePassword:React.FunctionComponent = () => {
                         />
                     </div>
                     <div className = 'modalwindow__input'>
-                        <p>Repeat password</p>
+                        <p className = 'modalwindow__fieldname'>Repeat password</p>
                         <input 
                             type = 'password'
                             className = 'modalwindow__input-field'

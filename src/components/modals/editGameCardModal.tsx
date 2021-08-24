@@ -143,7 +143,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
             <div className = {showModal === true ? 'edit-modalwindow' : 'edit-modalwindow_hidden'}>
                 <div className = 'edit-modalwindow__header'>
                     <p>Edit Card</p>
-                    <button className = 'modalwindow__close-button' onClick = {() => setShowModal(!showModal)}>x</button>
+                    <button className = 'modalwindow__close-button' onClick = {() => setShowModal(!showModal)}></button>
                 </div>
                 <div className = 'modalwindow__main-headers'>
                     <p>Card Image</p>
@@ -157,7 +157,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
 
                     <div className = 'edit-modalwindow__form'>
                         <div className = 'modalwindow__input'>
-                            <p>Name</p>
+                            <p className = 'modalwindow__fieldname'>Name</p>
                             <input 
                                 type = 'text'
                                 className = 'modalwindow__input-field'
@@ -166,7 +166,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
                             />
                         </div>
                         <div className = 'modalwindow__input'>
-                            <p>Category</p>
+                            <p className = 'modalwindow__fieldname'>Category</p>
                             <input 
                                 type = 'text'
                                 className = 'modalwindow__input-field'
@@ -175,7 +175,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
                             />
                         </div>
                         <div className = 'modalwindow__input'>
-                            <p>Price</p>
+                            <p className = 'modalwindow__fieldname'>Price</p>
                             <input 
                                 type = 'number'
                                 className = 'modalwindow__input-field'
@@ -184,7 +184,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
                             />
                         </div>
                         <div className = 'modalwindow__input'>
-                            <p>Image</p>
+                            <p className = 'modalwindow__fieldname'>Image</p>
                             <input 
                                 type = 'text'
                                 className = 'modalwindow__input-field'
@@ -193,7 +193,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
                             />
                         </div>
                         <div className = 'modalwindow__input'>
-                            <p>Rating</p>
+                            <p className = 'modalwindow__fieldname'>Rating</p>
                             <input 
                                 type = 'number' min = '0' max = '5'
                                 className = 'modalwindow__input-field'
@@ -202,15 +202,15 @@ const EditGameCardModal:React.FunctionComponent = () => {
                             />
                         </div>
                         <div className = 'modalwindow__input'>
-                            <p>Description</p>
-                            <textarea 
-                                className = 'modalwindow__desc-input-field'
+                            <p className = 'modalwindow__fieldname'>Description</p>
+                            <input 
+                                className = 'modalwindow__input-field'
                                 onChange = {(event) => setGameDescription(event.target.value)}
                                 value = {gameDescription}
                             />
                         </div>
                         <div className = 'modalwindow__input'>
-                            <p>Age</p>
+                            <p className = 'modalwindow__fieldname'>Age</p>
                             <input
                                 type = 'number' min = '3' max = '18'
                                 className = 'modalwindow__input-field'
@@ -220,32 +220,39 @@ const EditGameCardModal:React.FunctionComponent = () => {
                         </div>
 
                             <div className = 'modalwindow__checkbox-input'>
-                                <input 
-                                    type = 'checkbox' 
-                                    name = 'pc'
-                                    checked = {pcChecked}
-                                    onChange = {handleInputChange}
-                                    value = {'pc'}
-                                />
-                                <p>PC</p>
-
-                                <input 
-                                    type = 'checkbox' 
-                                    name = 'playstation'
-                                    checked = {playstationChecked}
-                                    onChange = {handleInputChange}
-                                    value = {'playstation'}
-                                />
-                                <p>Playstation</p>
-
-                                <input 
-                                    type = 'checkbox' 
-                                    name = 'xbox'
-                                    checked = {xboxChecked}
-                                    onChange = {handleInputChange}
-                                    value = {'xbox'}
-                                />
-                                <p>Xbox</p>
+                                <div className = 'modalwindow__checkbox-container'>
+                                    <input 
+                                        type = 'checkbox' 
+                                        name = 'pc'
+                                        checked = {pcChecked}
+                                        onChange = {handleInputChange}
+                                        value = {'pc'}
+                                    />
+                                    <p>PC</p>
+                                </div>
+                                
+                                <div className = 'modalwindow__checkbox-container'>
+                                    <input 
+                                        type = 'checkbox' 
+                                        name = 'playstation'
+                                        checked = {playstationChecked}
+                                        onChange = {handleInputChange}
+                                        value = {'playstation'}
+                                    />
+                                    <p>Playstation</p>
+                                </div>
+                                
+                                <div className = 'modalwindow__checkbox-container'>
+                                    <input 
+                                        type = 'checkbox' 
+                                        name = 'xbox'
+                                        checked = {xboxChecked}
+                                        onChange = {handleInputChange}
+                                        value = {'xbox'}
+                                    />
+                                    <p>Xbox</p>
+                                </div>
+                                
                             </div>
 
                     </div>

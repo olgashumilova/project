@@ -1,7 +1,7 @@
 @import '@Styles/main.scss';
 
 body {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../../assets/background/background.jpg);
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../../assets/background/background.jpg) center;
 }
 
 .modalwindow {
@@ -11,9 +11,10 @@ body {
     align-items: center;
     width: 40%;
     height: 500px;
-    margin: 200px 0 200px 30%;
+    margin: 10% 0 30% 30%;
     z-index: 9999;
     color: $white-color;
+    border-radius: 20px;
     background-color: rgba(0, 0, 0, 0.877);
     @include regular-font;
 }
@@ -44,19 +45,18 @@ body {
 }
 
 .modalwindow__close-button {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     border: none;
-}
-
-.modalwindow__close-button:hover {
-    background-color: gray;
+    cursor: pointer;
+    background: url('../../assets/headerIcons/closeModal.png');
 }
 
 .modalwindow__form {
     display: flex;
     flex-direction: column;
     width: 90%;
+    height: 250px;
     margin-top: 50px;
 }
 
@@ -65,21 +65,37 @@ body {
     flex-direction: row;
     justify-content: space-between;
     width: 80%;
-    height: 35px;
+    height: 65px;
     margin: 2% 2% 2% 13%;
     @media (max-width: 1105px) {
-        flex-wrap: wrap;
+        flex-direction: column;
+    }
+}
+
+.modalwindow__input-field {
+    width: 80%;
+    height: 40px;
+    margin-left: 10%;
+    margin-bottom: 30px;
+}
+
+.modalwindow__fieldname {
+    width: 200px;
+    @media (max-width: 1105px) {
+        text-align: center;
+        width: 100%;
+        margin: 10px 0 10px 0;
     }
 }
 
 .modalwindow__button {
     height: 30px;
-    margin-top: 60px;
     border: none;
     border-radius: 6px;
     color: $white-color;
     background-color: $purple-color;
-    margin-top: 50px;
+    margin-top: 40px;
+    margin-bottom: 20px;
 }
 
 .modalwindow__button:hover {
@@ -90,21 +106,22 @@ body {
     padding-bottom: 0.5px;
 }
 
-.modalwindow__input-field {
-    width: 60%;
-    margin-left: 20px;
-}
-
 //_______________________________________________________________________________________________________
 
 .edit-modalwindow {
     width: 40%;
-    height: 700px;
+    height: 100%;
     margin: 7% 0 10% 30%;
     z-index: 9999;
     color: $white-color;
+    border-radius: 20px;
     background-color: rgba(0, 0, 0, 0.877);
     @include regular-font;
+
+    @media (max-width: 900px) {
+        width: 60%;
+        margin: 7% 0 10% 20%;
+    }
 }
 
 .edit-modalwindow__header {
@@ -116,11 +133,11 @@ body {
 }
 
 .edit-modal-wrapper {
-    position: fixed;
+    position: absolute;
 	left: 0;
 	top: 0;
 	width: 100%; 
-	height: 100%;
+    min-height: 100%;
     z-index: 9999;
     background: rgb(0, 0, 0, 0.6);
 }
@@ -138,6 +155,10 @@ body {
     justify-content: space-around;
     width: 100%;
     margin: 3% 3% 0 3%;
+
+    @media (max-width: 1105px) {
+        display: none;
+    }
 }
 
 .modalwindow__main {
@@ -145,15 +166,21 @@ body {
     flex-direction: row;
     justify-content: space-between;
     width: 90%;
-    height: 400px;
     margin: 0 auto;
+
+    @media (max-width: 1105px) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }
 
 .modalwindow__main-image-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 300px;
+    width: 60%;
+    height: 100%;
     margin: 5% 5% 5% 5%;
 }
 
@@ -166,18 +193,12 @@ body {
     justify-content: space-around;
     width: 60%;
     margin: 0 auto;
-    padding-top: 10%;
+    margin-top: 9%;
 }
 
 .edit-modalwindow__button {
     @include button;
-    margin-bottom: 50px;
-}
-
-.modalwindow__desc-input-field {
-    width: 60%;
-    height: 100px;
-    resize: none;
+    margin: 0 10px 50px 10px;
 }
 
 .edit-modalwindow__form {
@@ -190,4 +211,13 @@ body {
     justify-content: space-between;
     width: 80%;
     margin: 10% 2% 2% 13%;
+
+    @media (max-width: 1105px) {
+        flex-direction: row;
+        text-align: center;
+    }
+}
+
+.modalwindow__checkbox-container {
+    text-align: center;
 }
