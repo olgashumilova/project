@@ -29,9 +29,9 @@ const CartPage = React.lazy(() => import('@Components/cart/cartPage.tsx'))
 const AboutPage = React.lazy(() => import('@Components/aboutPage/aboutPage.tsx'))
 
 // Modals
+import EditGameCardModal from '@Components/modals/editGameCardModal.tsx'
 const SignUpModal = React.lazy(() => import('@Components/modals/signUpModal.tsx'))
 const SignInModal = React.lazy(() => import('@Components/modals/signInModal.tsx'))
-const EditGameCardModal = React.lazy(() => import('@Components/modals/editGameCardModal.tsx'))
 
 // Scss
 import '@Components/header/header.scss'
@@ -85,14 +85,6 @@ const App: React.FunctionComponent = () => {
     Swal.fire('You\'ve signed out!')
   }
 
-  function modalRenderer() {
-    if (showModal) {
-      return <EditGameCardModal />
-    } else {
-      null
-    }  
-  }
-
   async function getProducts() {
     try {
       await getProductsAPI.then((response) => {
@@ -110,7 +102,7 @@ const App: React.FunctionComponent = () => {
   return (
     <Router>
       <header className = 'header'>
-      <div className = 'modalportal'>{modalRenderer()}</div>
+      <div className = 'modalportal'>{showModal? <EditGameCardModal/> : null}</div>
         <div className = 'header__title'>
           <h1>Game Store</h1>
         </div>
