@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect, Suspense } from "react"
 import { useSelector, useDispatch } from 'react-redux'
 import {
   BrowserRouter as Router,
@@ -15,7 +15,7 @@ import 'semantic-ui-css/semantic.min.css'
 import { Dropdown } from 'semantic-ui-react'
 
 // SweetAlert2 (for good looking alert windows)
-import Swal from "sweetalert2";
+import Swal from "sweetalert2"
 
 // Components
 import HomeComponent from '@Components/home/home.tsx'
@@ -29,9 +29,9 @@ const CartPage = React.lazy(() => import('@Components/cart/cartPage.tsx'))
 const AboutPage = React.lazy(() => import('@Components/aboutPage/aboutPage.tsx'))
 
 // Modals
+import EditGameCardModal from '@Components/modals/editGameCardModal.tsx'
 const SignUpModal = React.lazy(() => import('@Components/modals/signUpModal.tsx'))
 const SignInModal = React.lazy(() => import('@Components/modals/signInModal.tsx'))
-const EditGameCardModal = React.lazy(() => import('@Components/modals/editGameCardModal.tsx'))
 
 // Scss
 import '@Components/header/header.scss'
@@ -58,26 +58,17 @@ const App: React.FunctionComponent = () => {
   const [showButtons, setShowButtons] = useState(false)
 
   const cart = useSelector(state => state.cart)
-  const isSignedIn = useSelector(state => state.isSignedIn)
   const user = useSelector(state => state.userProfile)
 
   const userName = localStorage.getItem('username')
 
   useEffect(() => {
-    if (isSignedIn) {
+    if (user.length !== 0 || userName) {
       setShowButtons(true)
     } else {
       setShowButtons(false)
     }
-  }, [isSignedIn])
-
-  useEffect(() => {
-    if (userName) {
-      setShowButtons(true)
-    } else {
-      setShowButtons(false)
-    }
-  }, [userName])
+  }, [user, userName])
 
   const logOut = () => {
     localStorage.clear()
