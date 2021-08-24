@@ -48,17 +48,25 @@
     justify-content: space-between;
     width: 80%;
     color: $white-color;
+
+    @media (max-width: 800px) {
+        justify-content: center;
+    }
 }
 
 .game-border {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     width: 100%;
     padding: 3% 4% 3% 6%;
     margin: 0;
     border-bottom: 1px solid;
     border-color: $white-color;
+
+    @media (max-width: 450px) {
+        width: 60px;
+    }
 }
 
 .cart__game-button {
@@ -66,6 +74,14 @@
     align-items: center;
     border-bottom: 1px solid;
     border-color: $white-color;
+}
+
+.cart__game-button-close {
+    width: 30px;
+    height: 30px;
+    border: none;
+    cursor: pointer;
+    background: url('../../assets/headerIcons/closeModal.png');
 }
 
 .cart__total {
@@ -93,4 +109,8 @@
 
 .cart__select-platform {
     height: 40px;
+
+    @media (max-width: 800px) {
+        width: 50px;
+    }
 }

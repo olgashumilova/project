@@ -33,14 +33,6 @@ const CartPage: React.FunctionComponent = () => {
         return (
             <div className = 'cart' >
                 <p className = 'cart__title' >Cart page</p>
-                
-                <div className = 'cart__main'>
-                    <p>Name</p>
-                    <p>Platform</p>
-                    <p>Order date</p>
-                    <p>Amount</p>
-                    <p>Price ($)</p>
-                </div>
 
                 {cart.map((game, index) => {
                     totalPrice += game.price * game.amount
@@ -69,7 +61,9 @@ const CartPage: React.FunctionComponent = () => {
                                 </div>
                             </div>
                             <p className = 'game-border'>{game.price * game.amount}$</p>
-                            <div className = 'cart__game-button' onClick = {() => dispatch(removeItemFromCart(index))}><button>x</button></div> 
+                            <div className = 'cart__game-button' onClick = {() => dispatch(removeItemFromCart(index))}>
+                                <button className = 'cart__game-button-close'></button>
+                            </div> 
                         </div>
                     )
                 })}
