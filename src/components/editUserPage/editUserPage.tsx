@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react'
+import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import { Redirect } from 'react-router'
@@ -7,8 +8,11 @@ import ROUTES from '@Components/routes.ts'
 import ChangePassword from '@Components/modals/changePassword.tsx'
 
 import { saveProfileUrlAPI } from '@/api/api'
+import { getUserProfile } from '@/redux/actions/actions'
 
 const EditUserPage: React.FunctionComponent = () => {
+
+    const dispatch = useDispatch()
 
     const [showModal, setShowModal] = useState(false)
     const [newLogin, setNewLogin] = useState('')
@@ -26,9 +30,10 @@ const EditUserPage: React.FunctionComponent = () => {
             await axios.post(saveProfileUrlAPI, { newLogin, description, userImage }).then((response) => {
                 const userData = response.data
                 
-                if (userData.description) {
+                if (userData.description || userData.login || userData.image) {
                     localStorage.removeItem('username')
-                    localStorage.setItem('username', userData.login)              
+                    localStorage.setItem('username', userData.login)
+                    dispatch(getUserProfile(userData))
                     Swal.fire('Your profile has been changed!')
                     setRedirect(true)
                 } else {
