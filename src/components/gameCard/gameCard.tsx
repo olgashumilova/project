@@ -50,19 +50,11 @@ const GameCard: React.FunctionComponent <{backgroundImage: string, description: 
         }
     }
 
-    function modalRenderer(): JSX.Element {
-        if (showModal) {
-            return <EditGameCardModal />
-        } else {
-            null
-        }  
-    }
-
     const userName = localStorage.getItem('username')
     
     if (userName === 'admin') {
         return (
-            <div className = 'modalportal'>{modalRenderer()}
+            <div className = 'modalportal'>{showModal ? <EditGameCardModal /> : null}
                 <div className = 'gamecard gamecard-wrap'>
                 <div className = 'front' style = {{backgroundImage: `url(${backgroundImage})`}}></div>
                 <div className = 'back'>

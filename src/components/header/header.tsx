@@ -76,14 +76,6 @@ const App: React.FunctionComponent = () => {
     Swal.fire('You\'ve signed out!')
   }
 
-  function modalRenderer(): JSX.Element {
-    if (showModal) {
-      return <EditGameCardModal />
-    } else {
-      null
-    }  
-  }
-
   async function getProducts(): Promise<void> {
     try {
       await getProductsAPI.then((response) => {
@@ -101,7 +93,7 @@ const App: React.FunctionComponent = () => {
   return (
     <Router>
       <header className = 'header'>
-      <div className = 'modalportal'>{modalRenderer()}</div>
+      <div className = 'modalportal'>{showModal? <EditGameCardModal/> : null}</div>
         <div className = 'header__title'>
           <h1>Game Store</h1>
         </div>

@@ -45,14 +45,6 @@ const EditUserPage: React.FunctionComponent = () => {
         }
     }
 
-    function modalRenderer(): JSX.Element {
-        if (showModal) {
-            return <ChangePassword />
-        } else {
-            null
-        }  
-    }
-
     const displayImage = (): JSX.Element => {
         if (userImage === null) {
             return <div className = 'userpage__image-inner'>No picture</div>
@@ -64,7 +56,7 @@ const EditUserPage: React.FunctionComponent = () => {
     return (
         <div className = 'userpage'>
             
-        <div className = 'modalportal'>{modalRenderer()}</div>
+        <div className = 'modalportal'>{showModal ? <ChangePassword/> : null}</div>
 
             <p className = 'userpage__title'>Edit profile</p>
 
