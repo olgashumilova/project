@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import {
   BrowserRouter as Router,
@@ -7,30 +7,31 @@ import {
   Link,
 } from "react-router-dom"
 
+//Routes
 import ROUTES from '@Components/routes.ts'
 
 // Semantic UI (for modal window)
 import 'semantic-ui-css/semantic.min.css'
 import { Dropdown } from 'semantic-ui-react'
 
-// SweetAlert 2
+// SweetAlert2 (for good looking alert windows)
 import Swal from "sweetalert2";
 
 // Components
 import HomeComponent from '@Components/home/home.tsx'
-import FooterComponent from '@Components/footer/footer.tsx'
-import UserPage from '@Components/userPage/userPage.tsx'
-import EditUserPage from '@Components/editUserPage/editUserPage.tsx'
-import PcProductsPage from "@Components/products/productsPages/pcProductsPage.tsx"
-import XboxProductsPage from "@Components/products/productsPages/xboxProductsPage.tsx"
-import PlaystationProductsPage from "@Components/products/productsPages/playstationProductsPage.tsx"
-import CartPage from "@Components/cart/cartPage.tsx"
-import AboutPage from "@Components/aboutPage/aboutPage.tsx"
+const FooterComponent = React.lazy(() => import('@Components/footer/footer.tsx'))
+const UserPage = React.lazy(() => import('@Components/userPage/userPage.tsx'))
+const EditUserPage = React.lazy(() => import('@Components/editUserPage/editUserPage.tsx'))
+const PcProductsPage = React.lazy(() => import('@Components/products/productsPages/pcProductsPage.tsx'))
+const PlaystationProductsPage = React.lazy(() => import('@Components/products/productsPages/playstationProductsPage.tsx'))
+const XboxProductsPage = React.lazy(() => import('@Components/products/productsPages/xboxProductsPage.tsx'))
+const CartPage = React.lazy(() => import('@Components/cart/cartPage.tsx'))
+const AboutPage = React.lazy(() => import('@Components/aboutPage/aboutPage.tsx'))
 
 // Modals
-import SignUpModal from '@Components/modals/signUpModal.tsx'
-import SignInModal from '@Components/modals/signInModal.tsx'
-import EditGameCardModal from "../modals/editGameCardModal";
+import EditGameCardModal from '@Components/modals/editGameCardModal.tsx'
+const SignUpModal = React.lazy(() => import('@Components/modals/signUpModal.tsx'))
+const SignInModal = React.lazy(() => import('@Components/modals/signInModal.tsx'))
 
 // Scss
 import '@Components/header/header.scss'
@@ -43,7 +44,10 @@ import '@Components/products/products.scss'
 import '@Components/cart/cartPage.scss'
 import '@Components/aboutPage/aboutPage.scss'
 
+// API
 import { getProductsAPI } from '@/api/api'
+
+// Redux actions
 import { getProductsArray } from '@/redux/actions/actions'
 
 const App: React.FunctionComponent = () => {
@@ -52,8 +56,8 @@ const App: React.FunctionComponent = () => {
 
   const [showModal, setShowModal] = useState(false)
   const [showButtons, setShowButtons] = useState(false)
-  const cart = useSelector(state => state.cart)
 
+  const cart = useSelector(state => state.cart)
   const isSignedIn = useSelector(state => state.isSignedIn)
   const user = useSelector(state => state.userProfile)
 
@@ -81,19 +85,11 @@ const App: React.FunctionComponent = () => {
     Swal.fire('You\'ve signed out!')
   }
 
-  function modalRenderer() {
-    if (showModal) {
-      return <EditGameCardModal />
-    } else {
-        null
-    }  
-  }
-
   async function getProducts() {
     try {
-        await getProductsAPI.then((response) => {
-            dispatch(getProductsArray(response.data))
-        })
+      await getProductsAPI.then((response) => {
+          dispatch(getProductsArray(response.data))
+      })
     } catch (error) {
         console.log(error);         
     }   
@@ -106,7 +102,7 @@ const App: React.FunctionComponent = () => {
   return (
     <Router>
       <header className = 'header'>
-      <div className = 'modalportal'>{modalRenderer()}</div>
+      <div className = 'modalportal'>{showModal? <EditGameCardModal/> : null}</div>
         <div className = 'header__title'>
           <h1>Game Store</h1>
         </div>
@@ -148,8 +144,8 @@ const App: React.FunctionComponent = () => {
                 <Dropdown.Item className = 'dropdown-link'>Sign Up</Dropdown.Item>
               </Link>
               <Dropdown.Item className = 'dropdown-link'>
-                      <button className = 'dropdown-button' onClick = {() => logOut() }>Log Out</button>
-                    </Dropdown.Item>
+                <button className = 'dropdown-button' onClick = {() => logOut() }>Log Out</button>
+                </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </div>
@@ -160,19 +156,17 @@ const App: React.FunctionComponent = () => {
             </Link>
               <li className = 'header__list-element'>
                   <Dropdown text = 'Products'>
-                      <Dropdown.Menu className = 'header__dropdown'>  
-                        <Link to = {ROUTES.PC_PAGE}>
-                          <Dropdown.Item className = 'dropdown-link'>PC</Dropdown.Item>
-                        </Link>
-
-                        <Link to = {ROUTES.PLAYSTATION_PAGE}>
-                          <Dropdown.Item  className = 'dropdown-link'>Playstation 5</Dropdown.Item>
-                        </Link>
-
-                        <Link to = {ROUTES.XBOX_PAGE}>
-                          <Dropdown.Item className = 'dropdown-link'>XBox One</Dropdown.Item>
-                        </Link>
-                      </Dropdown.Menu>
+                    <Dropdown.Menu className = 'header__dropdown'>  
+                      <Link to = {ROUTES.PC_PAGE}>
+                        <Dropdown.Item className = 'dropdown-link'>PC</Dropdown.Item>
+                      </Link>
+                      <Link to = {ROUTES.PLAYSTATION_PAGE}>
+                        <Dropdown.Item  className = 'dropdown-link'>Playstation 5</Dropdown.Item>
+                      </Link>
+                      <Link to = {ROUTES.XBOX_PAGE}>
+                        <Dropdown.Item className = 'dropdown-link'>XBox One</Dropdown.Item>
+                      </Link>
+                    </Dropdown.Menu>
                   </Dropdown>
               </li>
 
@@ -183,118 +177,102 @@ const App: React.FunctionComponent = () => {
             </Link>
 
               {showButtons ? (
-                  <div className = 'header__list'>
-                    <Link className = 'header__user-list-element' to = {ROUTES.USER}>
-                      <div className = 'header__user-icon'></div>
-                      <p className = 'header__user-name'>Hello, {userName || user.login}</p>
-                    </Link>
+                <div className = 'header__list'>
+                  <Link className = 'header__user-list-element' to = {ROUTES.USER}>
+                    <div className = 'header__user-icon'></div>
+                    <p className = 'header__user-name'>Hello, {userName || user.login}</p>
+                  </Link>
                 
                   {user.login === 'admin' || userName === 'admin' ? (
-                      <div className = 'header__list'>
-                        
-                        <button className = 'header__create-card-button' onClick = {() => setShowModal(!showModal)}>Create Card</button>
-                        
-                        <Link className = 'header__list-element' to = {ROUTES.HOME}>
-                          <button className = 'header__logout-icon' onClick = {() => logOut() }></button>
-                        </Link>
-                      </div>
+                    <div className = 'header__list'>
+                      
+                      <button className = 'header__create-card-button' onClick = {() => setShowModal(!showModal)}>Create Card</button>
+                      
+                      <Link className = 'header__list-element' to = {ROUTES.HOME}>
+                        <button className = 'header__logout-icon' onClick = {() => logOut() }></button>
+                      </Link>
+                    </div>
                   ) : (
-                      <div className = 'header__list'>
-                        <Link className = 'header__list-element' to = {ROUTES.CART}>
-                          <button className = 'header__cart-icon'><p className = 'header__cart-icon-amount'>{cart.length}</p></button>
-                        </Link>
-                    
-                        <Link className = 'header__list-element' to = {ROUTES.HOME}>
-                            <button className = 'header__logout-icon' onClick = {() => logOut() }></button>
-                        </Link>
-                      </div>
+                    <div className = 'header__list'>
+                      <Link className = 'header__list-element' to = {ROUTES.CART}>
+                        <button className = 'header__cart-icon'><p className = 'header__cart-icon-amount'>{cart.length}</p></button>
+                      </Link>
+                  
+                      <Link className = 'header__list-element' to = {ROUTES.HOME}>
+                          <button className = 'header__logout-icon' onClick = {() => logOut() }></button>
+                      </Link>
+                    </div>
                   )}
                     
                 </div>
               ) : (
-                  <div className = 'header__signin-list'>
-                    <Link className = 'header__signin-list-element' to = {ROUTES.SIGNIN}>
-                      <li className = 'header__link'>
-                        Sign In
-                      </li>
-                    </Link>
-                    <Link className = 'header__signin-list-element' to = {ROUTES.SIGNUP}>
-                      <li className = 'header__link'>
-                        Sign Up
-                      </li>
-                    </Link>
-                  </div>
-                // </div>
+                <div className = 'header__signin-list'>
+                  <Link className = 'header__signin-list-element' to = {ROUTES.SIGNIN}>
+                    <li className = 'header__link'>
+                      Sign In
+                    </li>
+                  </Link>
+                  <Link className = 'header__signin-list-element' to = {ROUTES.SIGNUP}>
+                    <li className = 'header__link'>
+                      Sign Up
+                    </li>
+                  </Link>
+                </div>
               )}
           </ul>
         </div>
       </header>
-      <Switch>
 
-      <Route path = {ROUTES.CART}>
-          <CartPage />
-      </Route>
+      <Suspense fallback = {<div className = 'main-loader'></div>}>
+        
+        <Switch>
+          <Route path = {ROUTES.CART}>
+            <CartPage />
+          </Route>
 
-        <Route path = {ROUTES.PC_PAGE}>
-          <PcProductsPage />
-        </Route>
+          <Route path = {ROUTES.PC_PAGE}>
+            <PcProductsPage />
+          </Route>
 
-        <Route path = {ROUTES.XBOX_PAGE}>
-          <XboxProductsPage />
-        </Route>
+          <Route path = {ROUTES.XBOX_PAGE}>
+            <XboxProductsPage />
+          </Route>
 
-        <Route path = {ROUTES.PLAYSTATION_PAGE}>
-          <PlaystationProductsPage />
-        </Route>
+          <Route path = {ROUTES.PLAYSTATION_PAGE}>
+            <PlaystationProductsPage />
+          </Route>
 
-        <Route path = {ROUTES.USER}>
-          <User />
-        </Route>
+          <Route path = {ROUTES.USER}>
+            <UserPage />
+          </Route>
 
-        <Route path = {ROUTES.EDIT_USER}>
-          <EditUserPage />
-        </Route>
+          <Route path = {ROUTES.EDIT_USER}>
+            <EditUserPage />
+          </Route>
 
-        <Route path = {ROUTES.SIGNUP}>
-          <SignUpModal />
-        </Route>
+          <Route path = {ROUTES.SIGNUP}>
+            <SignUpModal />
+          </Route>
 
-        <Route path = {ROUTES.SIGNIN}>
-          <SignInModal />
-        </Route>
+          <Route path = {ROUTES.SIGNIN}>
+            <SignInModal />
+          </Route>
 
-        <Route path = {ROUTES.ABOUT}>
-          <About />
-        </Route>
+          <Route path = {ROUTES.ABOUT}>
+            <AboutPage />
+          </Route>
 
-        <Route path = {ROUTES.PRODUCTS}>
-          <Products />
-        </Route>
+          <Route path = {ROUTES.HOME}>
+            <HomeComponent />
+          </Route>
+        </Switch>
 
-        <Route path = {ROUTES.HOME}>
-          <Home />
-        </Route>
+        <FooterComponent />
 
-      </Switch>
-      <FooterComponent />
+      </Suspense>
+
     </Router>
   );
-}
-  
-function Home() {
-  return <HomeComponent />;
-}
-
-function Products() {
-  return <h2>Products</h2>;
-}
-
-function About() {
-  return <AboutPage />;
-}
-
-function User() {
-  return <UserPage />;
 }
 
 export default App;

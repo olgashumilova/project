@@ -37,8 +37,6 @@ const HomeComponent: React.FunctionComponent = () => {
     const [recentProducts, setRecentProducts] = useState([])
 
     const products = useSelector(state => state.products)
-    console.log(products);
-    console.log(recentProducts);
 
     async function getProducts() {
         try {
@@ -110,14 +108,14 @@ const HomeComponent: React.FunctionComponent = () => {
                    <div className = 'home__game-cards'>
                         {recentProducts.map((game, index) => {
                             return (
-                                <div key = {index}>
+                                <React.Fragment key = {index}>
                                     <GameCard
                                         backgroundImage = {game.image}
                                         description = {game.description}
                                         ageLimit = {`${game.ageLimit} +`}
                                         price = {`Price: ${game.price}$`}
                                     />
-                                </div>
+                                </React.Fragment>
                             ) 
                         })}
                     </div>

@@ -71,4 +71,4 @@ const ProductsPage: React.FunctionComponent<{title, filterByPlatform, searchbar,
     ) 
 }
 
-export default ProductsPage
+export default React.memo(ProductsPage)

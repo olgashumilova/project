@@ -13,79 +13,61 @@ const EditGameCardModal:React.FunctionComponent = () => {
 
     const [showModal, setShowModal] = useState(true)
 
-    const [gameId, setGameId] = useState('')
-    const [gameName, setGameName] = useState('')
-    const [gameGenre, setGameGenre] = useState('')
-    const [gamePrice, setGamePrice] = useState('')
-    const [gameImage, setGameImage] = useState('')
-    const [gameRating, setGameRating] = useState('')
-    const [gameDescription, setGameDescription] = useState('')
-    const [gameAgeLimit, setGameAgeLimit] = useState('')
-    const [gamePlatform, setGamePlatform] = useState(null)
+    const initialState = {
+        gameId: '',
+        gameName: '',
+        gameGenre: '',
+        gamePrice: '',
+        gameImage: '',
+        gameRating: '',
+        gameDescription: '',
+        gameAgeLimit: '',
+        gamePlatform: null,
+    }
+
+    const [stateGame, setStateGame] = useState(initialState)
 
     useEffect(() => {
         if (currentGameCard === null) {
-            setGameName('')
-            setGameGenre('')
-            setGamePrice('')
-            setGameImage('')
-            setGameRating('')
-            setGameDescription('')
-            setGameAgeLimit('')
-            setGamePlatform({})
+            setStateGame(initialState);
         } else {
-            setGameId(currentGameCard.id)
-            setGameName(currentGameCard.name)
-            setGameGenre(currentGameCard.genre)
-            setGamePrice(currentGameCard.price)
-            setGameImage(currentGameCard.image)
-            setGameRating(currentGameCard.rating)
-            setGameDescription(currentGameCard.description)
-            setGameAgeLimit(currentGameCard.ageLimit)
-            setGamePlatform(currentGameCard.platform)
+            setStateGame({
+                ...stateGame,
+                gameName: currentGameCard.name,
+                gameGenre: currentGameCard.genre,
+                gamePrice: currentGameCard.price,
+                gameImage: currentGameCard.image,
+                gameRating: currentGameCard.rating,
+                gameDescription: currentGameCard.description,
+                gameAgeLimit: currentGameCard.ageLimit,
+                gamePlatform: currentGameCard.platform,
+            })
         }
     }, [currentGameCard])
 
     const displayImage = () => {
-        if (!gameImage) {
+        if (!stateGame.gameImage) {
             return <div className = 'userpage__image-inner'>No picture</div>
         } else {
-            return <img className = 'modalwindow__main-image' src = {gameImage} alt = 'Game card image' />
+            return <img className = 'modalwindow__main-image' src = {stateGame.gameImage} alt = 'Game card image' />
         }
     }
 
     const addGame = async() => {
-        const response = await axios.post(productAPI, {
-            gameName,
-            gameGenre,
-            gamePrice,
-            gameImage,
-            gameDescription,
-            gameAgeLimit,
-            gamePlatform,
-        })
+        const response = await axios.post(productAPI, stateGame)
         dispatch(addGameToProductsArray(response.data))
         Swal.fire('Game card has been created');
     }
 
     const editGame = async() => {
-        const response = await axios.put(productAPI, {
-            gameId,
-            gameName,
-            gameGenre,
-            gamePrice,
-            gameImage,
-            gameDescription,
-            gameAgeLimit,
-            gamePlatform,
-        })
+        const response = await axios.put(productAPI, stateGame)
         dispatch(getProductsArray(response.data))
         Swal.fire('Game has been edited');
     }
 
     const deleteGame = async() => {
         Swal.fire({
-            title: `Are you sure  you want to delete the product ${gameName}?`,
+            title: `Are you sure  you want to delete the product ${stateGame.gameName}?`,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: 'rgba(199, 0, 218, 1)',
@@ -115,7 +97,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
         const name = target.name
 
         if (value === null) {
-            delete gamePlatform[name]
+            delete stateGame.gamePlatform[name]
             if (target.value === 'pc') {
                 setPcChecked(!pcChecked)
             } else if (target.value === 'playstation') {
@@ -125,7 +107,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
             }
         } else if (value) {
             if (value === target.value) {
-                setGamePlatform(Object.assign(gamePlatform, ({ [name]: value })))
+                setStateGame({...stateGame, gamePlatform: Object.assign(stateGame.gamePlatform, ({ [name]: value }))})
                 if (target.value === 'pc') {
                     setPcChecked(!pcChecked)
                 } else if (target.value === 'playstation') {
@@ -161,17 +143,17 @@ const EditGameCardModal:React.FunctionComponent = () => {
                             <input 
                                 type = 'text'
                                 className = 'modalwindow__input-field'
-                                onChange = {(event) => setGameName(event.target.value)}
-                                value = {gameName}
+                                onChange = {(event) => setStateGame({...stateGame, gameName: event.target.value})}
+                                value = {stateGame.gameName}
                             />
                         </div>
                         <div className = 'modalwindow__input'>
-                            <p>Category</p>
+                            <p>Genre</p>
                             <input 
                                 type = 'text'
                                 className = 'modalwindow__input-field'
-                                onChange = {(event) => setGameGenre(event.target.value)}
-                                value = {gameGenre}
+                                onChange = {(event) => setStateGame({...stateGame, gameGenre: event.target.value})}
+                                value = {stateGame.gameGenre}
                             />
                         </div>
                         <div className = 'modalwindow__input'>
@@ -179,8 +161,8 @@ const EditGameCardModal:React.FunctionComponent = () => {
                             <input 
                                 type = 'number'
                                 className = 'modalwindow__input-field'
-                                onChange = {(event) => setGamePrice(event.target.value)}
-                                value = {gamePrice}
+                                onChange = {(event) => setStateGame({...stateGame, gamePrice: event.target.value})}
+                                value = {stateGame.gamePrice}
                             />
                         </div>
                         <div className = 'modalwindow__input'>
@@ -188,8 +170,8 @@ const EditGameCardModal:React.FunctionComponent = () => {
                             <input 
                                 type = 'text'
                                 className = 'modalwindow__input-field'
-                                onChange = {(event) => setGameImage(event.target.value)}
-                                value = {gameImage}
+                                onChange = {(event) => setStateGame({...stateGame, gameImage: event.target.value})}
+                                value = {stateGame.gameImage}
                             />
                         </div>
                         <div className = 'modalwindow__input'>
@@ -197,16 +179,16 @@ const EditGameCardModal:React.FunctionComponent = () => {
                             <input 
                                 type = 'number' min = '0' max = '5'
                                 className = 'modalwindow__input-field'
-                                onChange = {(event) => setGameRating(event.target.value)}
-                                value = {gameRating}
+                                onChange = {(event) => setStateGame({...stateGame, gameRating: event.target.value})}
+                                value = {stateGame.gameRating}
                             />
                         </div>
                         <div className = 'modalwindow__input'>
                             <p>Description</p>
                             <textarea 
                                 className = 'modalwindow__desc-input-field'
-                                onChange = {(event) => setGameDescription(event.target.value)}
-                                value = {gameDescription}
+                                onChange = {(event) => setStateGame({...stateGame, gameDescription: event.target.value})}
+                                value = {stateGame.gameDescription}
                             />
                         </div>
                         <div className = 'modalwindow__input'>
@@ -214,8 +196,8 @@ const EditGameCardModal:React.FunctionComponent = () => {
                             <input
                                 type = 'number' min = '3' max = '18'
                                 className = 'modalwindow__input-field'
-                                onChange = {(event) => setGameAgeLimit(event.target.value)}
-                                value = {gameAgeLimit}
+                                onChange = {(event) => setStateGame({...stateGame, gameAgeLimit: event.target.value})}
+                                value = {stateGame.gameAgeLimit}
                             />
                         </div>
 

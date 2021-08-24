@@ -188,3 +188,33 @@ h1 {
         display: flex;
     }
 }
+
+.main-loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25px;
+    margin: 18% 0 20% 0;
+  }
+  
+  .main-loader:after {
+    content: " ";
+    display: flex;
+    width: 60px;
+    height: 60px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid;
+    border-color: $white-color;
+    border-color: $white-color transparent $white-color transparent;
+    animation: loader 1.2s linear infinite;
+  }
+  
+  @keyframes main-loader {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
