@@ -1,6 +1,6 @@
 import { ACTION_TYPES } from '@/redux/const/actionTypes.ts';
 
-// Users actions
+// Users actions________________________________________________________________________________________________
 export const getUsersArray = (users) => ({
     type: ACTION_TYPES.GET_USERS,
     payload: users,
@@ -16,23 +16,33 @@ export const getUserProfile = (payload) => ({
     payload: {...payload},
 })
 
-export const deleteUser = (payload) => ({
-    type: ACTION_TYPES.DELETE_USER,
-    payload: payload,
-})
-
 export const isSignedIn = (payload) => ({
     type: ACTION_TYPES.IS_SIGNED_IN,
     payload: payload,
 })
 
-// Products actions
+// Products actions________________________________________________________________________________________________
+export const getProductsArray = (payload) => ({
+    type: ACTION_TYPES.GET_PRODUCTS_ARRAY,
+    payload: [...payload],
+})
+
+export const addGameToProductsArray = (payload) => ({
+    type: ACTION_TYPES.ADD_GAME_TO_PRODUCTS,
+    payload: {...payload},
+})
+
 export const getFilteredProducts = (payload) => ({
     type: ACTION_TYPES.GET_FILTERED_PRODUCTS,
     payload: [...payload],
 })
 
-// Cart actions
+export const getCurrentGameCard = (payload) => ({
+    type: ACTION_TYPES.CURRENT_GAME_CARD,
+    payload: {...payload},
+})
+
+// Cart actions________________________________________________________________________________________________
 export const addItemToCart = (item) => ({
     type: ACTION_TYPES.ADD_ITEM,
     payload: item,

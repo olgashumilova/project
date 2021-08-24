@@ -10,25 +10,37 @@ body {
     justify-content: center;
     align-items: center;
     width: 40%;
-    height: 400px;
+    height: 500px;
     margin: 10% 0 10% 30%;
+    z-index: 9999;
     color: $white-color;
     background-color: rgba(0, 0, 0, 0.877);
     @include regular-font;
 }
 
 .modal-wrapper {
-    display: flex;
-    align-items: center;
-    width:100%;
-    height: 150%;
-    background:rgba(0,0,0,.7);
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%; 
+	height: 100%;
+    z-index: 9999;
+    background: rgb(0, 0, 0, 0.6);
+}
+
+.modalwindow_hidden {
+    display: none;
+}
+
+.modal-wrapper_hidden {
+    display: none;
 }
 
 .modalwindow__header {
     display: flex;
     justify-content: space-between;
     width: 70%;
+    margin: 5%;
 }
 
 .modalwindow__close-button {
@@ -58,6 +70,7 @@ body {
 
 .modalwindow__button {
     height: 30px;
+    margin-top: 60px;
     border: none;
     border-radius: 6px;
     color: $white-color;
@@ -77,12 +90,99 @@ body {
     width: 60%;
 }
 
+//_______________________________________________________________________________________________________
 
-.modalportal {
-    position: absolute;
+.edit-modalwindow {
+    width: 40%;
+    height: 700px;
+    margin: 7% 0 10% 30%;
+    z-index: 9999;
+    color: $white-color;
+    background-color: rgba(0, 0, 0, 0.877);
+    @include regular-font;
+}
+
+.edit-modalwindow__header {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    padding-top: 40px;
+    margin: 0 auto;
+}
+
+.edit-modal-wrapper {
+    position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%; 
+	height: 100%;
+    z-index: 9999;
+    background: rgb(0, 0, 0, 0.6);
+}
+
+.edit-modal-wrapper_hidden {
+    display: none;
+}
+
+.edit-modalwindow_hidden {
+    display: none;
+}
+
+.modalwindow__main-headers {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin: 3% 3% 0 3%;
+}
+
+.modalwindow__main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+    height: 400px;
+    margin: 0 auto;
+}
+
+.modalwindow__main-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    margin: 5% 5% 5% 5%;
+}
+
+.modalwindow__main-image {
     width: 100%;
 }
 
-.modalwindow_hidden {
-    display: none;
+.edit-modal-windows-buttons {
+    display: flex;
+    justify-content: space-around;
+    width: 60%;
+    margin: 0 auto;
+    padding-top: 10%;
+}
+
+.edit-modalwindow__button {
+    @include button;
+    margin-bottom: 50px;
+}
+
+.modalwindow__desc-input-field {
+    width: 60%;
+    height: 100px;
+    resize: none;
+}
+
+.edit-modalwindow__form {
+    width: 100%;
+}
+
+.modalwindow__checkbox-input {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80%;
+    margin: 10% 2% 2% 13%;
 }

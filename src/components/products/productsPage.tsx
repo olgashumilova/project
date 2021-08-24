@@ -8,7 +8,7 @@ import '@Components/gameCard/gameCard.scss'
 
 import SearchProductsPage from '@Components/products/searchProductsPage.tsx'
 
-const ProductsPage: React.FunctionComponent<{title, filterByPlatform, searchbar, productPlatform, displayGames}> = (props) => {
+const ProductsPage: React.FunctionComponent<{title, filterByPlatform, searchbar, productPlatform, displayGames, platform}> = (props) => {
 
     ProductsPage.propTypes = {
         title: PropTypes.string,
@@ -16,11 +16,14 @@ const ProductsPage: React.FunctionComponent<{title, filterByPlatform, searchbar,
         searchbar: PropTypes.object,
         displayGames: PropTypes.array,
         productPlatform: PropTypes.array,
+        platform: PropTypes.string,
     }
 
+    const productPlatform = props.productPlatform
+    const platform = props.platform
     const filteredProducts = useSelector(state => state.filteredProducts)
 
-    function displayGames(productPlatform) {
+    function displayGames() {
         if (filteredProducts.length === 0) {
             return (
                 productPlatform.map((game) => {
@@ -36,21 +39,21 @@ const ProductsPage: React.FunctionComponent<{title, filterByPlatform, searchbar,
                     )
                 })
             )
-        } else if (filteredProducts.length !== 0){
+        } else if (filteredProducts.length !== 0) {
             return (
-               filteredProducts.map((game) => {
-                    return (
-                        <div key = {game.index}>
-                            {productPlatform ? (
+                filteredProducts.map((game, index) => {
+                    if (platform in game.platform) {
+                        return (
+                            <div key = {index}>
                                 <GameCard className = 'catalog-gamecard' 
                                     backgroundImage = {game.image} 
                                     description = {game.description}
                                     ageLimit = {`${game.ageLimit} +`}
                                     price = {`Price: ${game.price}$`}
                                 />
-                            ) : null}  
-                        </div>
-                    )
+                            </div>  
+                        )
+                    }
                 })
             )
         }
@@ -58,10 +61,11 @@ const ProductsPage: React.FunctionComponent<{title, filterByPlatform, searchbar,
 
     return (
         <div>
+            {props.platform}
             <SearchProductsPage
                 title = {props.title}
                 searchbar = {props.searchbar}
-                filterByPlatform = {displayGames(props.productPlatform)}
+                filterByPlatform = {displayGames()}
             />
         </div>
     ) 

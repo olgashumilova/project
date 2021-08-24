@@ -1,24 +1,19 @@
 import { ACTION_TYPES } from '../const/actionTypes';
 
 export const initialState = {
-  users: [],
+  products: [],
   userProfile: [],
-  filteredProducts: [],
   authUser: null,
   isSignedIn: false,
+  filteredProducts: [],
   cart: [],
   totalQuantity: 0,
+  currentGameCard: null,
 }
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-    
-      case ACTION_TYPES.GET_USERS: {
-        return {
-          ...state,
-          users: [...state.users, action.payload],
-        }
-      }
+
       case ACTION_TYPES.SET_USER: {
         return {
           ...state,
@@ -37,17 +32,28 @@ const reducer = (state = initialState, action) => {
           isSignedIn: action.payload,
         }     
       }
-      case ACTION_TYPES.DELETE_USER: {
-          return {
-            ...state,
-            authUser: null,
-            isSignedIn: false,
-          }
+      case ACTION_TYPES.GET_PRODUCTS_ARRAY: {
+        return {
+          ...state,
+          products: action.payload,
+        }
+      }
+      case ACTION_TYPES.ADD_GAME_TO_PRODUCTS: {
+        return {
+          ...state,
+          products: state.products.concat(action.payload)
+        }
       }
       case ACTION_TYPES.GET_FILTERED_PRODUCTS: {
         return {
           ...state,
           filteredProducts: action.payload,
+        }
+      }
+      case ACTION_TYPES.CURRENT_GAME_CARD: {
+        return {
+          ...state,
+          currentGameCard: action.payload,
         }
       }
       case ACTION_TYPES.ADD_ITEM: {

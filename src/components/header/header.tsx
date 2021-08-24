@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import {
   BrowserRouter as Router,
   Switch,
@@ -25,10 +25,12 @@ import PcProductsPage from "@Components/products/productsPages/pcProductsPage.ts
 import XboxProductsPage from "@Components/products/productsPages/xboxProductsPage.tsx"
 import PlaystationProductsPage from "@Components/products/productsPages/playstationProductsPage.tsx"
 import CartPage from "@Components/cart/cartPage.tsx"
+import AboutPage from "@Components/aboutPage/aboutPage.tsx"
 
 // Modals
 import SignUpModal from '@Components/modals/signUpModal.tsx'
 import SignInModal from '@Components/modals/signInModal.tsx'
+import EditGameCardModal from "../modals/editGameCardModal";
 
 // Scss
 import '@Components/header/header.scss'
@@ -39,12 +41,21 @@ import '@Components/userPage/userPage.scss'
 import '@Components/editUserPage/editUserPage.scss'
 import '@Components/products/products.scss'
 import '@Components/cart/cartPage.scss'
+import '@Components/aboutPage/aboutPage.scss'
+
+import { getProductsAPI } from '@/api/api'
+import { getProductsArray } from '@/redux/actions/actions'
 
 const App: React.FunctionComponent = () => {
 
+  const dispatch = useDispatch()
+
+  const [showModal, setShowModal] = useState(false)
   const [showButtons, setShowButtons] = useState(false)
   const cart = useSelector(state => state.cart)
+
   const isSignedIn = useSelector(state => state.isSignedIn)
+  const user = useSelector(state => state.userProfile)
 
   const userName = localStorage.getItem('username')
 
@@ -70,22 +81,86 @@ const App: React.FunctionComponent = () => {
     Swal.fire('You\'ve signed out!')
   }
 
+  function modalRenderer() {
+    if (showModal) {
+      return <EditGameCardModal />
+    } else {
+        null
+    }  
+  }
+
+  async function getProducts() {
+    try {
+        await getProductsAPI.then((response) => {
+            dispatch(getProductsArray(response.data))
+        })
+    } catch (error) {
+        console.log(error);         
+    }   
+  }
+
+  useEffect(() => {
+    getProducts()
+  }, [])
+
   return (
     <Router>
       <header className = 'header'>
+      <div className = 'modalportal'>{modalRenderer()}</div>
         <div className = 'header__title'>
           <h1>Game Store</h1>
         </div>
+        <div className = 'burger-menu'>
+          <Dropdown>
+            <Dropdown.Menu className = 'header__dropdown'>
+              <Link to = {ROUTES.HOME}>
+                <Dropdown.Item className = 'dropdown-link'>Home</Dropdown.Item>
+              </Link>
+              <Link to = {ROUTES.PC_PAGE}>
+                <Dropdown.Item className = 'dropdown-link'>PC</Dropdown.Item>
+              </Link>
+              <Link to = {ROUTES.PLAYSTATION_PAGE}>
+                <Dropdown.Item className = 'dropdown-link'>Playstation 5</Dropdown.Item>
+              </Link>
+              <Link to = {ROUTES.XBOX_PAGE}>
+                <Dropdown.Item className = 'dropdown-link'>XBox One</Dropdown.Item>
+              </Link>
+              {user.login === 'admin' || userName === 'admin' ? (
+                <Dropdown.Item className = 'dropdown-link'>
+                  <button className = 'dropdown-button' onClick = {() => setShowModal(!showModal)}>Create Card</button>
+                </Dropdown.Item>
+              ) : (
+                <div>
+                  <Link className = 'header__list-element' to = {ROUTES.CART}>
+                    <Dropdown.Item className = 'dropdown-link'>
+                      <button className = 'header__cart-icon'>
+                        <p className = 'header__cart-icon-amount'>{cart.length}</p>
+                      </button>
+                    </Dropdown.Item>
+                    
+                  </Link>
+                </div>
+              )}
+              <Link to = {ROUTES.SIGNIN}>
+                <Dropdown.Item className = 'dropdown-link'>Sign In</Dropdown.Item>
+              </Link>
+              <Link to = {ROUTES.SIGNUP}>
+                <Dropdown.Item className = 'dropdown-link'>Sign Up</Dropdown.Item>
+              </Link>
+              <Dropdown.Item className = 'dropdown-link'>
+                      <button className = 'dropdown-button' onClick = {() => logOut() }>Log Out</button>
+                    </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </div>
         <div className = 'header__nav'>
           <ul className = 'header__list'>
-            
             <Link className = ' header__list-element' to = {ROUTES.HOME}>
               <li className = 'header__link'>Home</li>
             </Link>
-            
               <li className = 'header__list-element'>
                   <Dropdown text = 'Products'>
-                      <Dropdown.Menu>  
+                      <Dropdown.Menu className = 'header__dropdown'>  
                         <Link to = {ROUTES.PC_PAGE}>
                           <Dropdown.Item className = 'dropdown-link'>PC</Dropdown.Item>
                         </Link>
@@ -108,39 +183,49 @@ const App: React.FunctionComponent = () => {
             </Link>
 
               {showButtons ? (
-                <div className = 'header__nav'>
                   <div className = 'header__list'>
-                    <Link className = 'header__list-element' to = {ROUTES.USER}>
+                    <Link className = 'header__user-list-element' to = {ROUTES.USER}>
                       <div className = 'header__user-icon'></div>
-                      <p className = 'header__user-name'>Hello, {userName}</p>
+                      <p className = 'header__user-name'>Hello, {userName || user.login}</p>
                     </Link>
                 
-                    <Link className = 'header__list-element' to = {ROUTES.CART}>{/*totalQuantity < 0 ? 0 : totalQuantity*/}
-                        <button className = 'header__cart-icon'><p className = 'header__cart-icon-amount'>{cart.length}</p></button>
-                    </Link>
-                
-                    <Link className = 'header__list-element' to = {ROUTES.HOME}>
-                        <button className = 'header__logout-icon' onClick = {() => logOut() }></button>
-                    </Link>
-                  </div>
+                  {user.login === 'admin' || userName === 'admin' ? (
+                      <div className = 'header__list'>
+                        
+                        <button className = 'header__create-card-button' onClick = {() => setShowModal(!showModal)}>Create Card</button>
+                        
+                        <Link className = 'header__list-element' to = {ROUTES.HOME}>
+                          <button className = 'header__logout-icon' onClick = {() => logOut() }></button>
+                        </Link>
+                      </div>
+                  ) : (
+                      <div className = 'header__list'>
+                        <Link className = 'header__list-element' to = {ROUTES.CART}>
+                          <button className = 'header__cart-icon'><p className = 'header__cart-icon-amount'>{cart.length}</p></button>
+                        </Link>
+                    
+                        <Link className = 'header__list-element' to = {ROUTES.HOME}>
+                            <button className = 'header__logout-icon' onClick = {() => logOut() }></button>
+                        </Link>
+                      </div>
+                  )}
+                    
                 </div>
               ) : (
-                <div className = 'header__nav'>
-                  <div className = 'header__list'>
-                    <Link className = 'header__list-element' to = {ROUTES.SIGNIN}>
+                  <div className = 'header__signin-list'>
+                    <Link className = 'header__signin-list-element' to = {ROUTES.SIGNIN}>
                       <li className = 'header__link'>
                         Sign In
                       </li>
                     </Link>
-                    <Link className = 'header__list-element' to = {ROUTES.SIGNUP}>
+                    <Link className = 'header__signin-list-element' to = {ROUTES.SIGNUP}>
                       <li className = 'header__link'>
                         Sign Up
                       </li>
                     </Link>
                   </div>
-                </div>
+                // </div>
               )}
-            
           </ul>
         </div>
       </header>
@@ -205,7 +290,7 @@ function Products() {
 }
 
 function About() {
-  return <h2>About</h2>;
+  return <AboutPage />;
 }
 
 function User() {

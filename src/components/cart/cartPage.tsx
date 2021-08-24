@@ -44,16 +44,16 @@ const CartPage: React.FunctionComponent = () => {
 
                 {cart.map((game, index) => {
                     totalPrice += game.price * game.amount
-                    
+
                     return (
                         <div className = 'cart__products' key = {index}>
                         
                             <p className = 'game-border'>{game.name}</p>
                             <div className = 'game-border'>
-                                <select>
-                                    <option>PC</option>
-                                    <option>Playstation</option>
-                                    <option>Xbox</option>
+                                <select className = 'cart__select-platform'>
+                                    { Object.keys(game.platform).map((key) => {
+                                        return <option key = {key} value = {key}>{game.platform[key]}</option>
+                                    })}
                                 </select>
                             </div>
                             <p className = 'game-border'>{today}</p>

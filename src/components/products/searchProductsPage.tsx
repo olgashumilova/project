@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types'
 import { getProductsAPI } from '@/api/api';
 import { getFilteredProducts } from '@/redux/actions/actions'
@@ -24,10 +24,13 @@ const SearchProductsPage: React.FunctionComponent<{title, filterByPlatform, sear
         { label: "Descending", value: "descending"},
     ]
 
+    const [products, setProducts] = useState([])
+    
     const [type, setType] = useState('ascending')
-    const [productsArray, setProductsArray] = useState([])
     const [isLoading, setIsLoading] = useState(false)
 
+    const productsState = useSelector(state => state.products)
+    
     const listGenres = ['Shooter', 'RPG', 'Sandbox', 'Action-adventure', 'Simulator']
     const listAgeLimit = [3, 6, 12, 16, 18]
 
@@ -38,8 +41,8 @@ const SearchProductsPage: React.FunctionComponent<{title, filterByPlatform, sear
     async function getProducts() {
         try {
             await getProductsAPI.then((response) => {
-                setProductsArray(response.data)
-            })        
+                setProducts(productsState.length !== 0 ? productsState : response.data)
+            })
         } catch (error) {
             console.log(error);         
         }   
@@ -55,9 +58,9 @@ const SearchProductsPage: React.FunctionComponent<{title, filterByPlatform, sear
         setIsLoading(true)
         await setTimeout(() => {
             if (value === 'All genres') {
-                dispatch(getFilteredProducts(productsArray.filter((game) => game.genre)))
+                dispatch(getFilteredProducts(products.filter((game) => game.genre)))
             } else if (value) {
-                dispatch(getFilteredProducts(productsArray.filter((game) => game.genre == value)))
+                dispatch(getFilteredProducts(products.filter((game) => game.genre == value)))
             }
             setIsLoading(false)
         }, 500)
@@ -67,9 +70,9 @@ const SearchProductsPage: React.FunctionComponent<{title, filterByPlatform, sear
         setIsLoading(true)
         await setTimeout(() => {
             if (value === 'All ages') {
-                dispatch(getFilteredProducts(productsArray.filter((game) => game.ageLimit)))
+                dispatch(getFilteredProducts(products.filter((game) => game.ageLimit)))
             } else if (value) {
-                dispatch(getFilteredProducts(productsArray.filter((game) => (game.ageLimit >= 3 && game.ageLimit <= value))))
+                dispatch(getFilteredProducts(products.filter((game) => (game.ageLimit >= 3 && game.ageLimit <= value))))
             }
             setIsLoading(false)
         }, 500)
@@ -82,7 +85,7 @@ const SearchProductsPage: React.FunctionComponent<{title, filterByPlatform, sear
     async function sortByNameAsc() {
         setIsLoading(true)
         await setTimeout(() => {
-            const result = productsArray.sort((a, b) => {
+            const result = products.sort((a, b) => {
                 const nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase()
                 if (nameA < nameB)
                   return -1
@@ -100,7 +103,7 @@ const SearchProductsPage: React.FunctionComponent<{title, filterByPlatform, sear
     async function sortByNameDesc() {
         setIsLoading(true)
         await setTimeout(() => {
-            const result = productsArray.sort((a, b) => {
+            const result = products.sort((a, b) => {
                 const nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase()
                 nameA > nameB ? -1 : 1
                 if (nameA > nameB)
@@ -119,7 +122,7 @@ const SearchProductsPage: React.FunctionComponent<{title, filterByPlatform, sear
     async function sortByRatingAsc() {
         setIsLoading(true)
         await setTimeout(() => {
-            const result = productsArray.sort((a, b) => {
+            const result = products.sort((a, b) => {
                 const ratingA = a.rating, ratingB = b.rating
                 if (ratingA < ratingB)
                   return -1
@@ -137,7 +140,7 @@ const SearchProductsPage: React.FunctionComponent<{title, filterByPlatform, sear
     async function sortByRatingDesc() {
         setIsLoading(true)
         await setTimeout(() => {
-            const result = productsArray.sort((a, b) => {
+            const result = products.sort((a, b) => {
                 const ratingA = a.rating, ratingB = b.rating
                 if (ratingA > ratingB)
                   return -1
@@ -155,7 +158,7 @@ const SearchProductsPage: React.FunctionComponent<{title, filterByPlatform, sear
     async function sortByPriceAsc() {
         setIsLoading(true)
         await setTimeout(() => {
-            const result = productsArray.sort((a, b) => {
+            const result = products.sort((a, b) => {
                 const priceA = a.price, priceB = b.price
                 if (priceA < priceB)
                   return -1
@@ -173,7 +176,7 @@ const SearchProductsPage: React.FunctionComponent<{title, filterByPlatform, sear
     async function sortByPriceDesc() {
         setIsLoading(true)
         await setTimeout(() => {
-            const result = productsArray.sort((a, b) => {
+            const result = products.sort((a, b) => {
                 const priceA = a.price, priceB = b.price
                 if (priceA > priceB)
                   return -1
@@ -191,7 +194,7 @@ const SearchProductsPage: React.FunctionComponent<{title, filterByPlatform, sear
     async function sortByAgeAsc() {
         setIsLoading(true)
         await setTimeout(() => {
-            const result = productsArray.sort((a, b) => {
+            const result = products.sort((a, b) => {
                 const ageLimitA = a.ageLimit, ageLimitB = b.ageLimit
                 if (ageLimitA < ageLimitB)
                   return -1
@@ -209,7 +212,7 @@ const SearchProductsPage: React.FunctionComponent<{title, filterByPlatform, sear
     async function sortByAgeDesc() {
         setIsLoading(true)
         await setTimeout(() => {
-            const result = productsArray.sort((a, b) => {
+            const result = products.sort((a, b) => {
                 const ageLimitA = a.ageLimit, ageLimitB = b.ageLimit
                 if (ageLimitA > ageLimitB)
                   return -1

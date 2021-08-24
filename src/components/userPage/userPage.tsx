@@ -19,7 +19,7 @@ const UserPage: React.FunctionComponent = () => {
                   </div>
                   <div className = 'user-profile-main__text-container'>
                       <p className = 'user-profile-main__Login'>Login: {user.login || userName}</p>
-                      <p className = 'user-profile-main__description'>Profile description: {user.description}</p>
+                      <p className = 'user-profile-main__description'>Profile description: {user.description || 'No description'}</p>
                   </div>
               </div>
             </div>

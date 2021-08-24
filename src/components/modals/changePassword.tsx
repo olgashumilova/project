@@ -38,7 +38,7 @@ const ChangePassword:React.FunctionComponent = () => {
 
     return (
 
-        <div className = 'modal-wrapper'>
+        <div className = {showModal === true ? 'modal-wrapper' : 'modal-wrapper_hidden'}>
             <div className = {showModal === true ? 'modalwindow' : 'modalwindow_hidden'}>
                 <div className = 'modalwindow__header'>
                     <p>Change password</p>

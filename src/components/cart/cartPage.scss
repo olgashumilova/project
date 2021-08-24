@@ -52,9 +52,10 @@
 
 .game-border {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
-    padding: 3% 6% 3% 6%;
+    padding: 3% 4% 3% 6%;
     margin: 0;
     border-bottom: 1px solid;
     border-color: $white-color;
@@ -88,4 +89,8 @@
 
 .cart__current-item-amount {
     margin: 0 5px 0 5px;
+}
+
+.cart__select-platform {
+    height: 40px;
 }
