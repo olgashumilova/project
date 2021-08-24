@@ -1,4 +1,4 @@
-export const ACTION_TYPES = {
+const ACTION_TYPES = {
     SET_USER: 'SET_USER',
     GET_USER_PROFILE: 'GET_USER_PROFILE',
     IS_SIGNED_IN: 'IS_SIGNED_IN',
@@ -12,3 +12,5 @@ export const ACTION_TYPES = {
     REMOVE_ITEM: 'REMOVE_ITEM',
     CURRENT_GAME_CARD: 'CURRENT_GAME_CARD',
 }
+
+export default ACTION_TYPES
