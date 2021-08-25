@@ -48,7 +48,7 @@ import '@Components/aboutPage/aboutPage.scss'
 import { getProductsAPI } from '@/api/api'
 
 // Redux actions
-import { getProductsArray } from '@/redux/actions/actions.ts'
+import { getProductsArray, getCurrentGameCard } from '@/redux/actions/actions.ts'
 
 const App: React.FunctionComponent = () => {
 
@@ -190,7 +190,7 @@ const App: React.FunctionComponent = () => {
                   {user.login === 'admin' || userName === 'admin' ? (
                     <div className = 'header__list'>
                       
-                      <button className = 'header__create-card-button' onClick = {(): void => setShowModal(!showModal)}>Create Card</button>
+                      <button className = 'header__create-card-button' onClick = {(): void => {setShowModal(!showModal), dispatch(getCurrentGameCard(null))}}>Create Card</button>
                       
                       <Link className = 'header__list-element' to = {ROUTES.HOME}>
                         <button className = 'header__logout-icon' onClick = {(): void => logOut() }></button>
