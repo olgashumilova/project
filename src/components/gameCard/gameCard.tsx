@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Swal from 'sweetalert2'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addItemToCart, getCurrentGameCard } from '@/redux/actions/actions.ts'
-import { getProductsAPI } from '@/api/api'
 import EditGameCardModal from '@Components/modals/editGameCardModal'
 
 interface IProp {
@@ -17,37 +16,26 @@ const GameCard: React.FunctionComponent <{backgroundImage: string, description: 
     const dispatch = useDispatch()
 
     const [showModal, setShowModal] = useState(false)
-    const [productsArray, setProductsArray] = useState([])
 
-    async function getProducts(): Promise<void> {
-        try {
-            await getProductsAPI.then((response) => {
-                setProductsArray(response.data)
-            })        
-        } catch (error) {
-            console.log(error);         
-        }   
-    }
-
-    useEffect(() => {
-        getProducts()
-    }, [])
+    const products = useSelector(state => state.products)
 
     function dispatchItem(): void {
-        for (let i = 0; i < productsArray.length; i++) {
-            if (productsArray[i].description === description) {
-                dispatch(addItemToCart(productsArray[i]))
-            }  
+        for (let i = 0; i < products.length; i++) {
+            if (products[i].description === description) {
+                dispatch(addItemToCart(products[i]))
+            }    
         }
     }
 
     function showModalAndDispatch(): void {
-        for (let i = 0; i < productsArray.length; i++) {
-            if (productsArray[i].description === description) {
-                dispatch(getCurrentGameCard(productsArray[i]))
-                setShowModal(!showModal)
-            }  
+        for (let i = 0; i < products.length; i++) {
+            if (products[i].description === description) {
+                setShowModal(true)
+                dispatch(getCurrentGameCard(products[i]))
+            }   
         }
+        console.log(products);
+        
     }
 
     const userName = localStorage.getItem('username')
