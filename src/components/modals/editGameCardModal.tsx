@@ -22,7 +22,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
         gameRating: '',
         gameDescription: '',
         gameAgeLimit: '',
-        gamePlatform: null,
+        gamePlatform: {},
     }
 
     const [stateGame, setStateGame] = useState(initialState)
@@ -125,7 +125,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
             <div className = {showModal === true ? 'edit-modalwindow' : 'edit-modalwindow_hidden'}>
                 <div className = 'edit-modalwindow__header'>
                     <p>Edit Card</p>
-                    <button className = 'modalwindow__close-button' onClick = {(): void => setShowModal(!showModal)}></button>
+                    <button className = 'modalwindow__close-button' onClick = {(): void => {setShowModal(!showModal)}}></button>
                 </div>
                 <div className = 'modalwindow__main-headers'>
                     <p>Card Image</p>
@@ -148,7 +148,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
                             />
                         </div>
                         <div className = 'modalwindow__input'>
-                            <p>Genre</p>
+                            <p className = 'modalwindow__fieldname'>Genre</p>
                             <input 
                                 type = 'text'
                                 className = 'modalwindow__input-field'
@@ -161,7 +161,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
                             <input 
                                 type = 'number'
                                 className = 'modalwindow__input-field'
-                                onChange = {(event): void => setStateGame({...stateGame, gamePrice: event.target.value})}
+                                onChange = {(event): void => setStateGame({...stateGame, gamePrice: +(event.target.value)})}
                                 value = {stateGame.gamePrice}
                             />
                         </div>
@@ -179,14 +179,14 @@ const EditGameCardModal:React.FunctionComponent = () => {
                             <input 
                                 type = 'number' min = '0' max = '5'
                                 className = 'modalwindow__input-field'
-                                onChange = {(event): void => setStateGame({...stateGame, gameRating: event.target.value})}
+                                onChange = {(event): void => setStateGame({...stateGame, gameRating: +(event.target.value)})}
                                 value = {stateGame.gameRating}
                             />
                         </div>
                         <div className = 'modalwindow__input'>
-                            <p>Description</p>
-                            <textarea 
-                                className = 'modalwindow__desc-input-field'
+                            <p className = 'modalwindow__fieldname'>Description</p>
+                            <input 
+                                className = 'modalwindow__input-field'
                                 onChange = {(event): void => setStateGame({...stateGame, gameDescription: event.target.value})}
                                 value = {stateGame.gameDescription}
                             />
@@ -196,7 +196,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
                             <input
                                 type = 'number' min = '3' max = '18'
                                 className = 'modalwindow__input-field'
-                                onChange = {(event): void => setStateGame({...stateGame, gameAgeLimit: event.target.value})}
+                                onChange = {(event): void => setStateGame({...stateGame, gameAgeLimit: +(event.target.value)})}
                                 value = {stateGame.gameAgeLimit}
                             />
                         </div>
