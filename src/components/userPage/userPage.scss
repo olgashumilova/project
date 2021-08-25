@@ -1,18 +1,20 @@
 @import '@Styles/main.scss';
 
 #box {
-    margin: 5% 10% 10% 10%;
+  margin: 5% 10% 10% 16%;
 }
 
 .user-profile-container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    --borderWidth: 2px;
-    background: rgb(17, 17, 17);
-    @include regular-font;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  --borderWidth: 2px;
+  border-radius: 20px;
+  background: rgb(17, 17, 17);
+  @include regular-font;
 }
 
 .user-profile-container:after {
@@ -25,6 +27,7 @@
   background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82);
   z-index: -1;
   animation: animatedgradient 3s ease alternate infinite;
+  border-radius: 20px;
   background-size: 300% 300%;
 }
   

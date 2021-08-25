@@ -25,11 +25,11 @@ h1 {
     height: 100%;
     padding-left: 30%;
 
-    @media (min-width: 1024px) {
+    @media (min-width: 800px) {
         padding-left: 20%;
     }
 
-    @media (min-width: 280px) and (max-width: 1024px) {
+    @media (min-width: 280px) and (max-width: 800px) {
         display: none;
     }
 }
@@ -215,7 +215,7 @@ h1 {
     background: url('../../assets/headerIcons/burgerMenuIcon.png') no-repeat right;
     cursor: pointer;
 
-    @media (min-width: 280px) and (max-width: 1024px) {
+    @media (min-width: 280px) and (max-width: 800px) {
         display: flex;
     }
 }
