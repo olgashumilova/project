@@ -5,9 +5,19 @@
     flex-direction: column;
     justify-content: center;
     height: 20%;
+    padding: 2% 0 3% 0;
     background-color: rgba(0, 0, 0, 0.800);
     color: $white-color;
     @include regular-font;
+
+    @media (max-height: 850px) {
+        margin-top: 30%;
+    }
+
+    @media (max-width: 850px) and (max-height: 1024px) {
+        margin-top: 30%;
+    }
+    
 }
 
 .footer__title {
