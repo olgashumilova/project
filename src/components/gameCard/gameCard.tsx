@@ -34,8 +34,6 @@ const GameCard: React.FunctionComponent <{backgroundImage: string, description: 
                 dispatch(getCurrentGameCard(products[i]))
             }   
         }
-        console.log(products);
-        
     }
 
     const userName = localStorage.getItem('username')
