@@ -37,7 +37,7 @@ export const getFilteredProducts = (payload: any): {type: string, payload: any} 
 
 export const getCurrentGameCard = (payload: IGame): {type: string, payload: IGame} => ({
     type: ACTION_TYPES.CURRENT_GAME_CARD,
-    payload: {...payload},
+    payload: payload,
 })
 
 // Cart actions________________________________________________________________________________________________
