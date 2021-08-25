@@ -1,4 +1,5 @@
 import ACTION_TYPES from '../const/actionTypes'
+import { IUserProfile, IGame } from '../../types/types'
 
 export const initialState = {
   products: [],
@@ -11,19 +12,18 @@ export const initialState = {
   currentGameCard: null,
 }
 
+interface IState {
+  products: IGame[];
+  userProfile: IUserProfile[];
+  authUser: null;
+  isSignedIn: boolean;
+  filteredProducts: IGame[];
+  cart: IGame[];
+  totalQuantity: number;
+  currentGameCard: null | IGame;
+}
 
-// interface IState {
-//   products: never[];
-//   userProfile: never[];
-//   authUser: null;
-//   isSignedIn: boolean;
-//   filteredProducts: never[];
-//   cart: never[];
-//   totalQuantity: number;
-//   currentGameCard: null | string;
-// }
-
-const reducer = (state = initialState, action: any): any => {
+const reducer = (state = initialState, action: any): IState => {
     switch (action.type) {
 
       case ACTION_TYPES.SET_USER: {

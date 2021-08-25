@@ -20,7 +20,7 @@ export const isSignedIn = (payload: boolean): {type: string, payload: boolean} =
 
 // Products actions________________________________________________________________________________________________
 
-export const getProductsArray = (payload: any): {type: string, payload: any} => ({
+export const getProductsArray = (payload: (IGame | null)[]): {type: string, payload: (IGame | null)[]} => ({
     type: ACTION_TYPES.GET_PRODUCTS_ARRAY,
     payload: [...payload],
 })
@@ -30,7 +30,7 @@ export const addGameToProductsArray = (payload: IGame): {type: string, payload: 
     payload: {...payload},
 })
 
-export const getFilteredProducts = (payload: any): {type: string, payload: any} => ({
+export const getFilteredProducts = (payload: (IGame | null)[]): {type: string, payload: (IGame | null)[]} => ({
     type: ACTION_TYPES.GET_FILTERED_PRODUCTS,
     payload: [...payload],
 })
