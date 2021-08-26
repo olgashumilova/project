@@ -85,7 +85,8 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "test": "craco test"
+    "test": "craco test",
+    "serve": "webpack serve"
   },
   "eslintConfig": {
     "extends": [
