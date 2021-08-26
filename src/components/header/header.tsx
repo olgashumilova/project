@@ -158,9 +158,9 @@ const App: React.FunctionComponent = () => {
             <Link className = ' header__list-element' to = {ROUTES.HOME}>
               <li className = 'header__link'>Home</li>
             </Link>
-              <li className = 'header__list-element'>
-                  <Dropdown text = 'Products'>
-                    <Dropdown.Menu className = 'header__dropdown'>  
+              <li className = 'header__list-element header__dropdown-menu'>
+                  <Dropdown text = 'Products' className = 'header__dropdown'>
+                    <Dropdown.Menu>  
                       <Link to = {ROUTES.PC_PAGE}>
                         <Dropdown.Item className = 'dropdown-link'>PC</Dropdown.Item>
                       </Link>

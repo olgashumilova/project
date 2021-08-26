@@ -14,13 +14,14 @@ const UserPage: React.FunctionComponent = () => {
             <div className = 'user-profile' key = {user.index}>
               <p className = 'user-profile__title'>{user.login || userName}&#39;s profile page</p>
               <div className = 'user-profile-main'>
-                  <div className = 'user-profile-main__image-container'>
-                      <img className = 'user-profile-main__image' src = {user.userImage} alt = 'User profile image' />
-                  </div>
-                  <div className = 'user-profile-main__text-container'>
-                      <p className = 'user-profile-main__Login'>Login: {user.login || userName}</p>
-                      <p className = 'user-profile-main__description'>Profile description: {user.description || 'No description'}</p>
-                  </div>
+                <div className = 'user-profile-main__image-container'>
+                    <img className = 'user-profile-main__image' src = {user.userImage} alt = 'User profile image' />
+                </div>
+                <div className = 'user-profile-main__text-container'>
+                    <p className = 'user-profile__title'>Profile info</p>
+                    <p className = 'user-profile-main__Login'>Login: {user.login || userName}</p>
+                    <p className = 'user-profile-main__description'>Profile description: {user.description || 'No description'}</p>
+                </div>
               </div>
             </div>
 
