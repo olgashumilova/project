@@ -1,7 +1,21 @@
 import ACTION_TYPES from '../const/actionTypes'
-import { IUserProfile, IGame } from '../../types/types'
+import { IState, TActions } from '../../types/types'
+import { 
+  IUserProfile,
+  IProductsArray,
+  IGame,
+  TSetUser,
+  TGetUser,
+  TIsSignedIn,
+  TGetProductsArray,
+  TAddGameToProductsArray,
+  TGetFilteredProducts,
+  TGetCurrentGameCard,
+  TAddItemToCart,
+  TRemoveItemFromCart,
+} from '../../types/types'
 
-export const initialState = {
+export const initialState: IState = {
   products: [],
   userProfile: [],
   authUser: null,
@@ -12,18 +26,13 @@ export const initialState = {
   currentGameCard: null,
 }
 
-interface IState {
-  products: IGame[];
-  userProfile: IUserProfile[];
-  authUser: null;
-  isSignedIn: boolean;
-  filteredProducts: IGame[];
-  cart: IGame[];
-  totalQuantity: number;
-  currentGameCard: null | IGame;
+type TAction = {
+  type: string,
+  payload: any
 }
 
-const reducer = (state = initialState, action: any): IState => {
+const reducer = (state = initialState, action: TAction): IState => {
+  
     switch (action.type) {
 
       case ACTION_TYPES.SET_USER: {
