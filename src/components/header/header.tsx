@@ -82,7 +82,7 @@ const App: React.FunctionComponent = () => {
           dispatch(getProductsArray(response.data))
       })
     } catch (error) {
-        console.log(error);         
+        console.error(error);         
     }   
   }
 
@@ -93,7 +93,7 @@ const App: React.FunctionComponent = () => {
   return (
     <Router>
       <header className = 'header'>
-      <div className = 'modalportal'>{showModal? <EditGameCardModal/> : null}</div>
+      <div className = 'modal-portal'>{showModal? <EditGameCardModal/> : null}</div>
         <div className = 'header__title'>
           <h1>Game Store</h1>
         </div>

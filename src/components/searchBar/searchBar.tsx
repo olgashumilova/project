@@ -35,7 +35,7 @@ const SearchBar: React.FunctionComponent = () => {
         setArrOfMatches([])
       }         
     }).catch ((error) => {
-        console.log(error);
+        console.error(error);
     })
   }
 

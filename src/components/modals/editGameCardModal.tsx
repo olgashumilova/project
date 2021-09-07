@@ -49,7 +49,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
         if (!stateGame.gameImage) {
             return <div className = 'userpage__image-inner'>No picture</div>
         } else {
-            return <img className = 'modalwindow__main-image' src = {stateGame.gameImage} alt = 'Game card image' />
+            return <img className = 'modal-window__main-image' src = {stateGame.gameImage} alt = 'Game card image' />
         }
     }
 
@@ -122,87 +122,87 @@ const EditGameCardModal:React.FunctionComponent = () => {
     return (
 
         <div className = {showModal === true ? 'edit-modal-wrapper' : 'edit-modal-wrapper_hidden'}>
-            <div className = {showModal === true ? 'edit-modalwindow' : 'edit-modalwindow_hidden'}>
-                <div className = 'edit-modalwindow__header'>
+            <div className = {showModal === true ? 'edit-modal-window' : 'edit-modal-window_hidden'}>
+                <div className = 'edit-modal-window__header'>
                     <p>Edit Card</p>
-                    <button className = 'modalwindow__close-button' onClick = {(): void => {setShowModal(!showModal)}}></button>
+                    <button className = 'modal-window__close-button' onClick = {(): void => {setShowModal(!showModal)}}></button>
                 </div>
-                <div className = 'modalwindow__main-headers'>
+                <div className = 'modal-window__main-headers'>
                     <p>Card Image</p>
                     <p>Information</p>
                 </div>
-                <div className = 'modalwindow__main'>
+                <div className = 'modal-window__main'>
 
-                    <div className = 'modalwindow__main-image-container'>
+                    <div className = 'modal-window__main-image-container'>
                         {displayImage()}
                     </div>
 
-                    <div className = 'edit-modalwindow__form'>
-                        <div className = 'modalwindow__input'>
-                            <p className = 'modalwindow__fieldname'>Name</p>
+                    <div className = 'edit-modal-window__form'>
+                        <div className = 'modal-window__input'>
+                            <p className = 'modal-window__fieldname'>Name</p>
                             <input 
                                 type = 'text'
-                                className = 'modalwindow__input-field'
+                                className = 'modal-window__input-field'
                                 onChange = {(event): void => setStateGame({...stateGame, gameName: event.target.value})}
                                 value = {stateGame.gameName}
                             />
                         </div>
-                        <div className = 'modalwindow__input'>
-                            <p className = 'modalwindow__fieldname'>Genre</p>
+                        <div className = 'modal-window__input'>
+                            <p className = 'modal-window__fieldname'>Genre</p>
                             <input 
                                 type = 'text'
-                                className = 'modalwindow__input-field'
+                                className = 'modal-window__input-field'
                                 onChange = {(event): void => setStateGame({...stateGame, gameGenre: event.target.value})}
                                 value = {stateGame.gameGenre}
                             />
                         </div>
-                        <div className = 'modalwindow__input'>
-                            <p className = 'modalwindow__fieldname'>Price</p>
+                        <div className = 'modal-window__input'>
+                            <p className = 'modal-window__fieldname'>Price</p>
                             <input 
                                 type = 'number'
-                                className = 'modalwindow__input-field'
+                                className = 'modal-window__input-field'
                                 onChange = {(event): void => setStateGame({...stateGame, gamePrice: +(event.target.value)})}
                                 value = {stateGame.gamePrice}
                             />
                         </div>
-                        <div className = 'modalwindow__input'>
-                            <p className = 'modalwindow__fieldname'>Image</p>
+                        <div className = 'modal-window__input'>
+                            <p className = 'modal-window__fieldname'>Image</p>
                             <input 
                                 type = 'text'
-                                className = 'modalwindow__input-field'
+                                className = 'modal-window__input-field'
                                 onChange = {(event): void => setStateGame({...stateGame, gameImage: event.target.value})}
                                 value = {stateGame.gameImage}
                             />
                         </div>
-                        <div className = 'modalwindow__input'>
-                            <p className = 'modalwindow__fieldname'>Rating</p>
+                        <div className = 'modal-window__input'>
+                            <p className = 'modal-window__fieldname'>Rating</p>
                             <input 
                                 type = 'number' min = '0' max = '5'
-                                className = 'modalwindow__input-field'
+                                className = 'modal-window__input-field'
                                 onChange = {(event): void => setStateGame({...stateGame, gameRating: +(event.target.value)})}
                                 value = {stateGame.gameRating}
                             />
                         </div>
-                        <div className = 'modalwindow__input'>
-                            <p className = 'modalwindow__fieldname'>Description</p>
+                        <div className = 'modal-window__input'>
+                            <p className = 'modal-window__fieldname'>Description</p>
                             <input 
-                                className = 'modalwindow__input-field'
+                                className = 'modal-window__input-field'
                                 onChange = {(event): void => setStateGame({...stateGame, gameDescription: event.target.value})}
                                 value = {stateGame.gameDescription}
                             />
                         </div>
-                        <div className = 'modalwindow__input'>
-                            <p className = 'modalwindow__fieldname'>Age</p>
+                        <div className = 'modal-window__input'>
+                            <p className = 'modal-window__fieldname'>Age</p>
                             <input
                                 type = 'number' min = '3' max = '18'
-                                className = 'modalwindow__input-field'
+                                className = 'modal-window__input-field'
                                 onChange = {(event): void => setStateGame({...stateGame, gameAgeLimit: +(event.target.value)})}
                                 value = {stateGame.gameAgeLimit}
                             />
                         </div>
 
-                            <div className = 'modalwindow__checkbox-input'>
-                                <div className = 'modalwindow__checkbox-container'>
+                            <div className = 'modal-window__checkbox-input'>
+                                <div className = 'modal-window__checkbox-container'>
                                     <input 
                                         type = 'checkbox' 
                                         name = 'pc'
@@ -213,7 +213,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
                                     <p>PC</p>
                                 </div>
                                 
-                                <div className = 'modalwindow__checkbox-container'>
+                                <div className = 'modal-window__checkbox-container'>
                                     <input 
                                         type = 'checkbox' 
                                         name = 'playstation'
@@ -224,7 +224,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
                                     <p>Playstation</p>
                                 </div>
                                 
-                                <div className = 'modalwindow__checkbox-container'>
+                                <div className = 'modal-window__checkbox-container'>
                                     <input 
                                         type = 'checkbox' 
                                         name = 'xbox'
@@ -242,7 +242,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
 
                 <div className = 'edit-modal-windows-buttons'>
                     <button 
-                        className = 'edit-modalwindow__button'
+                        className = 'edit-modal-window__button'
                         type = 'submit'
                         onClick = {(): void => {
                             currentGameCard === null ? addGame() : editGame()
@@ -250,7 +250,7 @@ const EditGameCardModal:React.FunctionComponent = () => {
                         }}>Submit
                     </button>
                     <button 
-                        className = 'edit-modalwindow__button'
+                        className = 'edit-modal-window__button'
                         onClick = {(): void => { 
                             setShowModal(!showModal)
                             deleteGame() 

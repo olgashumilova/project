@@ -41,7 +41,7 @@ const EditUserPage: React.FunctionComponent = () => {
                 }              
             })
         } catch (error) {
-            console.log(error); 
+            console.error(error); 
         }
     }
 
@@ -56,7 +56,7 @@ const EditUserPage: React.FunctionComponent = () => {
     return (
         <div className = 'userpage'>
             
-        <div className = 'modalportal'>{showModal ? <ChangePassword/> : null}</div>
+        <div className = 'modal-portal'>{showModal ? <ChangePassword/> : null}</div>
 
             <p className = 'userpage__title'>Edit profile</p>
 

@@ -44,7 +44,7 @@ const HomeComponent: React.FunctionComponent = () => {
                 dispatch(getProductsArray(response.data))
             })
         } catch (error) {
-            console.log(error);         
+            console.error(error);         
         }   
     }
 
@@ -52,7 +52,7 @@ const HomeComponent: React.FunctionComponent = () => {
         await getTopGamesAPI.then((response) => {
             setTopGames(response.data)
         }).catch ((error) => {
-            console.log(error);
+            console.error(error);
         })
     }
 
@@ -60,7 +60,7 @@ const HomeComponent: React.FunctionComponent = () => {
         await getRecentProductsAPI.then((response) => {
             setRecentProducts(products.length !== 0 ? products.slice(Math.max(products.length - 3, 0)) : response.data)
         }).catch ((error) => {
-            console.log(error);
+            console.error(error);
         })
     }
 

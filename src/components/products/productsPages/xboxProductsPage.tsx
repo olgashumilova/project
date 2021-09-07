@@ -20,7 +20,7 @@ const XboxProductsPage: React.FunctionComponent = () => {
             const newArr = productsArray.filter((game) => game.platform.xbox )
             setXboxProductsFromAPI(newArr)          
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }   
     }
 

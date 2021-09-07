@@ -40,7 +40,7 @@ const GameCard: React.FunctionComponent <{backgroundImage: string, description: 
     
     if (userName === 'admin') {
         return (
-            <div className = 'modalportal'>{showModal ? <EditGameCardModal /> : null}
+            <div className = 'modal-portal'>{showModal ? <EditGameCardModal /> : null}
                 <div className = 'gamecard gamecard-wrap'>
                 <div className = 'front' style = {{backgroundImage: `url(${backgroundImage})`}}></div>
                 <div className = 'back'>

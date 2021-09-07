@@ -44,7 +44,7 @@ const SearchProductsPage: React.FunctionComponent<{title, filterByPlatform, sear
                 setProducts(productsState.length !== 0 ? productsState : response.data)
             })
         } catch (error) {
-            console.log(error);         
+            console.error(error);         
         }   
     }
 

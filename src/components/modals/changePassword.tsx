@@ -22,7 +22,7 @@ const ChangePassword:React.FunctionComponent = () => {
                 Swal.fire(response.data)               
             })
         } catch (error) {
-            console.log(error); 
+            console.error(error); 
         }
     }
 
@@ -39,34 +39,34 @@ const ChangePassword:React.FunctionComponent = () => {
     return (
 
         <div className = {showModal === true ? 'modal-wrapper' : 'modal-wrapper_hidden'}>
-            <div className = {showModal === true ? 'modalwindow' : 'modalwindow_hidden'}>
-                <div className = 'modalwindow__header'>
+            <div className = {showModal === true ? 'modal-window' : 'modal-window_hidden'}>
+                <div className = 'modal-window__header'>
                     <p >Change password</p>
-                    <button className = 'modalwindow__close-button' onClick = {(): void => setShowModal(!showModal)}></button>
+                    <button className = 'modal-window__close-button' onClick = {(): void => setShowModal(!showModal)}></button>
                 </div>
-                <div className = 'modalwindow__form'>
+                <div className = 'modal-window__form'>
 
-                    <div className = 'modalwindow__input'>
-                        <p className = 'modalwindow__fieldname'>Password</p>
+                    <div className = 'modal-window__input'>
+                        <p className = 'modal-window__fieldname'>Password</p>
                         <input 
                             type = 'password'
-                            className = 'modalwindow__input-field'
+                            className = 'modal-window__input-field'
                             onChange = {(event): void => setPassword(event.target.value)}
                             value = {password}
                         />
                     </div>
-                    <div className = 'modalwindow__input'>
-                        <p className = 'modalwindow__fieldname'>Repeat password</p>
+                    <div className = 'modal-window__input'>
+                        <p className = 'modal-window__fieldname'>Repeat password</p>
                         <input 
                             type = 'password'
-                            className = 'modalwindow__input-field'
+                            className = 'modal-window__input-field'
                             onChange = {(event): void => setRepeatPassword(event.target.value)}
                             value = {repeatPassword}
                         />
                     </div>
                 </div>
                 <button 
-                    className = 'modalwindow__button'
+                    className = 'modal-window__button'
                     type = 'submit'
                     onClick = {comparePasswords}>
                     Submit

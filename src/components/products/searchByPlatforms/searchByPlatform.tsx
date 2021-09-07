@@ -41,7 +41,7 @@ const SearchByPlatform: React.FunctionComponent = (props) => {
         setArrOfMatches([])
       }         
     }).catch ((error) => {
-        console.log(error);
+        console.error(error);
     })
   }
 

@@ -38,43 +38,43 @@ const SignInModal: React.FunctionComponent = () => {
                 }
             })        
         } catch (error) {
-            console.log(error);         
+            console.error(error);         
         }   
     }
     
 
     return (
         <div>
-            <div className = 'modalwindow'>
-                <div className = 'modalwindow__header'>
-                    <p className = 'modalwindow__fieldname'>Authorization</p>
+            <div className = 'modal-window'>
+                <div className = 'modal-window__header'>
+                    <p className = 'modal-window__fieldname'>Authorization</p>
                     <Link to = {ROUTES.HOME}>
-                        <button className = 'modalwindow__close-button'></button>
+                        <button className = 'modal-window__close-button'></button>
                     </Link>
                 </div>
-                <div className = 'modalwindow__form'>
-                    <div className = 'modalwindow__input'>
-                        <p className = 'modalwindow__fieldname'>Login</p>
+                <div className = 'modal-window__form'>
+                    <div className = 'modal-window__input'>
+                        <p className = 'modal-window__fieldname'>Login</p>
                         <input 
                             type="text" 
-                            className = 'modalwindow__input-field'
+                            className = 'modal-window__input-field'
                             onChange = {(event): void => setLogin(event.target.value)}
                             value = {login}
                         />
                     </div>
     
-                    <div className = 'modalwindow__input'>
-                        <p className = 'modalwindow__fieldname'>Password</p>
+                    <div className = 'modal-window__input'>
+                        <p className = 'modal-window__fieldname'>Password</p>
                         <input 
                             type = 'password'
-                            className = 'modalwindow__input-field'
+                            className = 'modal-window__input-field'
                             onChange = {(event): void => setPassword(event.target.value)}
                             value = {password}
                         />
                     </div>
                 </div>
                 <button 
-                    className = 'modalwindow__button'
+                    className = 'modal-window__button'
                     type = 'submit'
                     onClick = {(): void => {
                         signIn()

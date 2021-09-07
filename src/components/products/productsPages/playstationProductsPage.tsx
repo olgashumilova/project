@@ -20,7 +20,7 @@ const PlaystationProductsPage: React.FunctionComponent = () => {
             const newArr = productsArray.filter((game) => game.platform.playstation )
             setPlaystationProductsFromAPI(newArr)          
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }   
     }
 

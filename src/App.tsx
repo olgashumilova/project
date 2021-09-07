@@ -5,7 +5,7 @@ import Header from '@Components/header/header.tsx'
 
 import '@/App.css'
 
-interface Props {
+interface IProps {
   children: ReactNode;
 }
 
@@ -13,7 +13,7 @@ interface State {
   hasError: boolean;
 }
 
-class App extends Component <Props, State> {
+class App extends Component <IProps, State> {
   public state: State = {
     hasError: false
   };

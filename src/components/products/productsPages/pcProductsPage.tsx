@@ -20,7 +20,7 @@ const PcProductsPage: React.FunctionComponent = () => {
             const newArr = productsArray.filter((game) => game.platform.pc )
             setPcProductsFromAPI(newArr)
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }   
     }
 
