@@ -15,12 +15,12 @@ const CartPage: React.FunctionComponent = () => {
 
     const [itemCount, setItemCount] = useState(1);
 
-    let today = new Date();
-    const dd = String(today.getDate()).padStart(2, '0');
-    const mm = String(today.getMonth() + 1).padStart(2, '0')
-    const yyyy = today.getFullYear();
+    const date = new Date();
+    const dd = String(date.getDate()).padStart(2, '0');
+    const mm = String(date.getMonth() + 1).padStart(2, '0')
+    const yyyy = date.getFullYear();
 
-    today = mm + ' / ' + dd + ' / ' + yyyy;
+    const today = mm + ' / ' + dd + ' / ' + yyyy;
 
     if (cart.length === 0) {
         return (
