@@ -19,17 +19,9 @@ import '@Components/gameCard/gameCard.scss'
 import { getTopGamesAPI, getRecentProductsAPI, getProductsAPI } from '@/api/api'
 import { getProductsArray } from '@/redux/actions/actions.ts'
 
-const HomeComponent: React.FunctionComponent = () => {
+import { IGamesArray } from '@/interfaces.ts'
 
-    interface IGamesArray {
-        id: number,
-        name: string,
-        ageLimit: string,
-        rating: number,
-        image: string,
-        description: string,
-        price: number,
-    }
+const HomeComponent: React.FunctionComponent = () => {
 
     const dispatch = useDispatch()
 

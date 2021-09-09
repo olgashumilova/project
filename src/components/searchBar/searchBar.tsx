@@ -1,20 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
+import { IGamesArray } from '@/interfaces.ts'
 
 // Game Card
 import GameCard from '@Components/gameCard/gameCard.tsx'
 import '@Components/gameCard/gameCard.scss'
 
 const SearchBar: React.FunctionComponent = () => {
-
-  interface IGamesArrray {
-    id: number,
-    name: string,
-    price: number,
-    ageLimit: string,
-    image: string,
-    description: string,
-  }
 
   const [text, setText] = useState('');
   const [result, setResult] = useState('');
@@ -73,7 +65,7 @@ const SearchBar: React.FunctionComponent = () => {
 
       <div className = 'game-cards'>
         {text.length !== 0 ? (
-            arrOfMatches.map((item: IGamesArrray) => {         
+            arrOfMatches.map((item: IGamesArray) => {         
               return (
                 <div key = {item.name}>
                     <GameCard

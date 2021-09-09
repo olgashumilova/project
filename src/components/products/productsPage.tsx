@@ -10,15 +10,6 @@ import SearchProductsPage from '@Components/products/searchProductsPage.tsx'
 
 const ProductsPage: React.FunctionComponent<{title, filterByPlatform, searchbar, productPlatform, displayGames, platform}> = (props) => {
 
-    ProductsPage.propTypes = {
-        title: PropTypes.string,
-        filterByPlatform: PropTypes.array,
-        searchbar: PropTypes.object,
-        displayGames: PropTypes.array,
-        productPlatform: PropTypes.array,
-        platform: PropTypes.string,
-    }
-
     const productPlatform = props.productPlatform
     const platform = props.platform
     const filteredProducts = useSelector(state => state.filteredProducts)
@@ -69,6 +60,15 @@ const ProductsPage: React.FunctionComponent<{title, filterByPlatform, searchbar,
             />
         </div>
     ) 
+}
+
+ProductsPage.propTypes = {
+    title: PropTypes.string,
+    filterByPlatform: PropTypes.array,
+    searchbar: PropTypes.object,
+    displayGames: PropTypes.array,
+    productPlatform: PropTypes.array,
+    platform: PropTypes.string,
 }
 
 export default React.memo(ProductsPage)

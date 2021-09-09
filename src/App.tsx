@@ -2,23 +2,16 @@ import React, { Component, ErrorInfo, ReactNode } from "react";
 import  { Redirect } from "react-router-dom"
 import ROUTES from '@Components/routes.ts'
 import Header from '@Components/header/header.tsx'
+import {IProps, IState} from '@/interfaces.ts'
 
 import '@/App.css'
 
-interface IProps {
-  children: ReactNode;
-}
-
-interface State {
-  hasError: boolean;
-}
-
-class App extends Component <IProps, State> {
-  public state: State = {
+class App extends Component <IProps, IState> {
+  public state: IState = {
     hasError: false
   };
   
-  public static getDerivedStateFromError(): State {
+  public static getDerivedStateFromError(): IState {
     return { hasError: true };
   }
 

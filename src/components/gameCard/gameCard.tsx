@@ -4,14 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addItemToCart, getCurrentGameCard } from '@/redux/actions/actions.ts'
 import EditGameCardModal from '@Components/modals/editGameCardModal'
 
-interface IProp {
-    backgroundImage: string;
-    description: string;
-    ageLimit: string;
-    price: number;
-}
-
-const GameCard: React.FunctionComponent <{backgroundImage: string, description: string, ageLimit: string, price: number}> = ({backgroundImage, description, ageLimit, price}: IProp) => {
+const GameCard: React.FunctionComponent <{backgroundImage: string, description: string, ageLimit: string, price: number}> = ({backgroundImage, description, ageLimit, price}) => {
     
     const dispatch = useDispatch()
 

@@ -1,26 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 import PropTypes from 'prop-types'
+import { IGamesArray } from '@/interfaces.ts'
 
 // Game Card
 import GameCard from '@Components/gameCard/gameCard.tsx'
 import '@Components/gameCard/gameCard.scss'
 
 const SearchByPlatform: React.FunctionComponent = (props) => {
-
-    SearchByPlatform.propTypes = {
-        searchAPI: PropTypes.string,
-    }
-
-  interface IGamesArrray {
-    id: number,
-    name: string,
-    price: number,
-    ageLimit: string,
-    rating: number,
-    image: string,
-    description: string,
-  }
 
   const [text, setText] = useState('');
   const [result, setResult] = useState('');
@@ -79,7 +66,7 @@ const SearchByPlatform: React.FunctionComponent = (props) => {
 
       <div className = 'game-cards'>
         {text.length !== 0 ? (
-            arrOfMatches.map((item: IGamesArrray) => {         
+            arrOfMatches.map((item: IGamesArray) => {         
               return (
                 <div key = {item.name}>
                     <GameCard
@@ -98,6 +85,10 @@ const SearchByPlatform: React.FunctionComponent = (props) => {
 
     </div>
   );
+}
+
+SearchByPlatform.propTypes = {
+  searchAPI: PropTypes.string,
 }
 
 export default React.memo(SearchByPlatform)

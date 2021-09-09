@@ -12,13 +12,6 @@ const SearchProductsPage: React.FunctionComponent<{title, filterByPlatform, sear
 
     const dispatch = useDispatch()
 
-    SearchProductsPage.propTypes = {
-        title: PropTypes.string,
-        filterByPlatform: PropTypes.array,
-        searchbar: PropTypes.object,
-        productPlatform: PropTypes.array,
-    }
-
     const options = [
         { label: "Ascending", value: "ascending"},
         { label: "Descending", value: "descending"},
@@ -303,6 +296,13 @@ const SearchProductsPage: React.FunctionComponent<{title, filterByPlatform, sear
             
         </div>
     )
+}
+
+SearchProductsPage.propTypes = {
+    title: PropTypes.string,
+    filterByPlatform: PropTypes.array,
+    searchbar: PropTypes.object,
+    productPlatform: PropTypes.array,
 }
 
 export default React.memo(SearchProductsPage)

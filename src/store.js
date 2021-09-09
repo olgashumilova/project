@@ -1,0 +1,22 @@
+import React from 'react';
+import App from '@/App.tsx';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk'
+import reducer from '@/redux/reducers/redusers.ts'
+
+const Store = () => {
+    return (
+        <Provider store = {createStore(
+            reducer,
+            compose(
+              applyMiddleware(thunk),
+              window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+            )
+        )}>
+            <App />
+        </Provider>
+    )
+}
+
+export default Store
