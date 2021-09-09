@@ -6,232 +6,232 @@
     height: 100px;
     background-color:rgba(0, 0, 0, 0.800);
     @include regular-font;
-}
 
-.header__title {
-    display: flex;
-    align-items: center;
-    padding-left: 10%;
-    @include bold-font;
-    color: $white-color;
-}
-
-h1 {
-    width: 150px;
-}
-
-.header__nav {
-    width: 100%;
-    height: 100%;
-    padding-left: 30%;
-
-    @media (min-width: 800px) {
-        padding-left: 20%;
+    .header__title {
+        display: flex;
+        align-items: center;
+        padding-left: 10%;
+        @include bold-font;
+        color: $white-color;
     }
-
-    @media (min-width: 280px) and (max-width: 800px) {
+    
+    h1 {
+        width: 150px;
+    }
+    
+    .header__nav {
+        width: 100%;
+        height: 100%;
+        padding-left: 30%;
+    
+        @media (min-width: 800px) {
+            padding-left: 20%;
+        }
+    
+        @media (min-width: 280px) and (max-width: 800px) {
+            display: none;
+        }
+    }
+    
+    .header__list {
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .header__list-element {
+        padding: 40px 5% 0 5%;
+        color: $white-color;
+        list-style-type: none;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    
+    .header__list-element:hover {
+        color: $white-color;
+        background-color:rgba(255, 255, 255, 0.26);
+        border-bottom: 5px solid;
+        border-color: $purple-color;
+    }
+    
+    .header__user-list-element {
+        display: flex;
+        padding: 40px 5% 0 5%;
+        color: $white-color;
+        list-style-type: none;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    
+    .header__user-list-element:hover {
+        color: $white-color;
+        background-color:rgba(255, 255, 255, 0.26);
+        border-bottom: 5px solid;
+        border-color: $purple-color;
+    }
+    
+    .header__link {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        height: 28px;
+        color: $white-color;
+    }
+    
+    // Signed In Buttons 
+    
+    .header__user-icon {
+        width: 50px;
+        height: 30px;
+        background: url(../../assets/headerIcons/userIcon.png) no-repeat;
+    }
+    
+    .header__user-name{
+        width: 100%;
+    }
+    
+    .header__cart-icon {
+        width: 55px;
+        height: 30px;
+        border: none;
+        background: url(../../assets/headerIcons/cartIcon.png) no-repeat center;
+        cursor: pointer;
+    }
+    
+    .header__cart-icon-amount {
+        width: 40%;
+        margin-top: 15px;
+        margin-left: 25px;
+        border-radius: 50px;
+        color: $white-color;
+        background-color: $purple-color;
+    }
+    
+    .header__logout-icon {
+        width: 55px;
+        height: 30px;
+        border: none;
+        background: url(../../assets/headerIcons/logOut.png) no-repeat center;
+        cursor: pointer;
+    }
+    
+    .dropdown-link {
+        padding: 15px;
+        color:rgba(0, 0, 0, 0.9);
+    }
+    
+    .dropdown-button {
+        margin: 0;
+        padding: 0;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+    }
+    
+    .header__create-card-button {
+        display: flex;
+        justify-content: center;
+        width: 40%;
+        padding: 40px;
+        color: $white-color;
+        list-style-type: none;
+        text-decoration: none;
+        cursor: pointer;
+        border: none;
+        background-color: transparent;
+    }
+    
+    .header__create-card-button:hover {
+        color: $white-color;
+        background-color:rgba(255, 255, 255, 0.26);
+        border-bottom: 5px solid;
+        border-color: $purple-color;
+    }
+    
+    .header__signin-list {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .header__signin-list-element {
+        display: flex;
+        justify-content: center;
+        width: 130px;
+        padding: 40px 0 0 0;
+        color: $white-color;
+        list-style-type: none;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    
+    .header__signin-list-element:hover {
+        color: $white-color;
+        background-color:rgba(255, 255, 255, 0.26);
+        border-bottom: 5px solid;
+        border-color: $purple-color;
+    }
+    
+    .main-loader {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 25px;
+        margin: 18% 0 20% 0;
+    }
+      
+    .main-loader:after {
+        content: " ";
+        display: flex;
+        width: 60px;
+        height: 60px;
+        margin: 8px;
+        border-radius: 50%;
+        border: 6px solid;
+        border-color: $white-color;
+        border-color: $white-color transparent $white-color transparent;
+        animation: loader 1.2s linear infinite;
+    }
+      
+    @keyframes main-loader {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    
+    .burger-menu {
         display: none;
+        position: absolute;
+        top: 27px;
+        right: 47px;
+        width: 85px;
+        height: 45px;
+        border: none;
+        background: url('../../assets/headerIcons/burgerMenuIcon.png') no-repeat right;
+        cursor: pointer;
+    
+        @media (min-width: 280px) and (max-width: 800px) {
+            display: flex;
+        }
     }
-}
-
-.header__list {
-    display: flex;
-    flex-direction: row;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-.header__list-element {
-    padding: 40px 5% 0 5%;
-    color: $white-color;
-    list-style-type: none;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.header__list-element:hover {
-    color: $white-color;
-    background-color:rgba(255, 255, 255, 0.26);
-    border-bottom: 5px solid;
-    border-color: $purple-color;
-}
-
-.header__user-list-element {
-    display: flex;
-    padding: 40px 5% 0 5%;
-    color: $white-color;
-    list-style-type: none;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.header__user-list-element:hover {
-    color: $white-color;
-    background-color:rgba(255, 255, 255, 0.26);
-    border-bottom: 5px solid;
-    border-color: $purple-color;
-}
-
-.header__link {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    height: 28px;
-    color: $white-color;
-}
-
-// Signed In Buttons 
-
-.header__user-icon {
-    width: 50px;
-    height: 30px;
-    background: url(../../assets/headerIcons/userIcon.png) no-repeat;
-}
-
-.header__user-name{
-    width: 100%;
-}
-
-.header__cart-icon {
-    width: 55px;
-    height: 30px;
-    border: none;
-    background: url(../../assets/headerIcons/cartIcon.png) no-repeat center;
-    cursor: pointer;
-}
-
-.header__cart-icon-amount {
-    width: 40%;
-    margin-top: 15px;
-    margin-left: 25px;
-    border-radius: 50px;
-    color: $white-color;
-    background-color: $purple-color;
-}
-
-.header__logout-icon {
-    width: 55px;
-    height: 30px;
-    border: none;
-    background: url(../../assets/headerIcons/logOut.png) no-repeat center;
-    cursor: pointer;
-}
-
-.dropdown-link {
-    padding: 15px;
-    color:rgba(0, 0, 0, 0.9);
-}
-
-.dropdown-button {
-    margin: 0;
-    padding: 0;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-}
-
-.header__create-card-button {
-    display: flex;
-    justify-content: center;
-    width: 40%;
-    padding: 40px;
-    color: $white-color;
-    list-style-type: none;
-    text-decoration: none;
-    cursor: pointer;
-    border: none;
-    background-color: transparent;
-}
-
-.header__create-card-button:hover {
-    color: $white-color;
-    background-color:rgba(255, 255, 255, 0.26);
-    border-bottom: 5px solid;
-    border-color: $purple-color;
-}
-
-.header__signin-list {
-    display: flex;
-    justify-content: center;
-}
-
-.header__signin-list-element {
-    display: flex;
-    justify-content: center;
-    width: 130px;
-    padding: 40px 0 0 0;
-    color: $white-color;
-    list-style-type: none;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.header__signin-list-element:hover {
-    color: $white-color;
-    background-color:rgba(255, 255, 255, 0.26);
-    border-bottom: 5px solid;
-    border-color: $purple-color;
-}
-
-.main-loader {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 25px;
-    margin: 18% 0 20% 0;
-}
-  
-.main-loader:after {
-    content: " ";
-    display: flex;
-    width: 60px;
-    height: 60px;
-    margin: 8px;
-    border-radius: 50%;
-    border: 6px solid;
-    border-color: $white-color;
-    border-color: $white-color transparent $white-color transparent;
-    animation: loader 1.2s linear infinite;
-}
-  
-@keyframes main-loader {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.burger-menu {
-    display: none;
-    position: absolute;
-    top: 27px;
-    right: 47px;
-    width: 85px;
-    height: 45px;
-    border: none;
-    background: url('../../assets/headerIcons/burgerMenuIcon.png') no-repeat right;
-    cursor: pointer;
-
-    @media (min-width: 280px) and (max-width: 800px) {
+    
+    .ui.dropdown>.dropdown.icon::before {
+        padding-left: 15px;
+    }
+    
+    .burger-menu__wrap {
+        width: 100%;
+    }
+    
+    .ui.dropdown .menu {
+        right: 50px;
+    }
+    
+    .header__dropdown-menu {
         display: flex;
     }
-}
-
-.ui.dropdown>.dropdown.icon::before {
-    padding-left: 15px;
-}
-
-.burger-menu__wrap {
-    width: 100%;
-}
-
-.ui.dropdown .menu {
-    right: 50px;
-}
-
-.header__dropdown-menu {
-    display: flex;
 }

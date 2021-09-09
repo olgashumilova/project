@@ -18,25 +18,24 @@
         margin-top: 30%;
     }
     
-}
-
-.footer__title {
-    display: flex;
-    justify-content: center;
-    padding: 2% 0 0 0;
-}
-
-.footer__icons {
-    display: flex;
-    justify-content: center;
-    height: 45px;
-    margin: 2%;
-}
-
-.footer__link {
-    padding: 0 2.3% 0 2.3%;
-}
-
-.footer__link:hover{
-    margin: 5px
+    .footer__title {
+        display: flex;
+        justify-content: center;
+        padding: 2% 0 0 0;
+    }
+    
+    .footer__icons {
+        display: flex;
+        justify-content: center;
+        height: 45px;
+        margin: 2%;
+    }
+    
+    .footer__link {
+        padding: 0 2.3% 0 2.3%;
+    }
+    
+    .footer__link:hover{
+        margin: 5px
+    }
 }

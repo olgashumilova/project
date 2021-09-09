@@ -8,109 +8,110 @@
     width: 100%;
     padding: 60px 0 20% 0;
     @include regular-font;
-}
 
-.cart__title {
-    @include title;
-    width: 80%;
-}
-.cart__empty {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 270px 0 300px 0;
-    color: white;
-    @include regular-font;
-}
-
-.empty-cart {
-    width: 30%;
-    height: 100px;
-    font-size: large;
-    background: url('../../assets/cartImages/empty_cart.png') no-repeat center;
-}
-
-.cart__main {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin-top: 20px;
-    width: 80%;
-    border-bottom: 1px solid white;
-    color: $white-color;
-}
-
-.cart__products {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 80%;
-    color: $white-color;
-
-    @media (max-width: 800px) {
+    .cart__title {
+        @include title;
+        width: 80%;
+    }
+    .cart__empty {
+        display: flex;
+        flex-direction: column;
         justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 270px 0 300px 0;
+        color: white;
+        @include regular-font;
+    }
+    
+    .empty-cart {
+        width: 30%;
+        height: 100px;
+        font-size: large;
+        background: url('../../assets/cartImages/empty_cart.png') no-repeat center;
+    }
+    
+    .cart__main {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        margin-top: 20px;
+        width: 80%;
+        border-bottom: 1px solid white;
+        color: $white-color;
+    }
+    
+    .cart__products {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 80%;
+        color: $white-color;
+    
+        @media (max-width: 800px) {
+            justify-content: center;
+        }
+    }
+    
+    .game-border {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 3% 4% 3% 6%;
+        margin: 0;
+        border-bottom: 1px solid;
+        border-color: $white-color;
+    
+        @media (max-width: 450px) {
+            width: 60px;
+        }
+    }
+    
+    .cart__game-button {
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid;
+        border-color: $white-color;
+    }
+    
+    .cart__game-button-close {
+        width: 30px;
+        height: 30px;
+        border: none;
+        cursor: pointer;
+        background: url('../../assets/headerIcons/closeModal.png');
+    }
+    
+    .cart__total {
+        margin-top: 80px;
+        color: $white-color;
+        font-size: larger;
+    }
+    
+    .cart__purchase-button {
+        @include button;
+        width: 10%;
+        margin-bottom: 50px;
+    }
+    
+    .cart__change-quantity-btn {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        height: 25px;
+    }
+    
+    .cart__current-item-amount {
+        margin: 0 5px 0 5px;
+    }
+    
+    .cart__select-platform {
+        height: 40px;
+    
+        @media (max-width: 800px) {
+            width: 50px;
+        }
     }
 }
 
-.game-border {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 3% 4% 3% 6%;
-    margin: 0;
-    border-bottom: 1px solid;
-    border-color: $white-color;
-
-    @media (max-width: 450px) {
-        width: 60px;
-    }
-}
-
-.cart__game-button {
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid;
-    border-color: $white-color;
-}
-
-.cart__game-button-close {
-    width: 30px;
-    height: 30px;
-    border: none;
-    cursor: pointer;
-    background: url('../../assets/headerIcons/closeModal.png');
-}
-
-.cart__total {
-    margin-top: 80px;
-    color: $white-color;
-    font-size: larger;
-}
-
-.cart__purchase-button {
-    @include button;
-    width: 10%;
-    margin-bottom: 50px;
-}
-
-.cart__change-quantity-btn {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 25px;
-}
-
-.cart__current-item-amount {
-    margin: 0 5px 0 5px;
-}
-
-.cart__select-platform {
-    height: 40px;
-
-    @media (max-width: 800px) {
-        width: 50px;
-    }
-}
